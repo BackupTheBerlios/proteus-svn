@@ -83,7 +83,7 @@ namespace Proteus.Framework.Parts.Default
 
             bool success = base.ReadConfiguration(chunk);
 
-            log.Info("Actor subchunks: {0}:{1}:{2}", this.Name,this.TypeName,chunk.GetChildrenByName("Actor").Length);
+            log.Error("Actor subchunks: {0}:{1}:{2}", this.Name,this.TypeName,chunk.GetChildrenByName("Actor").Length);
 
             foreach( Chunk c in chunk.GetChildrenByName("Actor") )
             {

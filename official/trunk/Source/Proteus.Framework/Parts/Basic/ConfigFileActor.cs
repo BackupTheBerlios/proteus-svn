@@ -11,8 +11,8 @@ namespace Proteus.Framework.Parts.Basic
     [Documentation("Configuration file","An automatic reference to a secondary configuration file.")]
     public class ConfigFileActor : Default.CollectionActor
     {
-        private Handle<XmlDocument> configFile =
-            new Handle<XmlDocument>();
+        protected   Handle<XmlDocument> configFile =
+                new Handle<XmlDocument>();
 
         [Parts.Property()]
         public string Url
