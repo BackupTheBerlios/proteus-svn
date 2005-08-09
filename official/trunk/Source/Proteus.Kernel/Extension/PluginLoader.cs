@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Proteus.Kernel.Extension
 {
-    public sealed class PluginLoader
+    public sealed class PluginLoader : Pattern.Disposable
     {
         private SortedList<string,Assembly>             loadedAssemblies    = new SortedList<string,Assembly>();
         private static Diagnostics.Log<PluginLoader>    log 
@@ -98,9 +98,25 @@ namespace Proteus.Kernel.Extension
 
                 if (pluginInterface.OnUnload(new Information.License(), new Information.Version(), new Information.Platform()))
                 {
+                    log.Info("Plugin unloaded [{0}]", name);
                     loadedAssemblies.Remove(name);
                 }
             }
+        }
+
+        protected override void ReleaseManaged()
+        {
+            string[] allKeys = new string[loadedAssemblies.Count];
+            loadedAssemblies.Keys.CopyTo(allKeys, 0);
+            foreach (string name in allKeys )
+            {
+                Unload(name);
+            }
+        }
+
+        protected override void ReleaseUnmanaged()
+        {
+            
         }
     }
 }

@@ -111,8 +111,12 @@ namespace Proteus.Graphics.Hal
 
                 log.BeginRegion("Supported display modes:");
 
+                log.BeginMessage(Proteus.Kernel.Diagnostics.LogLevel.Info);
+                
                 foreach (D3d.DisplayMode m in ai.SupportedDisplayModes)
-                    log.Info("{0}", m);
+                    log.MessageContent("{0}", m);
+
+                log.EndMessage();
                 
                 log.EndRegion();
                 log.EndRegion();

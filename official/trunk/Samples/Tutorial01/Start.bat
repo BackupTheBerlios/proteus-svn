@@ -1,0 +1,1 @@
+Proteus.Host.Application -r Tutorial01.registry

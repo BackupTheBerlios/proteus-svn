@@ -23,7 +23,7 @@ namespace Proteus.Kernel.Configuration
             return Verify();
         }
 
-        public ValueType GetOption(string name, ValueType def)
+        public ValueType GetOption<ValueType>(string name, ValueType def)
         {
             Option foundOption = FindOption(name);
             if (foundOption != null)

@@ -35,7 +35,8 @@ namespace Proteus.Framework.Hosting
 
         public void Run()
         {
-            this.Initialize();
+            if (!this.Initialize())
+                return;
             
             // Initialize.
             foreach (ITask t in tasks)
@@ -77,17 +78,14 @@ namespace Proteus.Framework.Hosting
 
         protected override void ReleaseManaged()
         {
-            foreach (ITask t in tasks)
-            {
-                t.Dispose();
-            }
+            Shutdown();
         }
 
         protected override void ReleaseUnmanaged()
         {
         }
 
-        private void Initialize()
+        private bool Initialize()
         {
             commandLine.AddOption("w", "WorkingDirectory", "The working directory for the engine.");
             commandLine.AddOption("r", "Registry", "The registry file to load.");
@@ -95,16 +93,29 @@ namespace Proteus.Framework.Hosting
             if (!commandLine.Parse())
             {
                 System.Windows.Forms.MessageBox.Show(commandLine.ToString());
+                return false;
             }
 
             // Setup working path to counter any strange invocations.
-            Environment.CurrentDirectory = Kernel.Information.Program.Path;
+            Environment.CurrentDirectory = commandLine.GetOption("w", Kernel.Information.Program.Path);
 
             // Setup settings registry.
-            Kernel.Registry.Manager.Instance.Url = (string)this.Input[Input.InputType.Name] + ".registry";
+            Kernel.Registry.Manager.Instance.Url = commandLine.GetOption("r", (string)this.Input[Input.InputType.Name] + ".registry");
 
             // Load any defined plugins.
             loader.Load();
+
+            return true;
+        }
+
+        private void Shutdown()
+        {
+            foreach (ITask t in tasks)
+            {
+                t.Dispose();
+            }
+
+            loader.Dispose();
         }
 
         public Engine()
