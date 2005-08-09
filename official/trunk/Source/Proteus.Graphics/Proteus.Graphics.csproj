@@ -1,0 +1,92 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50215</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{58961AE0-EB88-4538-AF42-C616A2588CCA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Proteus.Graphics</RootNamespace>
+    <AssemblyName>Proteus.Graphics</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Proteus.Graphics.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Bin\Proteus.Graphics\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunFxCop>false</RunFxCop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Bin\Proteus.Graphics\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="microsoft.directx, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Libraries\ManagedDx\microsoft.directx.dll</HintPath>
+    </Reference>
+    <Reference Include="microsoft.directx.diagnostics, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Libraries\ManagedDx\microsoft.directx.diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="microsoft.directx.direct3d, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Libraries\ManagedDx\microsoft.directx.direct3d.dll</HintPath>
+    </Reference>
+    <Reference Include="microsoft.directx.direct3dx, Version=1.0.2907.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Libraries\ManagedDx\microsoft.directx.direct3dx.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Hal\CubeTexture.cs" />
+    <Compile Include="Hal\Device.cs" />
+    <Compile Include="Hal\Device2d.cs" />
+    <Compile Include="Hal\DeviceEnumerator.cs" />
+    <Compile Include="Hal\FrameBuffer.cs" />
+    <Compile Include="Hal\ITarget.cs" />
+    <Compile Include="Hal\ITexture.cs" />
+    <Compile Include="Hal\Manager.cs" />
+    <Compile Include="Hal\RenderCubeTexture.cs" />
+    <Compile Include="Hal\RenderTexture.cs" />
+    <Compile Include="Hal\Texture.cs" />
+    <Compile Include="Hal\TextureManager.cs" />
+    <Compile Include="Hal\VolumeTexture.cs" />
+    <Compile Include="Plugin\EntryPoint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Plugin\RenderTask.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Proteus.Framework\Proteus.Framework.csproj">
+      <Project>{83FBEDC8-EBC1-42DE-9376-ED0D088EEC99}</Project>
+      <Name>Proteus.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Proteus.Kernel\Proteus.Kernel.csproj">
+      <Project>{D04C709A-DE0D-49BE-A463-7F78CE4E5971}</Project>
+      <Name>Proteus.Kernel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Proteus.Graphics.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Vdb\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,121 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50215</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D04C709A-DE0D-49BE-A463-7F78CE4E5971}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Proteus.Kernel</RootNamespace>
+    <AssemblyName>Proteus.Kernel</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Proteus.Kernel.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Bin\Proteus.Kernel\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunFxCop>false</RunFxCop>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Bin\Proteus.Kernel\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunFxCop>false</RunFxCop>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\StringLengthComparer.cs" />
+    <Compile Include="Configuration\Chunk.cs" />
+    <Compile Include="Configuration\Document.cs" />
+    <Compile Include="Configuration\IConfigureable.cs" />
+    <Compile Include="Configuration\XmlDocument.cs" />
+    <Compile Include="Diagnostics\Assert.cs" />
+    <Compile Include="Diagnostics\Catcher.cs" />
+    <Compile Include="Diagnostics\Context.cs" />
+    <Compile Include="Diagnostics\ControlSink.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Diagnostics\ControlSink.Designer.cs">
+      <DependentUpon>ControlSink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Diagnostics\TimestampInfo.cs" />
+    <Compile Include="Diagnostics\IContextInfo.cs" />
+    <Compile Include="Diagnostics\ISink.cs" />
+    <Compile Include="Diagnostics\Log.cs" />
+    <Compile Include="Diagnostics\Manager.cs" />
+    <Compile Include="Diagnostics\TextSink.cs" />
+    <Compile Include="Diagnostics\XmlSink.cs" />
+    <Compile Include="Extension\IPlugin.cs" />
+    <Compile Include="Extension\PluginAttribute.cs" />
+    <Compile Include="Extension\PluginLoader.cs" />
+    <Compile Include="Information\License.cs" />
+    <Compile Include="Information\Platform.cs" />
+    <Compile Include="Information\Program.cs" />
+    <Compile Include="Information\Version.cs" />
+    <Compile Include="Io\Archive.cs" />
+    <Compile Include="Io\FileArchive.cs" />
+    <Compile Include="Io\Manager.cs" />
+    <Compile Include="Io\Url.cs" />
+    <Compile Include="Localization\Manager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Localization\Table.cs" />
+    <Compile Include="Math\Basic.cs" />
+    <Compile Include="Math\Matrix3.cs" />
+    <Compile Include="Math\Matrix4.cs" />
+    <Compile Include="Math\Plane.cs" />
+    <Compile Include="Math\Quaternion.cs" />
+    <Compile Include="Math\Transform.cs" />
+    <Compile Include="Math\Trigonometry.cs" />
+    <Compile Include="Math\Vector2.cs" />
+    <Compile Include="Math\Vector3.cs" />
+    <Compile Include="Math\Vector4.cs" />
+    <Compile Include="Pattern\AbstractFactory.cs" />
+    <Compile Include="Pattern\Component.cs" />
+    <Compile Include="Pattern\Composite.cs" />
+    <Compile Include="Pattern\ConcreteFactory.cs" />
+    <Compile Include="Pattern\Disposable.cs" />
+    <Compile Include="Pattern\ICopyable.cs" />
+    <Compile Include="Pattern\IVisitable.cs" />
+    <Compile Include="Pattern\IVisitor.cs" />
+    <Compile Include="Pattern\Singleton.cs" />
+    <Compile Include="Pattern\TypeFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflection\Converter.cs" />
+    <Compile Include="Registry\Manager.cs" />
+    <Compile Include="Resource\Entry.cs" />
+    <Compile Include="Resource\Handle.cs" />
+    <Compile Include="Resource\Item.cs" />
+    <Compile Include="Resource\Manager.cs" />
+    <Compile Include="Ui\Form.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Proteus.Kernel.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Diagnostics\ControlSink.resx">
+      <DependentUpon>ControlSink.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Storage\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
