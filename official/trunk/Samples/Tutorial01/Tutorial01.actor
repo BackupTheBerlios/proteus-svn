@@ -1,0 +1,12 @@
+<Actor>
+<Value Name="Name">RootGroup</Value>
+<Value Name="Type">Group</Value>
+	<Actor>
+		<Value Name="Name">SubGroup01</Value>
+		<Value Name="Type">Group</Value>
+	</Actor>
+	<Actor>
+		<Value Name="Name">SubGroup02</Value>
+		<Value Name="Type">Group</Value>
+	</Actor>
+</Actor>

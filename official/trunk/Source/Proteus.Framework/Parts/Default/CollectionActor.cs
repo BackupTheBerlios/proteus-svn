@@ -10,6 +10,9 @@ namespace Proteus.Framework.Parts.Default
     {
         protected Environment collectionEnvironment = null;
 
+        private static Kernel.Diagnostics.Log<CollectionActor> log =
+            new Kernel.Diagnostics.Log<CollectionActor>();
+
         #region ICollection<IActor> Members
 
         public void Add(IActor item)
@@ -78,8 +81,10 @@ namespace Proteus.Framework.Parts.Default
         {
             this.Clear();
 
-            bool success = base.ReadConfiguration(chunk);  
-                
+            bool success = base.ReadConfiguration(chunk);
+
+            log.Info("Actor subchunks: {0}:{1}:{2}", this.Name,this.TypeName,chunk.GetChildrenByName("Actor").Length);
+
             foreach( Chunk c in chunk.GetChildrenByName("Actor") )
             {
                 Utility.ReadActor(c, collectionEnvironment);

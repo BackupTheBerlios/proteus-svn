@@ -13,6 +13,9 @@ namespace Proteus.Framework.Parts.Default
         protected bool              actorActive         = true;
         protected IEnvironment      actorEnvironment    = null;
 
+        private static Kernel.Diagnostics.Log<Actor> log =
+            new Kernel.Diagnostics.Log<Actor>();
+
         #region IActor Members
 
         public virtual bool Active
@@ -84,6 +87,14 @@ namespace Proteus.Framework.Parts.Default
                     this.actorEnvironment = environment;
                     return true;
                 }
+                else
+                {
+                    log.Warning("Actor name already in environment: {0}", this.Name);
+                }
+            }
+            else
+            {
+                log.Warning("No environment to register this actor [{0}].", this.Name);
             }
             return false;
         }

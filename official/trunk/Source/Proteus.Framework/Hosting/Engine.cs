@@ -103,7 +103,9 @@ namespace Proteus.Framework.Hosting
             Kernel.Registry.Manager.Instance.Url = commandLine.GetOption("r", (string)this.Input[Input.InputType.Name] + ".registry");
 
             // Load any defined plugins.
+            this.Tasks.Enqueue(new Tasks.EventTask());
             loader.Load();
+            this.Tasks.Enqueue(new Tasks.ActorTask()); 
 
             return true;
         }
@@ -121,10 +123,6 @@ namespace Proteus.Framework.Hosting
         public Engine()
         {
             instance = this;
-
-            // Pass our tasks to the engine to use.
-            this.Tasks.Enqueue(new Tasks.EventTask());
-            this.Tasks.Enqueue(new Tasks.ActorTask()); 
         }
     }
 }

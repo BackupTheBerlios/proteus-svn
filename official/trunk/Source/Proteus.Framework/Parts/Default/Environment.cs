@@ -72,6 +72,7 @@ namespace Proteus.Framework.Parts.Default
             if (!actors.ContainsKey(actor.Name))
             {
                 actors.Add(actor.Name, actor);
+                return true;
             }
             return false;
         }

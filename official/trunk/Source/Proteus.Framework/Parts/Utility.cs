@@ -6,8 +6,11 @@ using Proteus.Kernel.Configuration;
 
 namespace Proteus.Framework.Parts
 {
-    public static class Utility
+    public class Utility
     {
+        private static Kernel.Diagnostics.Log<Utility> log =
+            new Kernel.Diagnostics.Log<Utility>();
+        
         public static string GetTypeName(Type actorType)
         {
             ActorAttribute actorAttribute = Attribute.GetCustomAttribute(actorType, typeof(ActorAttribute)) as ActorAttribute;
@@ -46,16 +49,36 @@ namespace Proteus.Framework.Parts
 
                             if (subSuccess)
                             {
-                                if (!newActor.Initialize( environment) )
+                                if (!newActor.Initialize(environment))
                                 {
+                                    log.Warning("Actor could not be initialized: {0}:{1}", typeName, newActor.Name);
                                     // Error name twice.
+                                    return null;
                                 }
+
+                                log.Debug("Actor created: {0}:{1}.", newActor.Name, newActor.TypeName);
 
                                 return newActor;
                             }
                         }
+                        else
+                        {
+                            log.Warning("Unable to create actor of type: {0}", typeName);
+                        }
+                    }
+                    else
+                    {
+                        log.Warning("No actor type found.");
                     }
                 }
+                else
+                {
+                    log.Warning("Not an actor chunk, but [{0}] instead.", actorChunk.Name);
+                }
+            }
+            else
+            {
+                log.Warning("No actor chunk given.");
             }
 
             return null;
