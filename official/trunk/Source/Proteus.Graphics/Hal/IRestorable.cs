@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Proteus.Graphics.Hal
 {
-    public interface ITarget : IRestorable
+    public interface IRestorable
     {
+        bool Restore();
     }
 }

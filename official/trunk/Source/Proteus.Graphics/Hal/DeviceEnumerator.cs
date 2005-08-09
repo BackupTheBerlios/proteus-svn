@@ -9,17 +9,41 @@ namespace Proteus.Graphics.Hal
 {
     public class DeviceEnumerator
     {
+        private static const D3d.Format backBufferFormat    = D3d.Format.A8R8G8B8;
+        private static const D3d.Format depthBufferFormat   = D3d.Format.D24S8;
+
         private static Kernel.Diagnostics.Log<DeviceEnumerator> log =
             new Kernel.Diagnostics.Log<DeviceEnumerator>();
 
-        private static int GetMultisampleMode()
+        private static int FindMultisampleMode()
         {
             int             adapter     = Kernel.Registry.Manager.Instance.GetValue("Graphics.Adapter",0);
             D3d.DeviceType  deviceType  = Kernel.Registry.Manager.Instance.GetValue("Graphics.DeviceType",D3d.DeviceType.Hardware );
             bool            windowed    = Kernel.Registry.Manager.Instance.GetValue("Graphics.Windowed",true );
+            int             multisample = Kernel.Registry.Manager.Instance.GetValue("Graphics.Multisample", 0);
 
-            //D3d.Manager.CheckDeviceMultiSampleType(
-            return 0;
+            while (!D3d.Manager.CheckDeviceMultiSampleType(adapter, deviceType, backBufferFormat, windowed, (D3d.MutliSampleType)multisample))
+            {
+                multisample--;
+            }
+
+            return multisample;
+        }
+
+        public static bool TestMdxPrescense()
+        {
+            try
+            {
+                int count = D3d.Manager.Adapters.Count;
+                if ( count > 0 )
+                    return true;
+            }
+            catch (System.Exception e)
+            {
+                log.Exception(e);
+                return false;
+            }
+            return false;
         }
 
         public static D3d.PresentParameters CreatePresentParameters(    Swf.Control window,
@@ -30,27 +54,33 @@ namespace Proteus.Graphics.Hal
         {
             D3d.PresentParameters pp = new D3d.PresentParameters();
 
-            pp.AutoDepthStencilFormat = D3d.DepthFormat.D24S8;
+            pp.AutoDepthStencilFormat = depthBufferFormat;
             pp.BackBufferCount = 1;
-            pp.BackBufferFormat = D3d.Format.A8R8G8B8;
+            pp.BackBufferFormat = backBufferFormat;
             pp.Windowed = windowed;
             pp.DeviceWindow = window;
             pp.EnableAutoDepthStencil = true;
             pp.ForceNoMultiThreadedFlag = false;
-            pp.FullScreenRefreshRateInHz = freq;
-            pp.MultiSample = (D3d.MultiSampleType)GetMultisampleMode();
+            pp.MultiSample = (D3d.MultiSampleType)FindMultisampleMode();
+            pp.MultiSampleQuality = 0;
+            pp.PresentationInterval = D3d.PresentInterval.Default;
+            pp.PresentFlag = D3d.PresentFlag.DiscardDepthStencil;
+            pp.SwapEffect = D3d.SwapEffect.Discard;
 
             if (windowed)
             {
+                pp.BackBufferWidth = 0;
+                pp.BackBufferHeight = 0;
+                pp.FullScreenRefreshRateInHz = 0;
             }
             else
             {
+                pp.BackBufferWidth = width;
+                pp.BackBufferHeight = height;
+                pp.FullScreenRefreshRateInHz = freq;
             }
           
-            
-            
             return pp;
-
         }
 
         public static void EnumerateAdapters()

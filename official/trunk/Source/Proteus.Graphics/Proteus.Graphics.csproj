@@ -58,6 +58,7 @@
     <Compile Include="Hal\Device2d.cs" />
     <Compile Include="Hal\DeviceEnumerator.cs" />
     <Compile Include="Hal\FrameBuffer.cs" />
+    <Compile Include="Hal\IRestorable.cs" />
     <Compile Include="Hal\ITarget.cs" />
     <Compile Include="Hal\ITexture.cs" />
     <Compile Include="Hal\Manager.cs" />

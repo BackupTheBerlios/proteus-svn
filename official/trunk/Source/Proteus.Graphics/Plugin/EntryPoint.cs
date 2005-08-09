@@ -25,10 +25,14 @@ namespace Proteus.Graphics.Plugin
 
         public bool OnLoad(Proteus.Kernel.Information.License license, Proteus.Kernel.Information.Version version, Proteus.Kernel.Information.Platform platform)
         {
-            // Register rendering task.
-            Framework.Hosting.Engine.Instance.Tasks.Enqueue(new RenderTask());
+            if (Hal.DeviceEnumerator.TestMdxPrescense())
+            {
+                // Register rendering task.
+                Framework.Hosting.Engine.Instance.Tasks.Enqueue(new RenderTask());
 
-            return true;
+                return true;
+            }
+            return false;
         }
 
         public bool OnUnload(Proteus.Kernel.Information.License license, Proteus.Kernel.Information.Version version, Proteus.Kernel.Information.Platform platform)

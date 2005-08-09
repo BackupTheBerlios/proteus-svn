@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Collections\StringLengthComparer.cs" />
     <Compile Include="Configuration\Chunk.cs" />
+    <Compile Include="Configuration\CommandLine.cs" />
     <Compile Include="Configuration\Document.cs" />
     <Compile Include="Configuration\IConfigureable.cs" />
     <Compile Include="Configuration\XmlDocument.cs" />
