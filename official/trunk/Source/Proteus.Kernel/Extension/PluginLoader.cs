@@ -50,7 +50,7 @@ namespace Proteus.Kernel.Extension
 
         public void Load()
         {
-            Configuration.Chunk[] pluginChunks = Registry.Manager.Instance.GetMultipleEntry("Engine.Plugins.Plugin");
+            Configuration.Chunk[] pluginChunks = Registry.Manager.Instance.GetMultipleEntry("Framework.Plugins.Plugin");
             foreach (Configuration.Chunk p in pluginChunks)
             {
                 string pluginUrl = p.GetValue("Url", string.Empty);
