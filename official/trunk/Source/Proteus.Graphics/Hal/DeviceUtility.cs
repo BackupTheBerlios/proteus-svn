@@ -22,7 +22,8 @@ namespace Proteus.Graphics.Hal
             bool            windowed    = Kernel.Registry.Manager.Instance.GetValue("Graphics.Windowed",true );
             int             multisample = Kernel.Registry.Manager.Instance.GetValue("Graphics.Multisample", 0);
 
-            while (!D3d.Manager.CheckDeviceMultiSampleType(adapter, deviceType, backBufferFormat, windowed, (D3d.MultiSampleType)multisample))
+            while (!D3d.Manager.CheckDeviceMultiSampleType(adapter, deviceType, backBufferFormat, windowed, (D3d.MultiSampleType)multisample) || 
+                   !D3d.Manager.CheckDeviceMultiSampleType(adapter,deviceType,(D3d.Format)depthBufferFormat,windowed,(D3d.MultiSampleType)multisample ) )
             {
                 multisample--;
             }
@@ -30,7 +31,7 @@ namespace Proteus.Graphics.Hal
             return multisample;
         }
 
-        public static bool TestMdxPrescense()
+        public static bool TestMdxPresence()
         {
             try
             {
