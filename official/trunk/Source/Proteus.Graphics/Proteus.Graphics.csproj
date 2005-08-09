@@ -90,4 +90,12 @@
     <Folder Include="Vdb\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(OutDir)
+cd ..
+cd ..
+md Complete
+cd Complete
+copy $(TargetPath) .</PostBuildEvent>
+  </PropertyGroup>
 </Project>

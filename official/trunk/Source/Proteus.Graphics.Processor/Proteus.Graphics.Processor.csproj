@@ -53,5 +53,11 @@ cd Dependencies
 cd Tools
 cd Schema
 xsd $(ProjectDir)/Collada/Schema/COLLADASchema.xsd /c /n:Proteus.Graphics.Processor.Collada.Schema /out:$(ProjectDir)/Collada/Schema</PreBuildEvent>
+    <PostBuildEvent>cd $(OutDir)
+cd ..
+cd ..
+md Complete
+cd Complete
+copy $(TargetPath) .</PostBuildEvent>
   </PropertyGroup>
 </Project>

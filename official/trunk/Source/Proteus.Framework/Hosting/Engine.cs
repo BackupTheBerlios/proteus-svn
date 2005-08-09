@@ -35,23 +35,8 @@ namespace Proteus.Framework.Hosting
 
         public void Run()
         {
-            commandLine.AddOption("w", "WorkingDirectory", "The working directory for the engine.");
-            commandLine.AddOption("r","Registry", "The registry file to load.");
-            commandLine.AddOption("x","Extension","The extension",true,false );
-            if (!commandLine.Parse())
-            {
-                System.Windows.Forms.MessageBox.Show(commandLine.ToString());
-            }
+            this.Initialize();
             
-            // Setup working path to counter any strange invocations.
-            Environment.CurrentDirectory            = Kernel.Information.Program.Path;
-            
-            // Setup settings registry.
-            Kernel.Registry.Manager.Instance.Url    = (string)this.Input[Input.InputType.Name] + ".registry";
-            
-            // Load any defined plugins.
-            loader.Load();
-
             // Initialize.
             foreach (ITask t in tasks)
             {
@@ -100,6 +85,26 @@ namespace Proteus.Framework.Hosting
 
         protected override void ReleaseUnmanaged()
         {
+        }
+
+        private void Initialize()
+        {
+            commandLine.AddOption("w", "WorkingDirectory", "The working directory for the engine.");
+            commandLine.AddOption("r", "Registry", "The registry file to load.");
+            
+            if (!commandLine.Parse())
+            {
+                System.Windows.Forms.MessageBox.Show(commandLine.ToString());
+            }
+
+            // Setup working path to counter any strange invocations.
+            Environment.CurrentDirectory = Kernel.Information.Program.Path;
+
+            // Setup settings registry.
+            Kernel.Registry.Manager.Instance.Url = (string)this.Input[Input.InputType.Name] + ".registry";
+
+            // Load any defined plugins.
+            loader.Load();
         }
 
         public Engine()
