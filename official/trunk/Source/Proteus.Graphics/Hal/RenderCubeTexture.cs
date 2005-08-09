@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Proteus.Graphics.Hal
 {
-    class RenderCubeTexture
+    public class RenderCubeTexture
     {
     }
 }

@@ -25,7 +25,7 @@ namespace Proteus.Graphics.Plugin
 
         public bool OnLoad(Proteus.Kernel.Information.License license, Proteus.Kernel.Information.Version version, Proteus.Kernel.Information.Platform platform)
         {
-            if (Hal.DeviceEnumerator.TestMdxPrescense())
+            if (Hal.DeviceUtility.TestMdxPrescense())
             {
                 // Register rendering task.
                 Framework.Hosting.Engine.Instance.Tasks.Enqueue(new RenderTask());

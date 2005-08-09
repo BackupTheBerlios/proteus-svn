@@ -7,13 +7,13 @@ using Swf = System.Windows.Forms;
 
 namespace Proteus.Graphics.Hal
 {
-    public class DeviceEnumerator
+    public class DeviceUtility
     {
-        private static const D3d.Format backBufferFormat    = D3d.Format.A8R8G8B8;
-        private static const D3d.Format depthBufferFormat   = D3d.Format.D24S8;
+        private const D3d.Format        backBufferFormat    = D3d.Format.A8R8G8B8;
+        private const D3d.DepthFormat   depthBufferFormat   = D3d.DepthFormat.D24S8;
 
-        private static Kernel.Diagnostics.Log<DeviceEnumerator> log =
-            new Kernel.Diagnostics.Log<DeviceEnumerator>();
+        private static Kernel.Diagnostics.Log<DeviceUtility> log =
+            new Kernel.Diagnostics.Log<DeviceUtility>();
 
         private static int FindMultisampleMode()
         {
@@ -22,7 +22,7 @@ namespace Proteus.Graphics.Hal
             bool            windowed    = Kernel.Registry.Manager.Instance.GetValue("Graphics.Windowed",true );
             int             multisample = Kernel.Registry.Manager.Instance.GetValue("Graphics.Multisample", 0);
 
-            while (!D3d.Manager.CheckDeviceMultiSampleType(adapter, deviceType, backBufferFormat, windowed, (D3d.MutliSampleType)multisample))
+            while (!D3d.Manager.CheckDeviceMultiSampleType(adapter, deviceType, backBufferFormat, windowed, (D3d.MultiSampleType)multisample))
             {
                 multisample--;
             }

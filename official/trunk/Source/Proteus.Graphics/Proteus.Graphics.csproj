@@ -56,7 +56,7 @@
     <Compile Include="Hal\CubeTexture.cs" />
     <Compile Include="Hal\Device.cs" />
     <Compile Include="Hal\Device2d.cs" />
-    <Compile Include="Hal\DeviceEnumerator.cs" />
+    <Compile Include="Hal\DeviceUtility.cs" />
     <Compile Include="Hal\FrameBuffer.cs" />
     <Compile Include="Hal\IRestorable.cs" />
     <Compile Include="Hal\ITarget.cs" />

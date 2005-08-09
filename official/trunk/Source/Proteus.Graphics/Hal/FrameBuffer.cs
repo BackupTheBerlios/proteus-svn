@@ -4,7 +4,16 @@ using System.Text;
 
 namespace Proteus.Graphics.Hal
 {
-    class FrameBuffer
+    public sealed class FrameBuffer : ITarget
     {
+
+        #region IRestorable Members
+
+        public bool Restore()
+        {
+            return false;
+        }
+
+        #endregion
     }
 }

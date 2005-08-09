@@ -10,7 +10,7 @@ namespace Proteus.Graphics.Plugin
 
         public bool Initialize(Proteus.Framework.Hosting.Engine engine)
         {
-            Hal.DeviceEnumerator.EnumerateAdapters();
+            Hal.DeviceUtility.EnumerateAdapters();
             return true;
         }
 

@@ -8,14 +8,15 @@ namespace Proteus.Framework.Hosting
 {
     public sealed class Engine : Kernel.Pattern.Disposable
     {
-        private Kernel.Diagnostics.Catcher      catcher         = new Kernel.Diagnostics.Catcher();
-        private Queue<ITask>                    tasks           = new Queue<ITask>();
-        private Input                           input           = new Input();
-        private bool                            quitRequested   = false;
-        private Stopwatch                       timer           = null;
-        private Kernel.Extension.PluginLoader   loader          = new Kernel.Extension.PluginLoader();
+        private Kernel.Diagnostics.Catcher          catcher         = new Kernel.Diagnostics.Catcher();
+        private Queue<ITask>                        tasks           = new Queue<ITask>();
+        private Input                               input           = new Input();
+        private bool                                quitRequested   = false;
+        private Stopwatch                           timer           = null;
+        private Kernel.Extension.PluginLoader       loader          = new Kernel.Extension.PluginLoader();
+        private Kernel.Configuration.CommandLine    commandLine     = new Kernel.Configuration.CommandLine();
 
-        private static Engine                   instance        = null;
+        private static Engine                       instance        = null;
 
         public static Engine Instance
         {
@@ -34,6 +35,14 @@ namespace Proteus.Framework.Hosting
 
         public void Run()
         {
+            commandLine.AddOption("w", "WorkingDirectory", "The working directory for the engine.");
+            commandLine.AddOption("r","Registry", "The registry file to load.");
+            commandLine.AddOption("x","Extension","The extension",true,false );
+            if (!commandLine.Parse())
+            {
+                System.Windows.Forms.MessageBox.Show(commandLine.ToString());
+            }
+            
             // Setup working path to counter any strange invocations.
             Environment.CurrentDirectory            = Kernel.Information.Program.Path;
             
