@@ -11,8 +11,11 @@ namespace Proteus.Framework.Parts.Basic
     [Documentation("Configuration file","An automatic reference to a secondary configuration file.")]
     public class ConfigFileActor : Default.CollectionActor
     {
-        protected   Handle<XmlDocument> configFile =
-                new Handle<XmlDocument>();
+        protected       Handle<XmlDocument> configFile =
+                  new   Handle<XmlDocument>();
+
+        private static  Kernel.Diagnostics.Log<ConfigFileActor> log =
+                  new   Kernel.Diagnostics.Log<ConfigFileActor>();
 
         [Parts.Property()]
         public string Url
@@ -35,7 +38,12 @@ namespace Proteus.Framework.Parts.Basic
                 IActor newActor = Utility.ReadActor(configFile.Resource.RootChunk, this.collectionEnvironment);
                 if (newActor == null)
                 {
+                    log.Warning("Unable to create configuration file root actor.");
                 }
+            }
+            else
+            {
+                log.Warning("No valid configuration file attached: {0}", this.Url);
             }
         }
 
