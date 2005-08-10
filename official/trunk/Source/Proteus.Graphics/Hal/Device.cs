@@ -10,14 +10,38 @@ namespace Proteus.Graphics.Hal
     {
         private D3d.Device d3dDevice = null;
 
+        public static Device Create(System.Windows.Forms.Control renderWindow)
+        {
+            D3d.Device _d3dDevice = DeviceUtility.CreateDevice( renderWindow );
+
+            if ( _d3dDevice != null )
+            {
+                Device newDevice = new Device();
+                if (newDevice.Initialize(_d3dDevice))
+                {
+                    return newDevice;
+                }
+            }
+            return null;
+        }
+
+        private bool Initialize(D3d.Device _d3dDevice)
+        {
+            return true;
+        }
+
         protected override void ReleaseManaged()
         {
-            throw new Exception("The method or operation is not implemented.");
+            if (d3dDevice != null)
+                d3dDevice.Dispose();
         }
 
         protected override void ReleaseUnmanaged()
         {
-            throw new Exception("The method or operation is not implemented.");
         }
-}
+
+        private Device()
+        {
+        }
+    }
 }

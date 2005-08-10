@@ -13,12 +13,12 @@ namespace Proteus.Graphics.Hal
 
         public bool Initialize(Framework.Hosting.Engine engine)
         {
-            /*device = DeviceUtility.CreateDevice();
-            
-            // Error condition reporting.
-            if (device != null)
-                return true;*/
+            // Create rendering device wrapper.
+            device = Device.Create( (System.Windows.Forms.Control)engine.Input[Proteus.Framework.Hosting.Input.InputType.MainWindow] );
 
+            if ( device != null )
+                return true;
+        
             return false;
         }
     }
