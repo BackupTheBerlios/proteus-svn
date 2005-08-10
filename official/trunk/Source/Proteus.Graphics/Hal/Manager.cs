@@ -6,6 +6,20 @@ namespace Proteus.Graphics.Hal
 {
     public sealed class Manager : Kernel.Pattern.Singleton<Manager>
     {
+        private Device                                  device = null;
         
+        private static Kernel.Diagnostics.Log<Manager>  log =
+            new Kernel.Diagnostics.Log<Manager>();
+
+        public bool Initialize(Framework.Hosting.Engine engine)
+        {
+            /*device = DeviceUtility.CreateDevice();
+            
+            // Error condition reporting.
+            if (device != null)
+                return true;*/
+
+            return false;
+        }
     }
 }

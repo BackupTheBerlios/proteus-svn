@@ -82,12 +82,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd $(OutDir)
-cd ..
-cd ..
-md Complete
-cd Complete
-copy $(TargetPath) .
-copy *.* ..\..\Samples\Tutorial01</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

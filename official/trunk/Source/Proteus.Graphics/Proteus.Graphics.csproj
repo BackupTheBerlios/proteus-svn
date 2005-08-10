@@ -64,6 +64,7 @@
     <Compile Include="Hal\Manager.cs" />
     <Compile Include="Hal\RenderCubeTexture.cs" />
     <Compile Include="Hal\RenderTexture.cs" />
+    <Compile Include="Hal\Settings.cs" />
     <Compile Include="Hal\Texture.cs" />
     <Compile Include="Hal\TextureManager.cs" />
     <Compile Include="Hal\VolumeTexture.cs" />
@@ -91,11 +92,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd $(OutDir)
-cd ..
-cd ..
-md Complete
-cd Complete
-copy $(TargetPath) .</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

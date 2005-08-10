@@ -9,27 +9,8 @@ namespace Proteus.Graphics.Hal
 {
     public class DeviceUtility
     {
-        private const D3d.Format        backBufferFormat    = D3d.Format.A8R8G8B8;
-        private const D3d.DepthFormat   depthBufferFormat   = D3d.DepthFormat.D24S8;
-
         private static Kernel.Diagnostics.Log<DeviceUtility> log =
             new Kernel.Diagnostics.Log<DeviceUtility>();
-
-        private static int FindMultisampleMode()
-        {
-            int             adapter     = Kernel.Registry.Manager.Instance.GetValue("Graphics.Adapter",0);
-            D3d.DeviceType  deviceType  = Kernel.Registry.Manager.Instance.GetValue("Graphics.DeviceType",D3d.DeviceType.Hardware );
-            bool            windowed    = Kernel.Registry.Manager.Instance.GetValue("Graphics.Windowed",true );
-            int             multisample = Kernel.Registry.Manager.Instance.GetValue("Graphics.Multisample", 0);
-
-            while (!D3d.Manager.CheckDeviceMultiSampleType(adapter, deviceType, backBufferFormat, windowed, (D3d.MultiSampleType)multisample) || 
-                   !D3d.Manager.CheckDeviceMultiSampleType(adapter,deviceType,(D3d.Format)depthBufferFormat,windowed,(D3d.MultiSampleType)multisample ) )
-            {
-                multisample--;
-            }
-
-            return multisample;
-        }
 
         public static bool TestMdxPresence()
         {
@@ -45,43 +26,6 @@ namespace Proteus.Graphics.Hal
                 return false;
             }
             return false;
-        }
-
-        public static D3d.PresentParameters CreatePresentParameters(    Swf.Control window,
-                                                                        bool windowed,
-                                                                        int width,
-                                                                        int height,
-                                                                        int freq )
-        {
-            D3d.PresentParameters pp = new D3d.PresentParameters();
-
-            pp.AutoDepthStencilFormat = depthBufferFormat;
-            pp.BackBufferCount = 1;
-            pp.BackBufferFormat = backBufferFormat;
-            pp.Windowed = windowed;
-            pp.DeviceWindow = window;
-            pp.EnableAutoDepthStencil = true;
-            pp.ForceNoMultiThreadedFlag = false;
-            pp.MultiSample = (D3d.MultiSampleType)FindMultisampleMode();
-            pp.MultiSampleQuality = 0;
-            pp.PresentationInterval = D3d.PresentInterval.Default;
-            pp.PresentFlag = D3d.PresentFlag.DiscardDepthStencil;
-            pp.SwapEffect = D3d.SwapEffect.Discard;
-
-            if (windowed)
-            {
-                pp.BackBufferWidth = 0;
-                pp.BackBufferHeight = 0;
-                pp.FullScreenRefreshRateInHz = 0;
-            }
-            else
-            {
-                pp.BackBufferWidth = width;
-                pp.BackBufferHeight = height;
-                pp.FullScreenRefreshRateInHz = freq;
-            }
-          
-            return pp;
         }
 
         public static void EnumerateAdapters()
@@ -123,6 +67,14 @@ namespace Proteus.Graphics.Hal
             }
 
             log.EndRegion();
+        }
+
+        public static D3d.Device CreateDevice(System.Windows.Forms.Control renderWIndow)
+        {
+            Settings deviceSettings = new Settings();
+            return null;
+
+
         }
     }
 }
