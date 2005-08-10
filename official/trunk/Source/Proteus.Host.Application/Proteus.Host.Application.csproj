@@ -87,6 +87,7 @@ cd ..
 cd ..
 md Complete
 cd Complete
-copy $(TargetPath) .</PostBuildEvent>
+copy $(TargetPath) .
+copy *.* ..\..\Samples\Tutorial01</PostBuildEvent>
   </PropertyGroup>
 </Project>

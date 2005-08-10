@@ -45,7 +45,7 @@ namespace Proteus.Kernel.Io
             {
                 if (write)
                 {
-                    FileStream file = new FileStream(GetPath(fileName), FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                    FileStream file = new FileStream(GetPath(fileName), FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
                     return file;
                 }
                 else

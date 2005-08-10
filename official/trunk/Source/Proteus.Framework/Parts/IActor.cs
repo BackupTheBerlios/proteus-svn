@@ -25,6 +25,6 @@ namespace Proteus.Framework.Parts
         bool                Initialize(IEnvironment environment);
 
         object              QueryInterface(Type interfaceType);
-        InterfaceType       QueryInterface<InterfaceType>(); 
+        InterfaceType       QueryInterface<InterfaceType>();
     }
 }

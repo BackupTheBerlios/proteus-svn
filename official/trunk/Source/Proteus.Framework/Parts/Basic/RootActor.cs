@@ -13,12 +13,6 @@ namespace Proteus.Framework.Parts.Basic
             base.LoadFile();
         }
 
-        protected override void ReleaseManaged()
-        {
-            base.ReleaseManaged();
-            this.configFile.Resource.Write("test.xml");
-        }
-
         public RootActor(Hosting.Engine _engine)
         {
             engine = _engine;

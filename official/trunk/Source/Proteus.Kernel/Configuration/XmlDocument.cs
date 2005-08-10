@@ -68,22 +68,34 @@ namespace Proteus.Kernel.Configuration
         {
             Chunk newChunk = new Chunk(element.Name);
 
-            // Read its values.
-            Xml.XmlNodeList valueNodes = element.GetElementsByTagName("Value");
-
-            foreach (Xml.XmlElement e in valueNodes)
+            foreach (Xml.XmlNode n in element.ChildNodes)
             {
-                string valueName = e.GetAttribute("Name");
-                newChunk.Values[valueName] = this.GetElementText(e);
+                if (n is Xml.XmlElement)
+                {
+                    Xml.XmlElement subElement = (Xml.XmlElement)n;
+
+                    if (subElement.Name == "Value")
+                    {
+                        if (subElement.HasAttribute("Name"))
+                        {
+                            string valueName = subElement.GetAttribute("Name");
+                            newChunk.Values[valueName] = this.GetElementText(subElement);
+                        }
+                    }
+                }
             }
 
             // Recurse.
             foreach (Xml.XmlNode n in element.ChildNodes)
             {
-                if (n is Xml.XmlElement && n.Name != "Value")
+                if (n is Xml.XmlElement )
                 {
                     Xml.XmlElement subElement = (Xml.XmlElement)n;
-                    newChunk.Add(ReadStep(subElement));
+
+                    if (subElement.Name != "Value")
+                    {
+                        newChunk.Add(ReadStep(subElement));
+                    }
                 }
             }
 

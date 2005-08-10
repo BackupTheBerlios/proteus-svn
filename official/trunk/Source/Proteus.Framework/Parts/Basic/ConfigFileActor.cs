@@ -33,11 +33,8 @@ namespace Proteus.Framework.Parts.Basic
             if (configFile.IsValid)
             {
                 IActor newActor = Utility.ReadActor(configFile.Resource.RootChunk, this.collectionEnvironment);
-                if (newActor != null)
+                if (newActor == null)
                 {
-                    if (!newActor.ReadConfiguration(configFile.Resource.RootChunk))
-                    {
-                    }
                 }
             }
         }

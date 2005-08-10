@@ -15,7 +15,7 @@ namespace Proteus.Framework.Hosting.Tasks
             rootActor = new Parts.Basic.RootActor(engine);
             rootActor.Url = Kernel.Registry.Manager.Instance.GetValue("Framework.RootFile",(string)engine.Input[Input.InputType.Name] + ".actor" );
             rootActor.ForceLoad();
-
+            
             return true;
         }
 
