@@ -8,7 +8,13 @@ namespace Proteus.Graphics.Hal
 {
     public sealed class Device : Kernel.Pattern.Disposable 
     {
-        private D3d.Device d3dDevice = null;
+        private D3d.Device      d3dDevice               = null;
+        private TextureManager  deviceTextureManager    = null;
+
+        public TextureManager TextureManager
+        {
+            get { return deviceTextureManager; }
+        }
 
         public static Device Create(System.Windows.Forms.Control renderWindow)
         {
@@ -27,6 +33,9 @@ namespace Proteus.Graphics.Hal
 
         private bool Initialize(D3d.Device _d3dDevice)
         {
+            // Create the managers.
+            deviceTextureManager = new TextureManager( _d3dDevice );
+
             return true;
         }
 
