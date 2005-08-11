@@ -10,9 +10,9 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<Tutorial01Files Include="../Samples/Tutorials/Tutorial01/*.actor"/>
-		<Tutorial01Files Include="../Samples/Tutorials/Tutorial01/*.registry"/>
-		<Tutorial01Files Include="../Samples/Tutorials/Tutorial01/*.bat"/>
+		<Tutorial01Files Include="../Samples/Tutorial01/*.actor"/>
+		<Tutorial01Files Include="../Samples/Tutorial01/*.registry"/>
+		<Tutorial01Files Include="../Samples/Tutorial01/*.bat"/>
 	</ItemGroup>
 	
 	<Target Name="BuildTutorial01">
