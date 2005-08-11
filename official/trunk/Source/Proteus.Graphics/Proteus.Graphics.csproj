@@ -53,21 +53,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hal\CubeTexture.cs" />
+    <Compile Include="Hal\DepthMap2d.cs" />
+    <Compile Include="Hal\DepthMapCube.cs" />
     <Compile Include="Hal\Device.cs" />
     <Compile Include="Hal\Device2d.cs" />
     <Compile Include="Hal\DeviceUtility.cs" />
     <Compile Include="Hal\FrameBuffer.cs" />
+    <Compile Include="Hal\IDepthMap.cs" />
+    <Compile Include="Hal\IRenderTarget.cs" />
     <Compile Include="Hal\IRestorable.cs" />
-    <Compile Include="Hal\ITarget.cs" />
     <Compile Include="Hal\ITexture.cs" />
     <Compile Include="Hal\Manager.cs" />
-    <Compile Include="Hal\RenderCubeTexture.cs" />
-    <Compile Include="Hal\RenderTexture.cs" />
+    <Compile Include="Hal\RenderTexture2d.cs" />
+    <Compile Include="Hal\RenderTextureCube.cs" />
     <Compile Include="Hal\Settings.cs" />
-    <Compile Include="Hal\Texture.cs" />
+    <Compile Include="Hal\Texture2d.cs" />
+    <Compile Include="Hal\Texture3d.cs" />
+    <Compile Include="Hal\TextureCube.cs" />
     <Compile Include="Hal\TextureManager.cs" />
-    <Compile Include="Hal\VolumeTexture.cs" />
+    <Compile Include="Hal\TextureVolume.cs" />
     <Compile Include="Plugin\EntryPoint.cs">
       <SubType>Code</SubType>
     </Compile>

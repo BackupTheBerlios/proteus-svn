@@ -12,6 +12,7 @@ namespace Proteus.Framework.Parts
     {
         bool                Active      { get; set; }
         string              TypeName    { get; }
+        string              BaseType    { get; }
 
         IEnvironment        Environment { get; }
 

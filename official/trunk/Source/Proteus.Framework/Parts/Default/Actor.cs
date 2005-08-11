@@ -38,6 +38,22 @@ namespace Proteus.Framework.Parts.Default
             }
         }
 
+        public virtual string BaseType
+        {
+            get
+            {
+                Type realBaseType = this.GetType().BaseType;
+                if (realBaseType.GetInterface(typeof(IActor).FullName) != null)
+                {
+                    if (!realBaseType.IsAbstract)
+                    {
+                        return Utility.GetTypeName( realBaseType );
+                    }
+                }
+                return string.Empty;
+            }
+        }
+
         public virtual IEnvironment Environment
         {
             get { return actorEnvironment; }
