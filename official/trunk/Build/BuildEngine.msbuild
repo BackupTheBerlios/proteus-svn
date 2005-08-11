@@ -34,6 +34,7 @@
     </ItemGroup>
     
     <Target Name="BuildPrerequisites">
+    	 <Exec Command="&quot;../Dependencies/Tools/Schema/xsd.exe&quot; &quot;../Source/Proteus.Graphics.Processor/Collada/Schema/COLLADASchema.xsd&quot; /c /n:Proteus.Graphics.Processor.Collada.Schema /out:&quot;../Source/Proteus.Graphics.Processor/Collada/Schema&quot;" />
     </Target>
 
     <Target Name="BuildProjectsDebug" DependsOnTargets="BuildPrerequisites">
