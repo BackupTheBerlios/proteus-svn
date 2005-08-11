@@ -1,4 +1,8 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="BuildBinaries">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="CopyBinaries">
+ 
+    <PropertyGroup>
+    	<ReleaseDirectory>d:/ProteusRelease</ReleaseDirectory>
+    </PropertyGroup>
 
     <ItemGroup>
         <ProteusProjects Include="../../Source/Proteus.Kernel/Proteus.Kernel.csproj" />
@@ -17,20 +21,14 @@
         <ProteusTestProjects Include="../../Source/Proteus.Graphics.Processor.Test/Proteus.Graphics.Processor.Test.csproj" />
     </ItemGroup>
     
-    <PropertyGroup>
-    	<Platform>AnyCPU</Platform>
-    </PropertyGroup>
+    <ItemGroup>
+    </ItemGroup>
 
     <Target Name="BuildProjectsDebug">
-    	<CreateProperty
-            Value="Debug">
-            <Output
-                TaskParameter="Value"
-                PropertyName="Configuration" />
-        </CreateProperty>
     	<MSBuild
             Projects="@(ProteusProjects)"
-            Targets="Build">
+            Targets="Build"
+	    Properties="Configuration=Debug;Platform=AnyCPU">
             <Output
                 TaskParameter="TargetOutputs"
                 ItemName="AssembliesBuiltByProjectsDebug" />
@@ -38,15 +36,10 @@
     </Target>
     
     <Target Name="BuildProjectsRelease">
-    	<CreateProperty
-            Value="Release">
-            <Output
-                TaskParameter="Value"
-                PropertyName="Configuration" />
-        </CreateProperty>
     	<MSBuild
             Projects="@(ProteusProjects)"
-            Targets="Build">
+            Targets="Build"
+	    Properties="Configuration=Release;Platform=AnyCPU">
             <Output
                 TaskParameter="TargetOutputs"
                 ItemName="AssembliesBuiltByProjectsRelease" />
@@ -54,48 +47,29 @@
     </Target>
     
      <Target Name="BuildTestProjects" DependsOnTargets="BuildProjectsDebug">
-     	<CreateProperty
-            Value="Debug">
-            <Output
-                TaskParameter="Value"
-                PropertyName="Configuration" />
-        </CreateProperty> 
      	<MSBuild
             Projects="@(ProteusTestProjects)"
-            Targets="Build">
+            Targets="Build"
+	    Properties="Configuration=Debug;Platform=AnyCPU">
             <Output
                 TaskParameter="TargetOutputs"
                 ItemName="AssembliesBuiltByTestProjects" />
         </MSBuild>
     </Target>
     
-    <Target Name="BuildBinaries">
-    	<MSBuild
-            Projects="BuildProteus.msbuild"
-            Targets="BuildProjectsDebug">
-            <Output
-                TaskParameter="TargetOutputs"
-                ItemName="AssembliesBuiltByProjectsDebug" />
-        </MSBuild>
-	<MSBuild
-            Projects="BuildProteus.msbuild"
-            Targets="BuildProjectsRelease">
-            <Output
-                TaskParameter="TargetOutputs"
-                ItemName="AssembliesBuiltByProjectsRelease" />
-        </MSBuild>
+    <Target Name="BuildBinaries" DependsOnTargets="BuildProjectsDebug;BuildProjectsRelease">
     </Target>
     
     <Target Name="CopyBinaries" DependsOnTargets="BuildBinaries">
-    	 <MakeDir Directories="$(BinaryDirectory)\Debug"/>
-	 <MakeDir Directories="$(BinaryDirectory)\Release"/>
+    	 <MakeDir Directories="$(ReleaseDirectory)\Bin\Debug"/>
+	 <MakeDir Directories="$(ReleaseDirectory)\Bin\Release"/>
 	 <Copy
            SourceFiles="@(AssembliesBuiltByProjectsDebug)"
-           DestinationFolder="$(BinaryDirectory)\Debug"
+           DestinationFolder="$(ReleaseDirectory)\Bin\Debug"
 	 />
 	 <Copy
            SourceFiles="@(AssembliesBuiltByProjectsRelease)"
-           DestinationFolder="$(BinaryDirectory)\Release"
+           DestinationFolder="$(ReleaseDirectory)\Bin\Release"
 	 /> 
     </Target>
     

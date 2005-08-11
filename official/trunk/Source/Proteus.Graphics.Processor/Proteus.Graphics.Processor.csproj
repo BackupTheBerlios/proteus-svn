@@ -47,12 +47,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>cd $(SolutionDir)
-cd ..
-cd Dependencies
-cd Tools
-cd Schema
-xsd $(ProjectDir)/Collada/Schema/COLLADASchema.xsd /c /n:Proteus.Graphics.Processor.Collada.Schema /out:$(ProjectDir)/Collada/Schema</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
