@@ -5,32 +5,32 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProteusProjects Include="../../Source/Proteus.Kernel/Proteus.Kernel.csproj" />
-        <ProteusProjects Include="../../Source/Proteus.Framework/Proteus.Framework.csproj" />
-        <ProteusProjects Include="../../Source/Proteus.Graphics/Proteus.Graphics.csproj" />
-        <ProteusProjects Include="../../Source/Proteus.Editor/Proteus.Editor.csproj" />
-        <ProteusProjects Include="../../Source/Proteus.Graphics.Processor/Proteus.Graphics.Processor.csproj" />
-        <ProteusProjects Include="../../Source/Proteus.Host.Application/Proteus.Host.Application.csproj" />
-        <ProteusProjects Include="../../Source/Proteus.Host.Editor/Proteus.Host.Editor.csproj" />
+        <ProteusProjects Include="../Source/Proteus.Kernel/Proteus.Kernel.csproj" />
+        <ProteusProjects Include="../Source/Proteus.Framework/Proteus.Framework.csproj" />
+        <ProteusProjects Include="../Source/Proteus.Graphics/Proteus.Graphics.csproj" />
+        <ProteusProjects Include="../Source/Proteus.Editor/Proteus.Editor.csproj" />
+        <ProteusProjects Include="../Source/Proteus.Graphics.Processor/Proteus.Graphics.Processor.csproj" />
+        <ProteusProjects Include="../Source/Proteus.Host.Application/Proteus.Host.Application.csproj" />
+        <ProteusProjects Include="../Source/Proteus.Host.Editor/Proteus.Host.Editor.csproj" />
     </ItemGroup>
     
     <ItemGroup>
-        <ProteusTestProjects Include="../../Source/Proteus.Kernel.Test/Proteus.Kernel.Test.csproj" />
-        <ProteusTestProjects Include="../../Source/Proteus.Framework.Test/Proteus.Framework.Test.csproj" />
-        <ProteusTestProjects Include="../../Source/Proteus.Graphics.Test/Proteus.Graphics.Test.csproj" />
-        <ProteusTestProjects Include="../../Source/Proteus.Graphics.Processor.Test/Proteus.Graphics.Processor.Test.csproj" />
+        <ProteusTestProjects Include="../Source/Proteus.Kernel.Test/Proteus.Kernel.Test.csproj" />
+        <ProteusTestProjects Include="../Source/Proteus.Framework.Test/Proteus.Framework.Test.csproj" />
+        <ProteusTestProjects Include="../Source/Proteus.Graphics.Test/Proteus.Graphics.Test.csproj" />
+        <ProteusTestProjects Include="../Source/Proteus.Graphics.Processor.Test/Proteus.Graphics.Processor.Test.csproj" />
     </ItemGroup>
     
     <ItemGroup>
-    	<ProteusDependencies Include="../../Dependencies/Libraries/DockPanel/WeifenLuo.WinFormsUI.Docking.dll"/>
-	<ProteusDependencies Include="../../Dependencies/Libraries/TextEditor/ICSharpCode.TextEditor.dll" />
-	<ProteusDependencies Include="../../Dependencies/Libraries/ManagedDx/microsoft.directx.audiovideoplayback.dll" />
-	<ProteusDependencies Include="../../Dependencies/Libraries/ManagedDx/microsoft.directx.diagnostics.dll" />
-	<ProteusDependencies Include="../../Dependencies/Libraries/ManagedDx/microsoft.directx.direct3d.dll" />
-	<ProteusDependencies Include="../../Dependencies/Libraries/ManagedDx/microsoft.directx.direct3dx.dll" />
-	<ProteusDependencies Include="../../Dependencies/Libraries/ManagedDx/microsoft.directx.directinput.dll" />
-	<ProteusDependencies Include="../../Dependencies/Libraries/ManagedDx/microsoft.directx.directsound.dll" />
-	<ProteusDependencies Include="../../Dependencies/Libraries/ManagedDx/microsoft.directx.dll" />
+    	<ProteusDependencies Include="../Dependencies/Libraries/DockPanel/WeifenLuo.WinFormsUI.Docking.dll"/>
+	<ProteusDependencies Include="../Dependencies/Libraries/TextEditor/ICSharpCode.TextEditor.dll" />
+	<ProteusDependencies Include="../Dependencies/Libraries/ManagedDx/microsoft.directx.audiovideoplayback.dll" />
+	<ProteusDependencies Include="../Dependencies/Libraries/ManagedDx/microsoft.directx.diagnostics.dll" />
+	<ProteusDependencies Include="../Dependencies/Libraries/ManagedDx/microsoft.directx.direct3d.dll" />
+	<ProteusDependencies Include="../Dependencies/Libraries/ManagedDx/microsoft.directx.direct3dx.dll" />
+	<ProteusDependencies Include="../Dependencies/Libraries/ManagedDx/microsoft.directx.directinput.dll" />
+	<ProteusDependencies Include="../Dependencies/Libraries/ManagedDx/microsoft.directx.directsound.dll" />
+	<ProteusDependencies Include="../Dependencies/Libraries/ManagedDx/microsoft.directx.dll" />
     </ItemGroup>
     
     <Target Name="BuildPrerequisites">
