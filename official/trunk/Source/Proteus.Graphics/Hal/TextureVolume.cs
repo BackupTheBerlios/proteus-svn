@@ -53,15 +53,15 @@ namespace Proteus.Graphics.Hal
             }
             catch (D3d.InvalidCallException e)
             {
-                log.Warning("Unable to create texture: {0}", e.Message);
+                log.Warning("Unable to create 3d texture: {0}", e.Message);
             }
             catch (D3d.OutOfVideoMemoryException e)
             {
-                log.Warning("Unable to create texture: {0}", e.Message);
+                log.Warning("Unable to create 3d texture: {0}", e.Message);
             }
             catch (OutOfMemoryException e)
             {
-                log.Warning("Unable to create texture: {0}", e.Message);
+                log.Warning("Unable to create 3d texture: {0}", e.Message);
             }
 
             return false;
