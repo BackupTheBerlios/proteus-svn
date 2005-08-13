@@ -95,29 +95,25 @@ namespace Proteus.Graphics.Hal
             return false;
         }
 
-        public static VertexStream Create(GeometryManager manager, Type vertexType, int size,bool pointsprites, bool read )
+        public static VertexStream Create(GeometryManager manager, Type vertexType, int size,bool pointsprites, bool dynamic )
         {
             VertexStream newVertexStream = new VertexStream();
-            if ( newVertexStream.Initialize( manager,vertexType,size,pointsprites,read ) )
+            if ( newVertexStream.Initialize( manager,vertexType,size,pointsprites,dynamic ) )
                 return newVertexStream;
 
             return null;
         }
 
-        private bool Initialize(GeometryManager manager, Type vertexType, int size,bool pointsprites,bool read)
+        private bool Initialize(GeometryManager manager, Type vertexType, int size,bool pointsprites,bool dynamic )
         {
             if (IsTypeValid(vertexType))
             {
                 try
                 {
                     D3d.Pool d3dPool = D3d.Pool.Managed;
-                    D3d.Usage d3dUsage = D3d.Usage.None;
-
-                    if (!read)
-                    {
-                        d3dUsage |= D3d.Usage.WriteOnly;
-                    }
-                    else
+                    D3d.Usage d3dUsage = D3d.Usage.WriteOnly;
+               
+                    if ( dynamic )
                     {
                         d3dUsage |= D3d.Usage.Dynamic;
                     }

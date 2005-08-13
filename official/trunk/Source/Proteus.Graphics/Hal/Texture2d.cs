@@ -6,41 +6,58 @@ using D3d = Microsoft.DirectX.Direct3D;
 
 namespace Proteus.Graphics.Hal
 {
-    public class Texture2d
+    public class Texture2d : TextureBase
     {
+        private D3d.Texture d3dTexture = null;
+
         private static Kernel.Diagnostics.Log<Texture2d> log = 
             new Kernel.Diagnostics.Log<Texture2d>();
 
-        public static Texture2d Create(Device device,D3d.Format format, int width, int height, bool dynamic, bool mipmap)
+        public override Microsoft.DirectX.Direct3D.Surface Lock(int surface)
         {
-            int mipLevels = 1;
-            
-            D3d.Usage d3dUsage = D3d.Usage.WriteOnly;
-            
-            if ( dynamic )
-                d3dUsage |= D3d.Usage.Dynamic;
-            
-            if (mipmap)
+            if (!textureLock)
             {
-                d3dUsage |= D3d.Usage.AutoGenerateMipMap;
-                mipLevels = 0;
+                D3d.Surface lockedSurface = d3dTexture.GetSurfaceLevel(0);
+                textureLock = true;
+                return lockedSurface;
             }
+            return null;
+        }
 
+        public override void Unlock()
+        {
+            if (textureLock)
+            {
+                textureLock = false;
+            }
+        }
+
+        public static Texture2d Create(TextureManager manager,D3d.Format format, int width, int height, bool dynamic, bool mipmap)
+        {
+            Texture2d newTexture = new Texture2d();
+            if ( newTexture.Initialize( manager,format,width,height,dynamic,mipmap ) )
+                return newTexture;
+
+            return null;
+        }
+
+        private bool Initialize(TextureManager manager, D3d.Format format, int width, int height, bool dynamic, bool mipmap)
+        {
             D3d.Pool d3dPool = D3d.Pool.Managed;
+            D3d.Usage d3dUsage = CreateUsageFlags( dynamic,mipmap,false );
 
             try
             {
-                D3d.Texture d3dTexture = new D3d.Texture(device.D3dDevice,
-                                                            width,
-                                                            height,
-                                                            mipLevels,
-                                                            d3dUsage,
-                                                            format,
-                                                            d3dPool);
+                d3dTexture = new D3d.Texture(   manager.Device.D3dDevice,
+                                                width,
+                                                height,
+                                                CreateMipLevels(mipmap),
+                                                d3dUsage,
+                                                format,
+                                                d3dPool );
+                this.Initialize(manager, format, width, height, 1, d3dTexture);
 
-                Texture2d newTexture = new Texture2d();
-                
-
+                return true;
             }
             catch (D3d.InvalidCallException e)
             {
@@ -54,11 +71,12 @@ namespace Proteus.Graphics.Hal
             {
                 log.Warning("Unable to create texture: {0}", e.Message);
             }
-            return null;
+
+            return false;
         }
 
-        private Texture2d()
+        protected Texture2d()
         {
-        }
+        } 
     }
 }

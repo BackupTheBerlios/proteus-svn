@@ -90,28 +90,24 @@ namespace Proteus.Graphics.Hal
         {
         }
 
-        public static IndexStream Create(GeometryManager manager, int size, bool isLarge, bool read )
+        public static IndexStream Create(GeometryManager manager, int size, bool isLarge, bool dynamic )
         {
             IndexStream newStream = new IndexStream();
-            if ( newStream.Initialize( manager,size,isLarge,read ) )
+            if ( newStream.Initialize( manager,size,isLarge,dynamic ) )
                 return newStream;
 
             return null;
         }
 
-        private bool Initialize(GeometryManager manager,int size, bool isLarge, bool read)
+        private bool Initialize(GeometryManager manager,int size, bool isLarge, bool dynamic)
         {
           
             try
             {
                 D3d.Pool d3dPool = D3d.Pool.Managed;
-                D3d.Usage d3dUsage = D3d.Usage.None;
+                D3d.Usage d3dUsage = D3d.Usage.WriteOnly;
 
-                if (!read)
-                {
-                    d3dUsage |= D3d.Usage.WriteOnly;
-                }
-                else
+                if( dynamic )
                 {
                     d3dUsage |= D3d.Usage.Dynamic;
                 }

@@ -8,20 +8,48 @@ namespace Proteus.Graphics.Hal
 {
     public sealed class TextureManager : Kernel.Pattern.Disposable
     {
-        private Device device = null;
+        private Device              textureDevice   = null;
+        private int                 textureDivider  = 1;
+        private List<TextureBase>   textures        = new List<TextureBase>();
+
+        public Device Device
+        {
+            get { return textureDevice; }
+        }
 
         public Texture2d CreateTexture2d(D3d.Format format, int width, int height, bool dynamic,bool mipmap )
         {
+            Texture2d newTexture = Texture2d.Create( this,format,width,height,dynamic,mipmap );
+            if (newTexture != null)
+            {
+                textures.Add( newTexture );
+                return newTexture;
+            }
+
             return null;
         }
 
         public TextureCube CreateTextureCube(D3d.Format format, int size, bool dynamic, bool mipmap)
         {
+            TextureCube newTexture = TextureCube.Create(this, format, size, dynamic, mipmap);
+            if (newTexture != null)
+            {
+                textures.Add(newTexture);
+                return newTexture;
+            }
+
             return null;
         }
 
-        public Texture3d CreateTexture3d(D3d.Format format, int width, int height, int depth, bool dynamic, bool mipmap)
+        public TextureVolume CreateTextureVolume(D3d.Format format, int width, int height, int depth, bool dynamic, bool mipmap)
         {
+            TextureVolume newTexture = TextureVolume.Create(this, format, width, height,depth, dynamic, mipmap);
+            if (newTexture != null)
+            {
+                textures.Add(newTexture);
+                return newTexture;
+            }
+
             return null;
         }
 
@@ -47,7 +75,7 @@ namespace Proteus.Graphics.Hal
 
         public bool SetAsSampler(ITexture texture,int channel)
         {
-            device.D3dDevice.SetTexture( channel,texture.BaseTexture );
+            textureDevice.D3dDevice.SetTexture( channel,texture.BaseTexture );
             return true;
         }
 
@@ -73,9 +101,9 @@ namespace Proteus.Graphics.Hal
             return null;
         }
 
-        private bool Initialize(Device _device)
+        private bool Initialize(Device device)
         {
-            this.device = _device;
+            this.textureDevice = device;
             return true;
         }
 

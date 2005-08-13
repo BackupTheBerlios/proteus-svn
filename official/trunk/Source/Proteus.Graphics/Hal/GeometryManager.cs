@@ -19,9 +19,9 @@ namespace Proteus.Graphics.Hal
             get { return geometryDevice; }
         }
 
-        public VertexStream CreateVertexStream(Type vertexType, int size, bool pointsprites,bool read)
+        public VertexStream CreateVertexStream(Type vertexType, int size, bool pointsprites,bool dynamic)
         {
-            VertexStream newStream = VertexStream.Create( this,vertexType,size,pointsprites,read );
+            VertexStream newStream = VertexStream.Create( this,vertexType,size,pointsprites,dynamic );
             if (newStream != null)
             {
                 geometryVertexStreams.Add( newStream );
@@ -30,9 +30,9 @@ namespace Proteus.Graphics.Hal
             return null;
         }
 
-        public IndexStream CreateIndexStream(int size, bool isLarge,bool read)
+        public IndexStream CreateIndexStream(int size, bool isLarge,bool dynamic)
         {
-            IndexStream newStream = IndexStream.Create(this,size,isLarge,read);
+            IndexStream newStream = IndexStream.Create(this,size,isLarge,dynamic);
             if (newStream != null)
             {
                 geometryIndexStreams.Add( newStream );

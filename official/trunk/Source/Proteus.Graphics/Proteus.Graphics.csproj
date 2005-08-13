@@ -78,7 +78,6 @@
     <Compile Include="Hal\RenderTextureCube.cs" />
     <Compile Include="Hal\Settings.cs" />
     <Compile Include="Hal\Texture2d.cs" />
-    <Compile Include="Hal\Texture3d.cs" />
     <Compile Include="Hal\TextureBase.cs" />
     <Compile Include="Hal\TextureCube.cs" />
     <Compile Include="Hal\TextureManager.cs" />
@@ -90,6 +89,7 @@
     <Compile Include="Plugin\RenderTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shading\Parameter.cs" />
+    <Compile Include="Shading\ParameterCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Proteus.Framework\Proteus.Framework.csproj">
