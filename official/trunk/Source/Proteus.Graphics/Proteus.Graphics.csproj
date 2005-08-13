@@ -53,30 +53,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hal\Compiler.cs" />
     <Compile Include="Hal\DepthMap2d.cs" />
     <Compile Include="Hal\DepthMapCube.cs" />
     <Compile Include="Hal\Device.cs" />
     <Compile Include="Hal\Device2d.cs" />
+    <Compile Include="Hal\Capabilities.cs" />
     <Compile Include="Hal\DeviceUtility.cs" />
+    <Compile Include="Hal\FormatUtility.cs" />
     <Compile Include="Hal\FrameBuffer.cs" />
+    <Compile Include="Hal\GeometryManager.cs" />
+    <Compile Include="Hal\GeometryPacket.cs" />
     <Compile Include="Hal\IDepthMap.cs" />
+    <Compile Include="Hal\IHardwareStream.cs" />
+    <Compile Include="Hal\IndexStream.cs" />
+    <Compile Include="Hal\Instance.cs" />
+    <Compile Include="Hal\InstanceStream.cs" />
     <Compile Include="Hal\IRenderTarget.cs" />
     <Compile Include="Hal\IRestorable.cs" />
     <Compile Include="Hal\ITexture.cs" />
     <Compile Include="Hal\Manager.cs" />
+    <Compile Include="Hal\Program.cs" />
     <Compile Include="Hal\RenderTexture2d.cs" />
     <Compile Include="Hal\RenderTextureCube.cs" />
     <Compile Include="Hal\Settings.cs" />
     <Compile Include="Hal\Texture2d.cs" />
     <Compile Include="Hal\Texture3d.cs" />
+    <Compile Include="Hal\TextureBase.cs" />
     <Compile Include="Hal\TextureCube.cs" />
     <Compile Include="Hal\TextureManager.cs" />
     <Compile Include="Hal\TextureVolume.cs" />
+    <Compile Include="Hal\VertexStream.cs" />
     <Compile Include="Plugin\EntryPoint.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Plugin\RenderTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shading\Parameter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Proteus.Framework\Proteus.Framework.csproj">

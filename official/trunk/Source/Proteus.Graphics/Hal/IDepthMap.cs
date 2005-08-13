@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Proteus.Graphics.Hal
 {
-    public interface IDepthMap
+    public interface IDepthMap : ITarget
     {
         bool IsPcf { get; }
     }

@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Proteus.Graphics.Hal
 {
-    public interface ITarget : ITexture
+    public sealed class Capabilities
     {
-        bool SetAsTarget( int targetChannel );
+        public Capabilities( Device device )
+        {
+        }
     }
 }

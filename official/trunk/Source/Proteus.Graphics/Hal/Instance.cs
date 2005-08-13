@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Proteus.Graphics.Hal
 {
-    public interface ITarget : ITexture
+  
+
+    class Instance
     {
-        bool SetAsTarget( int targetChannel );
     }
 }
