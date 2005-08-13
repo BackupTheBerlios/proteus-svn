@@ -84,6 +84,11 @@ namespace Proteus.Graphics.Hal
             return true;
         }
 
+        private bool AssureAndModifyParameters()
+        {
+            return true;
+        }
+
         protected override void ReleaseManaged()
         {
         }
