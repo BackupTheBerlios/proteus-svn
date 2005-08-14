@@ -10,10 +10,40 @@ namespace Proteus.Graphics.Hal
     {
         private D3d.Device      d3dDevice               = null;
         private Capabilities    d3dCapabilities         = null;
+        private Settings        d3dSettings             = null;
+        private FrameBuffer     d3dPrimaryFrameBuffer   = null;
+        private TextureManager  d3dTextureManager       = null;
+        private GeometryManager d3dGeometryManager      = null;
+  
 
         public D3d.Device D3dDevice
         {
             get { return d3dDevice; }
+        }
+
+        public Capabilities Capabilities
+        {
+            get { return d3dCapabilities; }
+        }
+
+        public Settings Settings
+        {
+            get { return d3dSettings; }
+        }
+
+        public TextureManager TextureManager
+        {
+            get { return d3dTextureManager; }
+        }
+
+        public GeometryManager GeometryManager
+        {
+            get { return d3dGeometryManager; }
+        }
+
+        public FrameBuffer CreateFrameBuffer(System.Windows.Forms.Control renderWindow)
+        {
+            return null;
         }
 
         protected override void ReleaseManaged()
@@ -27,26 +57,31 @@ namespace Proteus.Graphics.Hal
         }
 
         public static Device Create(System.Windows.Forms.Control renderWindow)
-        {
-            D3d.Device _d3dDevice = DeviceUtility.CreateDevice( renderWindow );
-
-            if ( _d3dDevice != null )
+        {     
+            Device newDevice = new Device();
+            if ( newDevice.Initialize(renderWindow) )
             {
-                Device newDevice = new Device();
-                if (newDevice.Initialize(_d3dDevice))
-                {
-                    return newDevice;
-                }
+                return newDevice;
             }
+         
             return null;
         }
 
-        private bool Initialize(D3d.Device _d3dDevice)
+        private bool Initialize(System.Windows.Forms.Control renderWindow )
         {
-            d3dDevice       = _d3dDevice;
-            d3dCapabilities = new Capabilities( this );
-            
-            return true;
+            d3dSettings     = new Settings();
+            d3dDevice       = DeviceUtility.CreateDevice( d3dSettings,renderWindow );
+
+            if (d3dDevice != null)
+            {
+                d3dCapabilities         = new Capabilities(this);
+                d3dPrimaryFrameBuffer   = FrameBuffer.Create( d3dDevice );
+                d3dGeometryManager      = GeometryManager.Create( this );
+                d3dTextureManager       = TextureManager.Create(this);
+
+                return true;
+            }
+            return false;
         }
 
         private Device()

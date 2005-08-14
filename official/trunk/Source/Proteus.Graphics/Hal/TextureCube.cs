@@ -45,11 +45,11 @@ namespace Proteus.Graphics.Hal
         private bool Initialize(TextureManager manager, D3d.Format format, int size, bool dynamic, bool mipmap)
         {
             D3d.Pool d3dPool = D3d.Pool.Managed;
-            D3d.Usage d3dUsage = CreateUsageFlags( dynamic,mipmap,false );
+            D3d.Usage d3dUsage = manager.GetUsageFlags( dynamic,mipmap,false );
 
             try
             {
-                d3dTexture = new D3d.CubeTexture( manager.Device.D3dDevice,size,CreateMipLevels(mipmap),d3dUsage,format,d3dPool);
+                d3dTexture = new D3d.CubeTexture( manager.Device.D3dDevice,size,manager.GetMipLevelCount(mipmap),d3dUsage,format,d3dPool);
                 this.Initialize(manager, format, size,size,6, d3dTexture);
 
                 return true;

@@ -19,7 +19,6 @@ namespace Proteus.Graphics.Hal
             return 0;
         }
 
-
         private FormatUtility()
         {
         }

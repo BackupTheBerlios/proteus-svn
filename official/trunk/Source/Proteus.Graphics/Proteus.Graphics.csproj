@@ -72,9 +72,9 @@
     <Compile Include="Hal\IRenderTarget.cs" />
     <Compile Include="Hal\IRestorable.cs" />
     <Compile Include="Hal\ITexture.cs" />
-    <Compile Include="Hal\Manager.cs" />
     <Compile Include="Hal\Program.cs" />
     <Compile Include="Hal\RenderTexture2d.cs" />
+    <Compile Include="Hal\RenderTextureBase.cs" />
     <Compile Include="Hal\RenderTextureCube.cs" />
     <Compile Include="Hal\Settings.cs" />
     <Compile Include="Hal\Texture2d.cs" />

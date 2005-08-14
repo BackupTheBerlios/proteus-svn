@@ -19,11 +19,16 @@ namespace Proteus.Graphics.Hal
 
         public Texture2d CreateTexture2d(D3d.Format format, int width, int height, bool dynamic,bool mipmap )
         {
-            Texture2d newTexture = Texture2d.Create( this,format,width,height,dynamic,mipmap );
-            if (newTexture != null)
+            int depth = 128;
+
+            if (ModifyParameters(D3d.ResourceType.Textures, format, dynamic, mipmap, false, ref width, ref height, ref depth))
             {
-                textures.Add( newTexture );
-                return newTexture;
+                Texture2d newTexture = Texture2d.Create(this, format, width, height, dynamic, mipmap);
+                if (newTexture != null)
+                {
+                    textures.Add(newTexture);
+                    return newTexture;
+                }
             }
 
             return null;
@@ -31,11 +36,17 @@ namespace Proteus.Graphics.Hal
 
         public TextureCube CreateTextureCube(D3d.Format format, int size, bool dynamic, bool mipmap)
         {
-            TextureCube newTexture = TextureCube.Create(this, format, size, dynamic, mipmap);
-            if (newTexture != null)
+            int height = 128;
+            int depth = 128;
+
+            if (ModifyParameters(D3d.ResourceType.CubeTexture, format, dynamic, mipmap, false, ref  size, ref height, ref depth))
             {
-                textures.Add(newTexture);
-                return newTexture;
+                TextureCube newTexture = TextureCube.Create(this, format, size, dynamic, mipmap);
+                if (newTexture != null)
+                {
+                    textures.Add(newTexture);
+                    return newTexture;
+                }
             }
 
             return null;
@@ -43,11 +54,14 @@ namespace Proteus.Graphics.Hal
 
         public TextureVolume CreateTextureVolume(D3d.Format format, int width, int height, int depth, bool dynamic, bool mipmap)
         {
-            TextureVolume newTexture = TextureVolume.Create(this, format, width, height,depth, dynamic, mipmap);
-            if (newTexture != null)
+            if (ModifyParameters(D3d.ResourceType.VolumeTexture, format, dynamic, mipmap, false, ref width, ref height, ref depth))
             {
-                textures.Add(newTexture);
-                return newTexture;
+                TextureVolume newTexture = TextureVolume.Create(this, format, width, height, depth, dynamic, mipmap);
+                if (newTexture != null)
+                {
+                    textures.Add(newTexture);
+                    return newTexture;
+                }
             }
 
             return null;
@@ -79,14 +93,69 @@ namespace Proteus.Graphics.Hal
             return true;
         }
 
-        public bool SetAsTarget(ITarget target,int channel)
+        public bool SetAsTarget(IRenderTarget target,int channel)
         {
             return true;
         }
 
-        private bool AssureAndModifyParameters()
+        public D3d.Usage GetUsageFlags(bool dynamic, bool mipmap, bool isTarget)
         {
-            return true;
+            D3d.Usage usageFlags = D3d.Usage.WriteOnly;
+
+            if (dynamic)
+                usageFlags |= D3d.Usage.Dynamic;
+
+            if (mipmap)
+                usageFlags |= D3d.Usage.AutoGenerateMipMap;
+
+            if (isTarget)
+                usageFlags |= D3d.Usage.RenderTarget;
+
+            return usageFlags;
+        }
+
+        public int GetMipLevelCount(bool mipmap)
+        {
+            if (mipmap)
+                return 0;
+            return 1;
+        }
+
+        private bool ModifyParameters(  D3d.ResourceType type,
+                                        D3d.Format format,
+                                        bool dynamic,
+                                        bool mipmap,
+                                        bool isTarget,
+                                        ref int width,
+                                        ref int height,
+                                        ref int depth )
+        {
+            // First fix any dimensional errors.
+            width   = width     / textureDivider;
+            height  = height    / textureDivider;
+            depth   = depth     / textureDivider;
+
+            // Make sure we stay within maximum allowed dimensions.
+            if ( width > textureDevice.Capabilities.textureMaxWidth )
+                width = textureDevice.Capabilities.textureMaxWidth;
+           
+            if ( height > textureDevice.Capabilities.textureMaxHeight )
+                height = textureDevice.Capabilities.textureMaxHeight;
+
+            if ( depth > textureDevice.Capabilities.textureMaxDepth )
+                depth = textureDevice.Capabilities.textureMaxDepth;
+
+            D3d.Usage d3dUsage = GetUsageFlags( dynamic,mipmap,isTarget );
+
+            if (D3d.Manager.CheckDeviceFormat(  Device.Settings.adapterIndex,
+                                                Device.Settings.deviceType,
+                                                Device.Settings.backBufferFormat,
+                                                d3dUsage, type, format))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         protected override void ReleaseManaged()

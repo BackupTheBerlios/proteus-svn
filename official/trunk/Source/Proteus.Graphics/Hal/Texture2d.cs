@@ -44,14 +44,14 @@ namespace Proteus.Graphics.Hal
         private bool Initialize(TextureManager manager, D3d.Format format, int width, int height, bool dynamic, bool mipmap)
         {
             D3d.Pool d3dPool = D3d.Pool.Managed;
-            D3d.Usage d3dUsage = CreateUsageFlags( dynamic,mipmap,false );
+            D3d.Usage d3dUsage = manager.GetUsageFlags( dynamic,mipmap,false );
 
             try
             {
                 d3dTexture = new D3d.Texture(   manager.Device.D3dDevice,
                                                 width,
                                                 height,
-                                                CreateMipLevels(mipmap),
+                                                manager.GetMipLevelCount(mipmap),
                                                 d3dUsage,
                                                 format,
                                                 d3dPool );

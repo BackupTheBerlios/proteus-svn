@@ -103,12 +103,11 @@ namespace Proteus.Graphics.Hal
             return false;
         }
 
-        public static D3d.Device    CreateDevice(System.Windows.Forms.Control renderWindow)
+        public static D3d.Device    CreateDevice(   Settings deviceSettings,
+                                                    System.Windows.Forms.Control renderWindow)
         {
             EnumerateAdapters();
             
-            Settings                deviceSettings  = new Settings();
-
             // First try full hardware acceleration.
             D3d.PresentParameters   presentParams   = deviceSettings.GetPresentParameters( renderWindow );
             D3d.CreateFlags         createFlags     = deviceSettings.GetCreateFlags(true,true);

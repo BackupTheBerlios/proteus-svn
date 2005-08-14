@@ -77,29 +77,6 @@ namespace Proteus.Graphics.Hal
             textureBase     = d3dBase;
         }
 
-        protected D3d.Usage CreateUsageFlags(bool dynamic, bool mipmap, bool isTarget)
-        {
-            D3d.Usage usageFlags = D3d.Usage.WriteOnly;
-
-            if ( dynamic )
-                usageFlags |= D3d.Usage.Dynamic;
-
-            if ( mipmap )
-                usageFlags |= D3d.Usage.AutoGenerateMipMap;
-
-            if ( isTarget )
-                usageFlags |= D3d.Usage.RenderTarget;
-
-            return usageFlags;
-        }
-
-        protected int CreateMipLevels(bool mipmap)
-        {
-            if ( mipmap )
-                return 0;
-            return 1;
-        }
-
         protected TextureBase()
         {
         }

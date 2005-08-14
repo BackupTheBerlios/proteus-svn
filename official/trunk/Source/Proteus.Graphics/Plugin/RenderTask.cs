@@ -10,7 +10,7 @@ namespace Proteus.Graphics.Plugin
 
         public bool Initialize(Proteus.Framework.Hosting.Engine engine)
         {
-            return Hal.Manager.Instance.Initialize(engine);
+            return true;
         }
 
         public bool Update(double deltaTime)
