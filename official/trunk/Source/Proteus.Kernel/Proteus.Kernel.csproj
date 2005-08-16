@@ -94,8 +94,10 @@
     <Compile Include="Pattern\ConcreteFactory.cs" />
     <Compile Include="Pattern\Disposable.cs" />
     <Compile Include="Pattern\ICopyable.cs" />
+    <Compile Include="Pattern\IPoolItem.cs" />
     <Compile Include="Pattern\IVisitable.cs" />
     <Compile Include="Pattern\IVisitor.cs" />
+    <Compile Include="Pattern\Pool.cs" />
     <Compile Include="Pattern\Singleton.cs" />
     <Compile Include="Pattern\TypeFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,8 +4,12 @@ using System.Text;
 
 namespace Proteus.Graphics.Hal
 {
-    public interface IRenderTarget 
+    public enum QueryType
     {
-        bool SetAsTarget( int channel,int surface );
+        Occlusion,
+    }
+
+    public sealed class Query
+    {
     }
 }

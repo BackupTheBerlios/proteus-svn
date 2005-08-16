@@ -73,10 +73,14 @@
     <Compile Include="Hal\IRestorable.cs" />
     <Compile Include="Hal\ITexture.cs" />
     <Compile Include="Hal\Program.cs" />
+    <Compile Include="Hal\Query.cs" />
+    <Compile Include="Hal\QueryManager.cs" />
     <Compile Include="Hal\RenderTexture2d.cs" />
     <Compile Include="Hal\RenderTextureBase.cs" />
     <Compile Include="Hal\RenderTextureCube.cs" />
     <Compile Include="Hal\Settings.cs" />
+    <Compile Include="Hal\StateManager.cs" />
+    <Compile Include="Hal\TargetConfiguration.cs" />
     <Compile Include="Hal\Texture2d.cs" />
     <Compile Include="Hal\TextureBase.cs" />
     <Compile Include="Hal\TextureCube.cs" />
@@ -90,6 +94,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shading\Parameter.cs" />
     <Compile Include="Shading\ParameterCollection.cs" />
+    <Compile Include="Vdb\Query.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Proteus.Framework\Proteus.Framework.csproj">
@@ -103,9 +108,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Proteus.Graphics.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Vdb\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

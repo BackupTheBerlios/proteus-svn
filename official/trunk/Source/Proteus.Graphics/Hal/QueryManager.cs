@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Proteus.Graphics.Hal
 {
-    public interface IRenderTarget 
+    class QueryManager
     {
-        bool SetAsTarget( int channel,int surface );
     }
 }

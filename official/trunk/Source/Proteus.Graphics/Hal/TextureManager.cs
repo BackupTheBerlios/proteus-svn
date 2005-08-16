@@ -8,9 +8,10 @@ namespace Proteus.Graphics.Hal
 {
     public sealed class TextureManager : Kernel.Pattern.Disposable
     {
-        private Device              textureDevice   = null;
-        private int                 textureDivider  = 1;
-        private List<TextureBase>   textures        = new List<TextureBase>();
+        private Device                  textureDevice   = null;
+        private int                     textureDivider  = 1;
+        private List<TextureBase>       textures        = new List<TextureBase>();
+        private List<RenderTextureBase> textureTargets  = new List<RenderTextureBase>();
 
         public Device Device
         {
@@ -69,11 +70,36 @@ namespace Proteus.Graphics.Hal
 
         public RenderTexture2d CreateRenderTexture2d(D3d.Format format, int width, int height, bool mipmap, int multisample)
         {
+            int depth = 128;
+            if (ModifyParameters(D3d.ResourceType.Textures, format, false, mipmap, true, ref width, ref height, ref depth))
+            {
+                RenderTexture2d newTexture = RenderTexture2d.Create(this, format, width, height, mipmap,multisample );
+                if (newTexture != null)
+                {
+                    textures.Add(newTexture);
+                    textureTargets.Add(newTexture);
+                    return newTexture;
+                }
+            }
+
             return null;
         }
 
         public RenderTextureCube CreateRenderTextureCube(D3d.Format format, int size, bool mipmap, int multisample)
         {
+            int height  = 128;
+            int depth   = 128;
+            if (ModifyParameters(D3d.ResourceType.CubeTexture, format, false, mipmap, true, ref size, ref height, ref depth))
+            {
+                RenderTextureCube newTexture = RenderTextureCube.Create(this, format, size, mipmap, multisample);
+                if (newTexture != null)
+                {
+                    textures.Add(newTexture);
+                    textureTargets.Add(newTexture);
+                    return newTexture;
+                }
+            }
+
             return null;
         }
 
@@ -90,11 +116,6 @@ namespace Proteus.Graphics.Hal
         public bool SetAsSampler(ITexture texture,int channel)
         {
             textureDevice.D3dDevice.SetTexture( channel,texture.BaseTexture );
-            return true;
-        }
-
-        public bool SetAsTarget(IRenderTarget target,int channel)
-        {
             return true;
         }
 

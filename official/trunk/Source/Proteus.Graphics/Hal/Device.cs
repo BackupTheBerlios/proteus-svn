@@ -15,7 +15,6 @@ namespace Proteus.Graphics.Hal
         private TextureManager  d3dTextureManager       = null;
         private GeometryManager d3dGeometryManager      = null;
   
-
         public D3d.Device D3dDevice
         {
             get { return d3dDevice; }
@@ -75,7 +74,7 @@ namespace Proteus.Graphics.Hal
             if (d3dDevice != null)
             {
                 d3dCapabilities         = new Capabilities(this);
-                d3dPrimaryFrameBuffer   = FrameBuffer.Create( d3dDevice );
+                d3dPrimaryFrameBuffer   = FrameBuffer.Create( this );
                 d3dGeometryManager      = GeometryManager.Create( this );
                 d3dTextureManager       = TextureManager.Create(this);
 
