@@ -4,7 +4,17 @@ using System.Text;
 
 namespace Proteus.Graphics.Hal
 {
-    class QueryManager
+    public sealed class QueryManager : 
+        Kernel.Pattern.Pool<Query,QueryManager>,
+        Kernel.Pattern.IPoolCreator<Query>
     {
-    }
+        #region IPoolCreator<Query> Members
+
+        public Query Create()
+        {
+            return null;
+        }
+
+        #endregion
+}
 }

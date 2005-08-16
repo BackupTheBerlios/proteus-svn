@@ -6,17 +6,17 @@ namespace Proteus.Kernel.Pattern
 {
     public interface IPoolCreator<ItemType>
     {
-        ItemType Create();
+        ItemType CreateInstance();
     }
 
-    public sealed class Pool<ItemType,CreatorType> 
-        where ItemType : IPoolItem<ItemType,CreatorType>,new() 
+    public class Pool<ItemType,CreatorType> : Kernel.Pattern.Disposable
+        where ItemType : IPoolItem<ItemType,CreatorType>,IDisposable
         where CreatorType : IPoolCreator<ItemType>,new()
     {
         private List<ItemType>      poolItems           = new List<ItemType>();
-        private static CreatorType  creator             = new CreatorType();
+        private static CreatorType  creator             = null;
 
-        public ItemType New()
+        public ItemType Create()
         {
             if (poolItems.Count > 0)
             {
@@ -28,11 +28,11 @@ namespace Proteus.Kernel.Pattern
                     item.Pool = this;
                     return item;
                 }
-                return New();
+                return Create();
             }
 
             IncreaseSize( poolItems.Count );
-            return New();
+            return Create();
         }
 
         public void Release(ItemType item)
@@ -44,8 +44,18 @@ namespace Proteus.Kernel.Pattern
         {
             for (int i = 0; i < size; i++)
             {
-                poolItems.Add( creator.Create() );
+                poolItems.Add( creator.CreateInstance() );
             }
+        }
+
+        protected override void ReleaseManaged()
+        {
+            foreach( ItemType t in poolItems )
+                t.Dispose();
+        }
+
+        protected override void ReleaseUnmanaged()
+        {
         }
 
         public Pool(int initialSize)
