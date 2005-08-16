@@ -55,7 +55,6 @@
       <DependentUpon>PreviewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Manipulation\Manager.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
