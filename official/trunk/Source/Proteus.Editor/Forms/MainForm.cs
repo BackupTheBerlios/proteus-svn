@@ -19,8 +19,7 @@ namespace Proteus.Editor.Forms
         {
             InitializeComponent();
 
-            // Initialize gui parts hoster.
-            Editor.Controls.Manager.Instance.DockPanel = dockPanel1;
+           
         }
     }
 }

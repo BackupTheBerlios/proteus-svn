@@ -5,11 +5,21 @@ using System.Text;
 namespace Proteus.Graphics.Hal
 {
     public sealed class Query : Kernel.Pattern.Disposable,
-                                Kernel.Pattern.IPoolItem<Query,QueryManager>
+                                Kernel.Pattern.IPoolItem<Query,QueryManager.QueryCreator>
     {
-        #region IPoolItem<Query,QueryManager> Members
+        protected override void ReleaseManaged()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
-        public Proteus.Kernel.Pattern.Pool<Query, QueryManager> Pool
+        protected override void ReleaseUnmanaged()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        #region IPoolItem<Query,QueryCreator> Members
+
+        public Proteus.Kernel.Pattern.Pool<Query, QueryManager.QueryCreator> Pool
         {
             set { throw new Exception("The method or operation is not implemented."); }
         }
@@ -25,15 +35,5 @@ namespace Proteus.Graphics.Hal
         }
 
         #endregion
-
-        protected override void ReleaseManaged()
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        protected override void ReleaseUnmanaged()
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }  
-    }
+}
 }

@@ -11,10 +11,10 @@ namespace Proteus.Kernel.Pattern
 
     public class Pool<ItemType,CreatorType> : Kernel.Pattern.Disposable
         where ItemType : IPoolItem<ItemType,CreatorType>,IDisposable
-        where CreatorType : IPoolCreator<ItemType>,new()
+        where CreatorType : IPoolCreator<ItemType>
     {
         private List<ItemType>      poolItems           = new List<ItemType>();
-        private static CreatorType  creator             = null;
+        private CreatorType         creator             = default(CreatorType);
 
         public ItemType Create()
         {
@@ -44,7 +44,14 @@ namespace Proteus.Kernel.Pattern
         {
             for (int i = 0; i < size; i++)
             {
-                poolItems.Add( creator.CreateInstance() );
+                ItemType newItem = creator.CreateInstance();
+                if (!newItem.Equals(default(ItemType)))
+                {
+                    poolItems.Add(newItem);
+                    return;
+                }
+                
+                throw new ApplicationException("No instances createable.");
             }
         }
 
@@ -58,12 +65,13 @@ namespace Proteus.Kernel.Pattern
         {
         }
 
-        public Pool(int initialSize)
+        public Pool(int initialSize,CreatorType _creator)
         {
+            creator = _creator;
             IncreaseSize(initialSize);
         }
 
-        public Pool() : this ( 8 )
+        public Pool( CreatorType _creator ) : this ( 8,_creator )
         {
         }
     }
