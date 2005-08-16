@@ -10,6 +10,11 @@ namespace Proteus.Editor.Forms
 {
     public partial class MainForm : Form
     {
+        public Control MainWindow
+        {
+            get { return this; }
+        }
+
         public MainForm()
         {
             InitializeComponent();

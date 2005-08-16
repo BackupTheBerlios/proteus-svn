@@ -20,7 +20,7 @@ namespace Proteus.Host.Editor
             using (Framework.Hosting.Engine engine = new Framework.Hosting.Engine())
             {
                 // Pass input parameters to engine to use.
-                //engine.Input[Proteus.Framework.Hosting.Input.InputType.MainWindow] = mainForm.MainWindow;
+                engine.Input[Proteus.Framework.Hosting.Input.InputType.MainWindow] = mainForm.MainWindow;
                 engine.Input[Proteus.Framework.Hosting.Input.InputType.Name] = Kernel.Information.Program.Name;
 
                 // Finally run the engine.

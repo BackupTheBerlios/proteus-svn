@@ -45,18 +45,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\DockControl.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="DockForms\DockableForm.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\DockControl.Designer.cs">
-      <DependentUpon>DockControl.cs</DependentUpon>
+    <Compile Include="DockForms\DockableForm.Designer.cs">
+      <DependentUpon>DockableForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Manager.cs" />
-    <Compile Include="Controls\PreviewControl.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="DockForms\Manager.cs" />
+    <Compile Include="Forms\AboutForm.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\PreviewControl.Designer.cs">
-      <DependentUpon>PreviewControl.cs</DependentUpon>
+    <Compile Include="Forms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Manipulation\Manager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,9 +85,15 @@
     <None Include="Proteus.Editor.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
