@@ -8,22 +8,9 @@ using System.Windows.Forms;
 
 namespace Proteus.Editor.DockForms
 {
-    public enum DockPosition
+    public partial class DiagramForm : Form
     {
-        Left,
-        Right,
-        Top,
-        Bottom,
-        Document,
-    }
-
-    public partial class DockableForm : Form
-    {
-        public virtual DockPosition DockPosition
-        {
-        }
-
-        public DockableForm()
+        public DiagramForm()
         {
             InitializeComponent();
         }

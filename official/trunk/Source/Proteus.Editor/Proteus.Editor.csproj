@@ -34,6 +34,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Dependencies\Libraries\TextEditor\ICSharpCode.TextEditor.dll</HintPath>
     </Reference>
+    <Reference Include="NetronGraphLib, Version=2.2.2055.24966, Culture=neutral, PublicKeyToken=a55bbad7898c6f34, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Libraries\Netron\NetronGraphLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -45,6 +49,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DockForms\ActorBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\ActorBrowserForm.Designer.cs">
+      <DependentUpon>ActorBrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\ActorTypeBrowerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\ActorTypeBrowerForm.Designer.cs">
+      <DependentUpon>ActorTypeBrowerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\DiagramForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\DiagramForm.Designer.cs">
+      <DependentUpon>DiagramForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DockForms\DockableForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -52,6 +74,12 @@
       <DependentUpon>DockableForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DockForms\Manager.cs" />
+    <Compile Include="DockForms\PropertyBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\PropertyBrowserForm.Designer.cs">
+      <DependentUpon>PropertyBrowserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
