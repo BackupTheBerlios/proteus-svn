@@ -168,12 +168,29 @@ namespace Proteus.Graphics.Hal
 
             D3d.Usage d3dUsage = GetUsageFlags( dynamic,mipmap,isTarget );
 
+            // Get the current display mode format for later use.
+            D3d.Format displayFormat = D3d.Manager.Adapters[ Device.Settings.adapterIndex ].CurrentDisplayMode.Format;
+
             if (D3d.Manager.CheckDeviceFormat(  Device.Settings.adapterIndex,
                                                 Device.Settings.deviceType,
                                                 Device.Settings.backBufferFormat,
                                                 d3dUsage, type, format))
             {
-                return true;
+                if (isTarget)
+                {
+                    if (D3d.Manager.CheckDepthStencilMatch(Device.Settings.adapterIndex,
+                                                            Device.Settings.deviceType,
+                                                            displayFormat,
+                                                            format,
+                                                            Device.Settings.depthBufferFormat))
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
             }
 
             return false;
