@@ -6,23 +6,45 @@ namespace Proteus.Graphics.Hal
 {
     public sealed class QueryManager 
     {
-        public sealed class QueryCreator : Kernel.Pattern.IPoolCreator<Query>
+        public sealed class Creator : Kernel.Pattern.IPoolCreator<Query>
         {
+            private QueryManager manager = null;
+
             #region IPoolCreator<Query> Members
 
             public Query CreateInstance()
             {
-                return null;
+                return Query.Create( manager );
             }
 
             #endregion
+
+            public Creator(QueryManager _manager)
+            {
+                manager = _manager;
+            }
         }
 
-        private Device device = null;
+        private Device                              device      = null;
+        private Kernel.Pattern.Pool<Query,Creator>  queryPool   = null;
+
+        public Device Device
+        {
+            get { return device; }
+        }
+
+        public Query Create()
+        {
+            return queryPool.Create();
+        }
 
         private bool Initialize(Device _device)
         {
             device = _device;
+
+            Creator queryCreator = new Creator( this );
+            queryPool = new Kernel.Pattern.Pool<Query,Creator>( queryCreator );
+
             return true;
         }
 

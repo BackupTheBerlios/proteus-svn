@@ -14,6 +14,7 @@ namespace Proteus.Graphics.Hal
         private FrameBuffer     d3dPrimaryFrameBuffer   = null;
         private TextureManager  d3dTextureManager       = null;
         private GeometryManager d3dGeometryManager      = null;
+        private QueryManager    d3dQueryManager         = null;
   
         public D3d.Device D3dDevice
         {
@@ -38,6 +39,11 @@ namespace Proteus.Graphics.Hal
         public GeometryManager GeometryManager
         {
             get { return d3dGeometryManager; }
+        }
+
+        public QueryManager QueryManager
+        {
+            get { return d3dQueryManager; }
         }
 
         public FrameBuffer CreateFrameBuffer(System.Windows.Forms.Control renderWindow)
@@ -77,6 +83,7 @@ namespace Proteus.Graphics.Hal
                 d3dPrimaryFrameBuffer   = FrameBuffer.Create( this );
                 d3dGeometryManager      = GeometryManager.Create( this );
                 d3dTextureManager       = TextureManager.Create(this);
+                d3dQueryManager         = QueryManager.Create(this);
 
                 return true;
             }
