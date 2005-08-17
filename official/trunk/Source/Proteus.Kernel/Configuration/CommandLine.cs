@@ -210,13 +210,17 @@ namespace Proteus.Kernel.Configuration
         {
             string[] commandLineParts = Environment.CommandLine.Split(new char[] { ' ' });
 
-            if ( commandLineParts.Length > 1 )
+            if (commandLineParts.Length > 1)
             {
-                arguments = new string[ commandLineParts.Length - 1];
-                for ( int i = 1; i < commandLineParts.Length; i++ )
+                arguments = new string[commandLineParts.Length - 1];
+                for (int i = 1; i < commandLineParts.Length; i++)
                 {
-                    arguments[i -1]= commandLineParts[i];
+                    arguments[i - 1] = commandLineParts[i];
                 }
+            }
+            else
+            {
+                arguments = new string[0];
             }
         }
     }
