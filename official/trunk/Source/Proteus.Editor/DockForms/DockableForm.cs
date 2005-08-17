@@ -22,6 +22,11 @@ namespace Proteus.Editor.DockForms
             get { return false; }
         }
 
+        public virtual Framework.Parts.IActor Actor
+        {
+            set { }
+        }
+
         public DockableForm()
         {
             InitializeComponent();

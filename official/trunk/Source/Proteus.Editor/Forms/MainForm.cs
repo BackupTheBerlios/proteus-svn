@@ -22,5 +22,10 @@ namespace Proteus.Editor.Forms
             // Initialize docking support.
             DockForms.Manager.Instance.Initialize( dockPanel1 );
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Framework.Hosting.Engine.Instance.RequestQuit();
+        }
     }
 }

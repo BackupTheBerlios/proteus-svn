@@ -34,19 +34,7 @@ namespace Proteus.Framework.Hosting
         }
 
         public void Run()
-        {
-            if (!this.Initialize())
-                return;
-            
-            // Initialize.
-            foreach (ITask t in tasks)
-            {
-                if (!t.Initialize(this))
-                {
-                    return;
-                }
-            }
-
+        {             
             timer = new Stopwatch();
             timer.Start();
 
@@ -85,7 +73,7 @@ namespace Proteus.Framework.Hosting
         {
         }
 
-        private bool Initialize()
+        public bool Initialize()
         {
             commandLine.AddOption("w", "WorkingDirectory", "The working directory for the engine.");
             commandLine.AddOption("r", "Registry", "The registry file to load.");
@@ -105,7 +93,16 @@ namespace Proteus.Framework.Hosting
             // Load any defined plugins.
             this.Tasks.Enqueue(new Tasks.EventTask());
             loader.Load();
-            this.Tasks.Enqueue(new Tasks.ActorTask()); 
+            this.Tasks.Enqueue(new Tasks.ActorTask());
+
+            // Initialize.
+            foreach (ITask t in tasks)
+            {
+                if (!t.Initialize(this))
+                {
+                    return false;
+                }
+            }
 
             return true;
         }

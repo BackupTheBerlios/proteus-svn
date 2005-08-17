@@ -49,6 +49,7 @@ namespace Proteus.Editor.Forms
             this.Controls.Add(this.dockPanel1);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.ResumeLayout(false);
 
         }

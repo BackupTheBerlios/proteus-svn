@@ -14,17 +14,20 @@ namespace Proteus.Host.Application
         {
             System.Windows.Forms.Application.EnableVisualStyles();
 
-            // Create main form.
-            MainForm mainForm = Kernel.Ui.Form.Create<MainForm>();
-     
             using (Framework.Hosting.Engine engine = new Framework.Hosting.Engine())
             {
-                // Pass input parameters to engine to use.
-                engine.Input[Proteus.Framework.Hosting.Input.InputType.MainWindow]  = mainForm.MainWindow;
-                engine.Input[Proteus.Framework.Hosting.Input.InputType.Name]        = Kernel.Information.Program.Name;
-                     
-                // Finally run the engine.
-                engine.Run();
+                if (engine.Initialize())
+                {
+                    // Create main form.
+                    MainForm mainForm = Kernel.Ui.Form.Create<MainForm>();
+                 
+                    // Pass input parameters to engine to use.
+                    engine.Input[Proteus.Framework.Hosting.Input.InputType.MainWindow] = mainForm.MainWindow;
+                    engine.Input[Proteus.Framework.Hosting.Input.InputType.Name] = Kernel.Information.Program.Name;
+
+                    // Finally run the engine.
+                    engine.Run();
+                }
             }
         }
     }

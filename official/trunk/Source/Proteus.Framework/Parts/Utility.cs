@@ -13,14 +13,14 @@ namespace Proteus.Framework.Parts
         
         public static string GetTypeName(Type actorType)
         {
-            ActorAttribute actorAttribute = Attribute.GetCustomAttribute(actorType, typeof(ActorAttribute)) as ActorAttribute;
+            ActorAttribute actorAttribute = Attribute.GetCustomAttribute(actorType, typeof(ActorAttribute),false) as ActorAttribute;
             if (actorAttribute != null)
             {
                 return actorAttribute.Name;
             }
             else
             {
-                return actorType.FullName;
+                return actorType.Name;
             }
         }
 
