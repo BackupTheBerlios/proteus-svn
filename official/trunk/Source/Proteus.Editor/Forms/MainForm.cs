@@ -19,7 +19,8 @@ namespace Proteus.Editor.Forms
         {
             InitializeComponent();
 
-           
+            // Initialize docking support.
+            DockForms.Manager.Instance.Initialize( dockPanel1 );
         }
     }
 }

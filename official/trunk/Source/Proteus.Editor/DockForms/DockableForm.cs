@@ -6,21 +6,20 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
+using Dp = WeifenLuo.WinFormsUI;
+
 namespace Proteus.Editor.DockForms
 {
-    public enum DockPosition
+    public partial class DockableForm : Dp.DockContent
     {
-        Left,
-        Right,
-        Top,
-        Bottom,
-        Document,
-    }
-
-    public partial class DockableForm : Form
-    {
-        public virtual DockPosition DockPosition
+        public virtual Dp.DockState DefaultDockState
         {
+            get { return Dp.DockState.DockLeft; }
+        }
+
+        public virtual bool IsDocumentHost
+        {
+            get { return false; }
         }
 
         public DockableForm()
