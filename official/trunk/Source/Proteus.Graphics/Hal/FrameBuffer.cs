@@ -20,6 +20,22 @@ namespace Proteus.Graphics.Hal
 
         #region IRenderTarget Members
 
+        public int Width
+        {
+            get
+            {
+                return d3dBackBuffer.Description.Width;
+            }
+        }
+
+        public int Height
+        {
+            get
+            {
+                return d3dBackBuffer.Description.Height;
+            }
+        }
+
         public bool SetAsTarget(int targetChannel,int surface )
         {
             // Always set as the first target, ignoring any settings.

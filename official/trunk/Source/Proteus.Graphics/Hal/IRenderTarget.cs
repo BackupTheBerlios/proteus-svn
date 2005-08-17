@@ -6,6 +6,8 @@ namespace Proteus.Graphics.Hal
 {
     public interface IRenderTarget 
     {
-        bool SetAsTarget( int channel,int surface );
+        int     Width { get; }
+        int     Height { get; }
+        bool    SetAsTarget( int channel,int surface );
     }
 }
