@@ -55,11 +55,11 @@
     <Compile Include="DockForms\ActorBrowserForm.Designer.cs">
       <DependentUpon>ActorBrowserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DockForms\ActorTypeBrowerForm.cs">
+    <Compile Include="DockForms\ActorTypeBrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DockForms\ActorTypeBrowerForm.Designer.cs">
-      <DependentUpon>ActorTypeBrowerForm.cs</DependentUpon>
+    <Compile Include="DockForms\ActorTypeBrowserForm.Designer.cs">
+      <DependentUpon>ActorTypeBrowserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DockForms\DiagramForm.cs">
       <SubType>Form</SubType>
