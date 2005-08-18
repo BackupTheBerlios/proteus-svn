@@ -7,7 +7,7 @@ namespace Proteus.Framework.Parts
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class PropertyAttribute : System.Attribute
     {
-        private string      category        = string.Empty;
+        private string      category        = "General";
         private Type        editorType      = null;
         private string      name            = string.Empty;
         private bool        isState         = false;

@@ -39,6 +39,7 @@ namespace Proteus.Editor.DockForms
             this.treeView1.Size = new System.Drawing.Size(292, 266);
             this.treeView1.TabIndex = 0;
             this.treeView1.ShowNodeToolTips = true;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(treeView1_AfterSelect);
             // 
             // ActorBrowserForm
             // 

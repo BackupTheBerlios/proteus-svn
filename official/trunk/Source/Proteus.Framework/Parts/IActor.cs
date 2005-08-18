@@ -12,7 +12,6 @@ namespace Proteus.Framework.Parts
     {
         bool                Active      { get; set; }
               
-        [Property()]
         string              Name        { get; set; }
         
         string              TypeName    { get; }

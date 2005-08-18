@@ -59,9 +59,15 @@ namespace Proteus.Editor.DockForms
             propertyGrid1.SelectedObject = displayProperties;
         }
 
+        private void Instance_SelectionChanged(Proteus.Framework.Parts.IActor selectedActor, List<Proteus.Framework.Parts.IActor> selectedActors)
+        {
+            this.Actor = selectedActor;
+        }
+
         public PropertyBrowserForm()
         {
             InitializeComponent();
+            Manipulation.Manager.Instance.SelectionChanged += new Proteus.Editor.Manipulation.Manager.SelectionDelegate(Instance_SelectionChanged);
         }
     }
 }

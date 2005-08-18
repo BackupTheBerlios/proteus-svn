@@ -18,6 +18,7 @@ namespace Proteus.Framework.Parts.Basic
                   new   Kernel.Diagnostics.Log<ConfigFileActor>();
 
         [Parts.Property()]
+        [Parts.Documentation("The url of the configuration file to work with.","The url to the .actor configuration file to read/write")]
         public string Url
         {
             get { return configFile.Url; }

@@ -60,6 +60,12 @@ namespace Proteus.Editor.DockForms
             return null;
         }
 
+        private void treeView1_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
+        {
+            ActorNode node = (ActorNode)e.Node;
+            Manipulation.Manager.Instance.SelectedActor = node.Actor;
+        }
+
         public ActorBrowserForm()
         {
             InitializeComponent();

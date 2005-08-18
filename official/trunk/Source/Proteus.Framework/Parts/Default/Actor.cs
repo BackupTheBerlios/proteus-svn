@@ -153,6 +153,8 @@ namespace Proteus.Framework.Parts.Default
 
         #region IPart Members
 
+        [Property()]
+        [Documentation("The name of the actor instance.","The name of this actor instance, has to be unique in its environment.")]
         public virtual string Name
         {
             get { return actorName; }
