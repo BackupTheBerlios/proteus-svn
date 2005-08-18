@@ -55,10 +55,12 @@ namespace Proteus.Editor.DockForms
             // Register default types.
             Factory.Register<DiagramForm>("ActorDiagram");
             Factory.Register<ActorBrowserForm>("ActorBrowser");
+            Factory.Register<LogForm>("LogForm");
 
             // Add default forms.
             Add("ActorDiagram");
             Add("ActorBrowser");
+            Add("LogForm");
         }
 
         private void newForm_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
