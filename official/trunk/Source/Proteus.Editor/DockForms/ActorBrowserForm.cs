@@ -10,6 +10,17 @@ namespace Proteus.Editor.DockForms
 {
     public partial class ActorBrowserForm : DockableForm
     {
+        internal sealed class ActorNode : TreeNode
+        {
+            private Framework.Parts.IActor actor = null;
+
+            public Framework.Parts.IActor Actor
+            {
+                set { actor = value; }
+                get { return actor; }
+            }
+        }
+        
         public virtual Framework.Parts.IActor Actor
         {
             set { }
@@ -18,20 +29,21 @@ namespace Proteus.Editor.DockForms
         private void Build()
         {
             treeView1.Nodes.Clear();
-            TreeNode rootNode = BuildStep( Framework.Parts.Basic.RootActor.Instance );
+            ActorNode rootNode = BuildStep( Framework.Parts.Basic.RootActor.Instance );
             
             if ( rootNode != null )
                 treeView1.Nodes.Add( rootNode );
         }
 
-        private TreeNode BuildStep( Framework.Parts.IActor actor )
+        private ActorNode BuildStep( Framework.Parts.IActor actor )
         {
             if (actor != null)
             {
-                TreeNode newNode = new TreeNode();
+                ActorNode newNode = new ActorNode();
 
-                newNode.Text = actor.Name;
+                newNode.Text        = actor.Name;
                 newNode.ToolTipText = actor.TypeName;
+                newNode.Actor       = actor;
 
                 Framework.Parts.IActorCollection collection = actor.QueryInterface<Framework.Parts.IActorCollection>();
 
