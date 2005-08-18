@@ -53,14 +53,18 @@ namespace Proteus.Editor.DockForms
             dockPanel = _dockPanel;
 
             // Register default types.
-            Factory.Register<DiagramForm>("ActorDiagram");
-            Factory.Register<ActorBrowserForm>("ActorBrowser");
-            Factory.Register<LogForm>("LogForm");
+            Factory.Register<DiagramForm>("Diagram View");
+            Factory.Register<ActorBrowserForm>("Actor Tree");
+            Factory.Register<LogForm>("Log");
+            Factory.Register<PropertyBrowserForm>("Actor Properties");
+            Factory.Register<WebBrowserForm>("Web browser");
 
             // Add default forms.
-            Add("ActorDiagram");
-            Add("ActorBrowser");
-            Add("LogForm");
+            Add("Diagram View");
+            Add("Actor Tree");
+            Add("Log");
+            Add("Actor Properties");
+            Add("Web browser");
         }
 
         private void newForm_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)

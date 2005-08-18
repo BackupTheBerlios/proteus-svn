@@ -1,6 +1,6 @@
 namespace Proteus.Editor.DockForms
 {
-    partial class PropertyBrowserForm
+    partial class WebBrowserForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,31 +28,30 @@ namespace Proteus.Editor.DockForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
-            // propertyGrid1
+            // webBrowser1
             // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(292, 266);
-            this.propertyGrid1.TabIndex = 0;
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(292, 266);
             // 
-            // PropertyBrowserForm
+            // WebBrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 266);
-            this.Controls.Add(this.propertyGrid1);
-            this.Name = "PropertyBrowserForm";
-            this.Text = "PropertyBrowser";
+            this.Controls.Add(this.webBrowser1);
+            this.Name = "WebBrowserForm";
+            this.Text = "WebBrowserForm";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PropertyGrid propertyGrid1;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }

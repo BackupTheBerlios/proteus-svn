@@ -8,14 +8,19 @@ using System.Windows.Forms;
 
 namespace Proteus.Editor.DockForms
 {
-    public partial class PropertyBrowserForm : DockableForm
+    public partial class WebBrowserForm : DockableForm
     {
         public override WeifenLuo.WinFormsUI.DockState DefaultDockState
         {
-            get { return WeifenLuo.WinFormsUI.DockState.DockRight; }
+            get { return WeifenLuo.WinFormsUI.DockState.Document; }
         }
 
-        public PropertyBrowserForm()
+        public override bool IsDocumentHost
+        {
+            get { return true; }
+        }
+
+        public WebBrowserForm()
         {
             InitializeComponent();
         }
