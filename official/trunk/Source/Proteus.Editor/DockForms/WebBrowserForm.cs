@@ -20,9 +20,18 @@ namespace Proteus.Editor.DockForms
             get { return true; }
         }
 
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            {
+                webBrowser1.Navigate(this.textBox1.Text);
+            }
+        }
+
         public WebBrowserForm()
         {
             InitializeComponent();
+            webBrowser1.Navigate( textBox1.Text );
         }
     }
 }

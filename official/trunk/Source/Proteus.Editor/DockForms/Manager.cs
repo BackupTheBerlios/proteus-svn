@@ -39,6 +39,7 @@ namespace Proteus.Editor.DockForms
             
                 // Ok we can allow it being hosted so add it.
                 dockedForms.Add( newForm );
+                newForm.Text = name;
                 newForm.FormClosed += new System.Windows.Forms.FormClosedEventHandler(newForm_FormClosed);
                 newForm.Show( dockPanel,newForm.DefaultDockState );
 
