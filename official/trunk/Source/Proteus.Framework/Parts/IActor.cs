@@ -11,6 +11,10 @@ namespace Proteus.Framework.Parts
             IDisposable   
     {
         bool                Active      { get; set; }
+              
+        [Property()]
+        string              Name        { get; set; }
+        
         string              TypeName    { get; }
         string              BaseType    { get; }
 

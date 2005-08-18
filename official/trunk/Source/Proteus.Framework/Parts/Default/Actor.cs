@@ -156,6 +156,18 @@ namespace Proteus.Framework.Parts.Default
         public virtual string Name
         {
             get { return actorName; }
+            set
+            {
+                if (actorEnvironment != null && value != actorName )
+                {
+                    if (!actorName.Contains(value))
+                    {
+                        actorEnvironment.Remove( this );
+                        actorName = value;
+                        actorEnvironment.Add(this);
+                    }
+                }
+            }
         }
 
         public virtual string Description

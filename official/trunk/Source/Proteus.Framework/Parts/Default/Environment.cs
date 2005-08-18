@@ -67,6 +67,11 @@ namespace Proteus.Framework.Parts.Default
 
         #endregion
 
+        public bool Contains(string actorName)
+        {
+            return actors.ContainsKey(actorName);
+        }
+
         public bool Add(IActor actor)
         {
             if (!actors.ContainsKey(actor.Name))

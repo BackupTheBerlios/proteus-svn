@@ -13,6 +13,7 @@ namespace Proteus.Framework.Parts
         IActor[]        Actors { get; }
         IConnection[]   Connections { get; }
 
+        bool            Contains( string actorName );
         bool            Add(IActor actor);
         bool            Add(IConnection connection);
         void            Remove(IActor actor);
