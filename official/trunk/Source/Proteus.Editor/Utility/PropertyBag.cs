@@ -985,7 +985,7 @@ namespace Proteus.Editor.Utility
 		/// <summary>
 		/// Initializes a new instance of the PropertyTable class.
 		/// </summary>
-		public PropertyTable()
+		public PropertyTable() : base()
 		{
 			propValues = new Hashtable();
 		}

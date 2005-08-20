@@ -10,7 +10,7 @@ namespace Proteus.Editor.DockForms
 {
     public partial class PropertyBrowserForm : DockableForm
     {
-        private Utility.PropertyTable   displayProperties   = null;
+        private Utility.PropertyBag     displayProperties   = null;
         private Framework.Parts.IActor  currentActor        = null;
 
         public override WeifenLuo.WinFormsUI.DockState DefaultDockState
@@ -32,7 +32,7 @@ namespace Proteus.Editor.DockForms
 
         private void Build(Framework.Parts.IActor actor)
         {
-            displayProperties = new Utility.PropertyTable();
+            displayProperties = new Utility.PropertyBag();
             Proteus.Framework.Parts.IProperty[] properties = currentActor.Properties;
 
             foreach (Proteus.Framework.Parts.IProperty p in properties)
@@ -56,7 +56,7 @@ namespace Proteus.Editor.DockForms
                 displayProperties.Properties.Add( spec );
             }
 
-            propertyGrid1.SelectedObject = displayProperties;
+            propertyGrid1.SelectedObject = displayProperties;           
         }
 
         private void Instance_SelectionChanged(Proteus.Framework.Parts.IActor selectedActor, List<Proteus.Framework.Parts.IActor> selectedActors)
