@@ -73,6 +73,7 @@
     <Compile Include="Io\Archive.cs" />
     <Compile Include="Io\FileArchive.cs" />
     <Compile Include="Io\Manager.cs" />
+    <Compile Include="Io\TextFile.cs" />
     <Compile Include="Io\Url.cs" />
     <Compile Include="Localization\Manager.cs">
       <SubType>Code</SubType>

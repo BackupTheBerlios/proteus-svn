@@ -49,6 +49,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\FileBrowserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FileBrowserControl.Designer.cs">
+      <DependentUpon>FileBrowserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="DockForms\ActorBrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +154,9 @@
     <None Include="Proteus.Editor.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\FileBrowserControl.resx">
+      <DependentUpon>FileBrowserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DockForms\ActorBrowserForm.resx">
       <DependentUpon>ActorBrowserForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,9 +184,6 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

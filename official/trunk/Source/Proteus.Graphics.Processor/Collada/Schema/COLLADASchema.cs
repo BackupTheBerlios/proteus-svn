@@ -799,6 +799,8 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
         
         private object[] itemsField;
         
+        private sourceTechnique[] techniqueField;
+        
         private string idField;
         
         private string nameField;
@@ -806,7 +808,6 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("float_array", typeof(float_array))]
         [System.Xml.Serialization.XmlElementAttribute("int_array", typeof(int_array))]
-        [System.Xml.Serialization.XmlElementAttribute("technique", typeof(sourceTechnique))]
         [System.Xml.Serialization.XmlElementAttribute("bool_array", typeof(bool_array))]
         [System.Xml.Serialization.XmlElementAttribute("array", typeof(array))]
         [System.Xml.Serialization.XmlElementAttribute("Name_array", typeof(Name_array))]
@@ -816,6 +817,17 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
             }
             set {
                 this.itemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("technique")]
+        public sourceTechnique[] technique {
+            get {
+                return this.techniqueField;
+            }
+            set {
+                this.techniqueField = value;
             }
         }
         
@@ -847,23 +859,79 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.collada.org/2005/COLLADASchema")]
     public partial class sourceTechnique {
         
-        private object[] itemsField;
+        private asset assetField;
+        
+        private param[] paramField;
+        
+        private accessor[] accessorField;
+        
+        private combiner combinerField;
+        
+        private joints jointsField;
+        
+        private program programField;
         
         private string profileField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("program", typeof(program))]
-        [System.Xml.Serialization.XmlElementAttribute("accessor", typeof(accessor))]
-        [System.Xml.Serialization.XmlElementAttribute("asset", typeof(asset))]
-        [System.Xml.Serialization.XmlElementAttribute("combiner", typeof(combiner))]
-        [System.Xml.Serialization.XmlElementAttribute("param", typeof(param))]
-        [System.Xml.Serialization.XmlElementAttribute("joints", typeof(joints))]
-        public object[] Items {
+        public asset asset {
             get {
-                return this.itemsField;
+                return this.assetField;
             }
             set {
-                this.itemsField = value;
+                this.assetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("param")]
+        public param[] param {
+            get {
+                return this.paramField;
+            }
+            set {
+                this.paramField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("accessor")]
+        public accessor[] accessor {
+            get {
+                return this.accessorField;
+            }
+            set {
+                this.accessorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public combiner combiner {
+            get {
+                return this.combinerField;
+            }
+            set {
+                this.combinerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public joints joints {
+            get {
+                return this.jointsField;
+            }
+            set {
+                this.jointsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public program program {
+            get {
+                return this.programField;
+            }
+            set {
+                this.programField = value;
             }
         }
         
@@ -885,6 +953,12 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class mesh {
         
+        private source[] sourceField;
+        
+        private vertices verticesField;
+        
+        private source[] source1Field;
+        
         private object[] itemsField;
         
         private string idField;
@@ -892,14 +966,45 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
         private string nameField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("tristrips", typeof(tristrips))]
-        [System.Xml.Serialization.XmlElementAttribute("triangles", typeof(triangles))]
-        [System.Xml.Serialization.XmlElementAttribute("source", typeof(source))]
-        [System.Xml.Serialization.XmlElementAttribute("polygons", typeof(polygons))]
-        [System.Xml.Serialization.XmlElementAttribute("vertices", typeof(vertices))]
-        [System.Xml.Serialization.XmlElementAttribute("linestrips", typeof(linestrips))]
-        [System.Xml.Serialization.XmlElementAttribute("trifans", typeof(trifans))]
-        [System.Xml.Serialization.XmlElementAttribute("lines", typeof(lines))]
+        [System.Xml.Serialization.XmlElementAttribute("source", Order=0)]
+        public source[] source {
+            get {
+                return this.sourceField;
+            }
+            set {
+                this.sourceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public vertices vertices {
+            get {
+                return this.verticesField;
+            }
+            set {
+                this.verticesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("source", Order=2)]
+        public source[] source1 {
+            get {
+                return this.source1Field;
+            }
+            set {
+                this.source1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("triangles", typeof(triangles), Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute("polygons", typeof(polygons), Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute("lines", typeof(lines), Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute("tristrips", typeof(tristrips), Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute("trifans", typeof(trifans), Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute("linestrips", typeof(linestrips), Order=3)]
         public object[] Items {
             get {
                 return this.itemsField;
@@ -1074,22 +1179,45 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class lines {
         
-        private object[] itemsField;
+        private param[] paramField;
+        
+        private input[] inputField;
+        
+        private string pField;
         
         private string countField;
         
         private string materialField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("input", typeof(input))]
-        [System.Xml.Serialization.XmlElementAttribute("param", typeof(param))]
-        [System.Xml.Serialization.XmlElementAttribute("p", typeof(long))]
-        public object[] Items {
+        [System.Xml.Serialization.XmlElementAttribute("param")]
+        public param[] param {
             get {
-                return this.itemsField;
+                return this.paramField;
             }
             set {
-                this.itemsField = value;
+                this.paramField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("input")]
+        public input[] input {
+            get {
+                return this.inputField;
+            }
+            set {
+                this.inputField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string p {
+            get {
+                return this.pField;
+            }
+            set {
+                this.pField = value;
             }
         }
         
@@ -1122,22 +1250,45 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class linestrips {
         
-        private object[] itemsField;
+        private param[] paramField;
+        
+        private input[] inputField;
+        
+        private string pField;
         
         private string countField;
         
         private string materialField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("input", typeof(input))]
-        [System.Xml.Serialization.XmlElementAttribute("param", typeof(param))]
-        [System.Xml.Serialization.XmlElementAttribute("p", typeof(long))]
-        public object[] Items {
+        [System.Xml.Serialization.XmlElementAttribute("param")]
+        public param[] param {
             get {
-                return this.itemsField;
+                return this.paramField;
             }
             set {
-                this.itemsField = value;
+                this.paramField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("input")]
+        public input[] input {
+            get {
+                return this.inputField;
+            }
+            set {
+                this.inputField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string p {
+            get {
+                return this.pField;
+            }
+            set {
+                this.pField = value;
             }
         }
         
@@ -1170,22 +1321,46 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class polygons {
         
-        private object[] itemsField;
+        private param[] paramField;
+        
+        private input[] inputField;
+        
+        private polygonsP[] pField;
         
         private string countField;
         
         private string materialField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("input", typeof(input))]
-        [System.Xml.Serialization.XmlElementAttribute("param", typeof(param))]
-        [System.Xml.Serialization.XmlElementAttribute("p", typeof(polygonsP))]
-        public object[] Items {
+        [System.Xml.Serialization.XmlElementAttribute("param")]
+        public param[] param {
             get {
-                return this.itemsField;
+                return this.paramField;
             }
             set {
-                this.itemsField = value;
+                this.paramField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("input")]
+        public input[] input {
+            get {
+                return this.inputField;
+            }
+            set {
+                this.inputField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("p")]
+        public polygonsP[] p {
+            get {
+                return this.pField;
+            }
+            set {
+                this.pField = value;
             }
         }
         
@@ -1217,18 +1392,18 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.collada.org/2005/COLLADASchema")]
     public partial class polygonsP {
         
-        private object[] itemsField;
+        private object[] hField;
         
         private string[] textField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("h")]
-        public object[] Items {
+        public object[] h {
             get {
-                return this.itemsField;
+                return this.hField;
             }
             set {
-                this.itemsField = value;
+                this.hField = value;
             }
         }
         
@@ -1250,22 +1425,45 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class triangles {
         
-        private object[] itemsField;
+        private param[] paramField;
+        
+        private input[] inputField;
+        
+        private string pField;
         
         private string countField;
         
         private string materialField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("input", typeof(input))]
-        [System.Xml.Serialization.XmlElementAttribute("param", typeof(param))]
-        [System.Xml.Serialization.XmlElementAttribute("p", typeof(long))]
-        public object[] Items {
+        [System.Xml.Serialization.XmlElementAttribute("param")]
+        public param[] param {
             get {
-                return this.itemsField;
+                return this.paramField;
             }
             set {
-                this.itemsField = value;
+                this.paramField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("input")]
+        public input[] input {
+            get {
+                return this.inputField;
+            }
+            set {
+                this.inputField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string p {
+            get {
+                return this.pField;
+            }
+            set {
+                this.pField = value;
             }
         }
         
@@ -1298,22 +1496,45 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class trifans {
         
-        private object[] itemsField;
+        private param[] paramField;
+        
+        private input[] inputField;
+        
+        private string pField;
         
         private string countField;
         
         private string materialField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("input", typeof(input))]
-        [System.Xml.Serialization.XmlElementAttribute("param", typeof(param))]
-        [System.Xml.Serialization.XmlElementAttribute("p", typeof(long))]
-        public object[] Items {
+        [System.Xml.Serialization.XmlElementAttribute("param")]
+        public param[] param {
             get {
-                return this.itemsField;
+                return this.paramField;
             }
             set {
-                this.itemsField = value;
+                this.paramField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("input")]
+        public input[] input {
+            get {
+                return this.inputField;
+            }
+            set {
+                this.inputField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string p {
+            get {
+                return this.pField;
+            }
+            set {
+                this.pField = value;
             }
         }
         
@@ -1346,22 +1567,45 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class tristrips {
         
-        private object[] itemsField;
+        private param[] paramField;
+        
+        private input[] inputField;
+        
+        private string pField;
         
         private string countField;
         
         private string materialField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("input", typeof(input))]
-        [System.Xml.Serialization.XmlElementAttribute("param", typeof(param))]
-        [System.Xml.Serialization.XmlElementAttribute("p", typeof(long))]
-        public object[] Items {
+        [System.Xml.Serialization.XmlElementAttribute("param")]
+        public param[] param {
             get {
-                return this.itemsField;
+                return this.paramField;
             }
             set {
-                this.itemsField = value;
+                this.paramField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("input")]
+        public input[] input {
+            get {
+                return this.inputField;
+            }
+            set {
+                this.inputField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string p {
+            get {
+                return this.pField;
+            }
+            set {
+                this.pField = value;
             }
         }
         
@@ -1997,18 +2241,41 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class pass {
         
-        private object[] itemsField;
+        private param[] paramField;
+        
+        private passInput[] inputField;
+        
+        private program programField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("input", typeof(passInput))]
-        [System.Xml.Serialization.XmlElementAttribute("program", typeof(program))]
-        [System.Xml.Serialization.XmlElementAttribute("param", typeof(param))]
-        public object[] Items {
+        [System.Xml.Serialization.XmlElementAttribute("param")]
+        public param[] param {
             get {
-                return this.itemsField;
+                return this.paramField;
             }
             set {
-                this.itemsField = value;
+                this.paramField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("input")]
+        public passInput[] input {
+            get {
+                return this.inputField;
+            }
+            set {
+                this.inputField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public program program {
+            get {
+                return this.programField;
+            }
+            set {
+                this.programField = value;
             }
         }
     }
@@ -2109,21 +2376,55 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.collada.org/2005/COLLADASchema")]
     public partial class shaderTechnique {
         
-        private object[] itemsField;
+        private asset assetField;
+        
+        private param[] paramField;
+        
+        private pass[] passField;
+        
+        private program programField;
         
         private string profileField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("program", typeof(program))]
-        [System.Xml.Serialization.XmlElementAttribute("pass", typeof(pass))]
-        [System.Xml.Serialization.XmlElementAttribute("asset", typeof(asset))]
-        [System.Xml.Serialization.XmlElementAttribute("param", typeof(param))]
-        public object[] Items {
+        public asset asset {
             get {
-                return this.itemsField;
+                return this.assetField;
             }
             set {
-                this.itemsField = value;
+                this.assetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("param")]
+        public param[] param {
+            get {
+                return this.paramField;
+            }
+            set {
+                this.paramField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("pass")]
+        public pass[] pass {
+            get {
+                return this.passField;
+            }
+            set {
+                this.passField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public program program {
+            get {
+                return this.programField;
+            }
+            set {
+                this.programField = value;
             }
         }
         
@@ -2215,21 +2516,55 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.collada.org/2005/COLLADASchema")]
     public partial class textureTechnique {
         
-        private object[] itemsField;
+        private asset assetField;
+        
+        private param[] paramField;
+        
+        private textureTechniqueInput[] inputField;
+        
+        private program programField;
         
         private string profileField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("program", typeof(program))]
-        [System.Xml.Serialization.XmlElementAttribute("input", typeof(textureTechniqueInput))]
-        [System.Xml.Serialization.XmlElementAttribute("asset", typeof(asset))]
-        [System.Xml.Serialization.XmlElementAttribute("param", typeof(param))]
-        public object[] Items {
+        public asset asset {
             get {
-                return this.itemsField;
+                return this.assetField;
             }
             set {
-                this.itemsField = value;
+                this.assetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("param")]
+        public param[] param {
+            get {
+                return this.paramField;
+            }
+            set {
+                this.paramField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("input")]
+        public textureTechniqueInput[] input {
+            get {
+                return this.inputField;
+            }
+            set {
+                this.inputField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public program program {
+            get {
+                return this.programField;
+            }
+            set {
+                this.programField = value;
             }
         }
         
@@ -2498,7 +2833,7 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class program {
         
-        private asset[] assetField;
+        private asset assetField;
         
         private param[] paramField;
         
@@ -2513,8 +2848,7 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
         private string urlField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("asset")]
-        public asset[] asset {
+        public asset asset {
             get {
                 return this.assetField;
             }
@@ -2568,7 +2902,7 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="Name")]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="NCName")]
         public string name {
             get {
                 return this.nameField;
@@ -2596,7 +2930,7 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class camera {
         
-        private cameraTechnique[] itemsField;
+        private cameraTechnique[] techniqueField;
         
         private string idField;
         
@@ -2604,12 +2938,12 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("technique")]
-        public cameraTechnique[] Items {
+        public cameraTechnique[] technique {
             get {
-                return this.itemsField;
+                return this.techniqueField;
             }
             set {
-                this.itemsField = value;
+                this.techniqueField = value;
             }
         }
         
@@ -2696,16 +3030,15 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.collada.org/2005/COLLADASchema")]
     public partial class cameraTechniqueOptics {
         
-        private program itemField;
+        private program programField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("program")]
-        public program Item {
+        public program program {
             get {
-                return this.itemField;
+                return this.programField;
             }
             set {
-                this.itemField = value;
+                this.programField = value;
             }
         }
     }
@@ -2715,16 +3048,15 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.collada.org/2005/COLLADASchema")]
     public partial class cameraTechniqueImager {
         
-        private program itemField;
+        private program programField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("program")]
-        public program Item {
+        public program program {
             get {
-                return this.itemField;
+                return this.programField;
             }
             set {
-                this.itemField = value;
+                this.programField = value;
             }
         }
     }
@@ -2892,21 +3224,32 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class skin {
         
-        private object[] itemsField;
+        private source[] sourceField;
+        
+        private vertices verticesField;
         
         private string idField;
         
         private string nameField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("source", typeof(source))]
-        [System.Xml.Serialization.XmlElementAttribute("vertices", typeof(vertices))]
-        public object[] Items {
+        [System.Xml.Serialization.XmlElementAttribute("source")]
+        public source[] source {
             get {
-                return this.itemsField;
+                return this.sourceField;
             }
             set {
-                this.itemsField = value;
+                this.sourceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public vertices vertices {
+            get {
+                return this.verticesField;
+            }
+            set {
+                this.verticesField = value;
             }
         }
         
@@ -3085,7 +3428,7 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class extra {
         
-        private extraTechnique[] itemsField;
+        private extraTechnique[] techniqueField;
         
         private string idField;
         
@@ -3095,12 +3438,12 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("technique")]
-        public extraTechnique[] Items {
+        public extraTechnique[] technique {
             get {
-                return this.itemsField;
+                return this.techniqueField;
             }
             set {
-                this.itemsField = value;
+                this.techniqueField = value;
             }
         }
         
@@ -3143,19 +3486,30 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.collada.org/2005/COLLADASchema")]
     public partial class extraTechnique {
         
-        private object[] itemsField;
+        private asset assetField;
+        
+        private param[] paramField;
         
         private string profileField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("asset", typeof(asset))]
-        [System.Xml.Serialization.XmlElementAttribute("param", typeof(param))]
-        public object[] Items {
+        public asset asset {
             get {
-                return this.itemsField;
+                return this.assetField;
             }
             set {
-                this.itemsField = value;
+                this.assetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("param")]
+        public param[] param {
+            get {
+                return this.paramField;
+            }
+            set {
+                this.paramField = value;
             }
         }
         
@@ -3177,12 +3531,14 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.collada.org/2005/COLLADASchema", IsNullable=false)]
     public partial class boundingbox {
         
-        private string minField;
+        private boundingboxMin minField;
         
-        private string maxField;
+        private boundingboxMax maxField;
+        
+        private string sidField;
         
         /// <remarks/>
-        public string min {
+        public boundingboxMin min {
             get {
                 return this.minField;
             }
@@ -3192,12 +3548,87 @@ namespace Proteus.Graphics.Processor.Collada.Schema {
         }
         
         /// <remarks/>
-        public string max {
+        public boundingboxMax max {
             get {
                 return this.maxField;
             }
             set {
                 this.maxField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="NCName")]
+        public string sid {
+            get {
+                return this.sidField;
+            }
+            set {
+                this.sidField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.collada.org/2005/COLLADASchema")]
+    public partial class boundingboxMin {
+        
+        private string sidField;
+        
+        private double[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="NCName")]
+        public string sid {
+            get {
+                return this.sidField;
+            }
+            set {
+                this.sidField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public double[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.collada.org/2005/COLLADASchema")]
+    public partial class boundingboxMax {
+        
+        private string sidField;
+        
+        private double[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="NCName")]
+        public string sid {
+            get {
+                return this.sidField;
+            }
+            set {
+                this.sidField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public double[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
             }
         }
     }

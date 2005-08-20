@@ -44,7 +44,8 @@ namespace Proteus.Editor.Documents
                         documentIsDirty = false;
                     }
 
-                    writeStream.Close();               
+                    if( writeStream.CanWrite )
+                        writeStream.Close();               
                 }           
             }
         }

@@ -17,7 +17,7 @@ namespace Proteus.Editor.DockForms
 
         protected override void CreateDocument()
         {
-            currentDocument = (Documents.Document)new Documents.TextDocument();
+            currentDocument = (Documents.Document)new Documents.TextDocument( textEditorControl1 );
         }
 
         public TextEditorForm()
