@@ -8,9 +8,18 @@ using System.Windows.Forms;
 
 namespace Proteus.Editor.DockForms
 {
-    public partial class ActorTypeBrowerForm : Form
+    public partial class ActorTypeBrowserForm : DockableForm
     {
-        public ActorTypeBrowerForm()
+        public override WeifenLuo.WinFormsUI.DockState DefaultDockState
+        {
+            get { return WeifenLuo.WinFormsUI.DockState.DockRight; }
+        }
+
+        private void Build()
+        {
+        }
+
+        public ActorTypeBrowserForm()
         {
             InitializeComponent();
         }

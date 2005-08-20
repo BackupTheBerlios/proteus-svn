@@ -1,6 +1,6 @@
 namespace Proteus.Editor.DockForms
 {
-    partial class ActorBrowserForm
+    partial class TextEditorForm 
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,33 @@ namespace Proteus.Editor.DockForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextEditorForm));
             this.SuspendLayout();
+
+            this.textEditorControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textEditorControl1.Encoding = System.Text.Encoding.UTF8;
+            this.textEditorControl1.Location = new System.Drawing.Point(0, 0);
+            this.textEditorControl1.Name = "textEditorControl1";
+            this.textEditorControl1.ShowEOLMarkers = true;
+            this.textEditorControl1.ShowSpaces = true;
+            this.textEditorControl1.ShowTabs = true;
+            this.textEditorControl1.ShowVRuler = true;
+            this.textEditorControl1.Size = new System.Drawing.Size(976, 542);
+            this.textEditorControl1.TabIndex = 2;
             // 
-            // treeView1
-            // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(292, 266);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.ShowNodeToolTips = true;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(treeView1_AfterSelect);
-            this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(treeView1_NodeMouseDoubleClick);
-            // 
-            // ActorBrowserForm
+            // TextEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 266);
-            this.Controls.Add(this.treeView1);
-            this.Name = "ActorBrowserForm";
-            this.Text = "ActorBrowserForm";
+            this.Controls.Add(this.textEditorControl1);
+            this.Name = "TextEditorForm";
+            this.Text = "TextEditorForm";
             this.ResumeLayout(false);
-
         }
 
         #endregion
 
-        private System.Windows.Forms.TreeView treeView1;
+        private ICSharpCode.TextEditor.TextEditorControl textEditorControl1;
     }
 }

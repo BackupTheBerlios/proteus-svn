@@ -15,11 +15,6 @@ namespace Proteus.Editor.DockForms
             get { return WeifenLuo.WinFormsUI.DockState.Document; }
         }
 
-        public override bool IsDocumentHost
-        {
-            get { return true; }
-        }
-
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == System.Windows.Forms.Keys.Enter)

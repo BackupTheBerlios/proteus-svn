@@ -69,6 +69,16 @@ namespace Proteus.Kernel.Io
             return false;
         }
 
+        public override bool CreateDirectory(string directory)
+        {
+            string fullDir = GetPath( directory );
+            if (!Directory.Exists(fullDir))
+            {
+                Directory.CreateDirectory( fullDir );
+            }
+            return true;
+        }
+
         public override bool Initialize(string initUrl, string mountPoint)
         {
             base.Initialize(initUrl, mountPoint);

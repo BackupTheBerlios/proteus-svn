@@ -15,7 +15,7 @@ namespace Proteus.Kernel.Diagnostics
 
         #region ISink Members
 
-        public bool Capture
+        public bool CaptureLog
         {
             set
             {

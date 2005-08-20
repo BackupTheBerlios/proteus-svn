@@ -17,6 +17,7 @@ namespace Proteus.Editor.DockForms
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 

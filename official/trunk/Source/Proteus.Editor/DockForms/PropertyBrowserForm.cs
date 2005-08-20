@@ -18,7 +18,7 @@ namespace Proteus.Editor.DockForms
             get { return WeifenLuo.WinFormsUI.DockState.DockRight; }
         }
 
-        public override Proteus.Framework.Parts.IActor Actor
+        public Proteus.Framework.Parts.IActor Actor
         {
             set 
             {
@@ -68,6 +68,7 @@ namespace Proteus.Editor.DockForms
         {
             InitializeComponent();
             Manipulation.Manager.Instance.SelectionChanged += new Proteus.Editor.Manipulation.Manager.SelectionDelegate(Instance_SelectionChanged);
+            this.Actor = Framework.Parts.Basic.RootActor.Instance;
         }
     }
 }

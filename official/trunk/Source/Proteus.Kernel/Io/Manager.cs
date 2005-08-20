@@ -79,6 +79,21 @@ namespace Proteus.Kernel.Io
             return new string[0];
         }
 
+        public bool CreateDirectory(string url)
+        {
+            if (Url.IsDirectory(url))
+            {
+                string relativeUrl = url;
+                Archive foundArchive = FindArchive(url, ref relativeUrl);
+
+                if (foundArchive != null)
+                {
+                    return foundArchive.CreateDirectory( relativeUrl );
+                }
+            }
+            return false;
+        }
+
         public System.IO.Stream Open(string url, bool write)
         {
             log.Debug("Trying to open file [{0}] write: {1}", url, write);

@@ -66,6 +66,11 @@ namespace Proteus.Editor.DockForms
             Manipulation.Manager.Instance.SelectedActor = node.Actor;
         }
 
+        private void treeView1_NodeMouseDoubleClick(object sender, System.Windows.Forms.TreeNodeMouseClickEventArgs e)
+        {
+            Manipulation.Manager.Instance.PerformDefaultAction();
+        }
+
         public ActorBrowserForm()
         {
             InitializeComponent();

@@ -10,24 +10,28 @@ namespace Proteus.Editor.DockForms
     {
         private Kernel.Pattern.TypeFactory<DockableForm> formFactory = 
             new Kernel.Pattern.TypeFactory<DockableForm> ();
+
+        private List<string>                             documentFormTypes = 
+            new List<string>();
     
         private Dp.DockPanel                             dockPanel   = null;
         private List<DockableForm>                       dockedForms = 
             new List<DockableForm>();
 
-        public Kernel.Pattern.TypeFactory<DockableForm> Factory
+        public void Add(string name)
         {
-            get { return formFactory; }
+            DockableForm newForm = Create(name,true);
         }
 
-        public DockableForm Add(string name)
+        private DockableForm Create(string name,bool show )
         {
             // First try to create it.
             DockableForm newForm = formFactory.Create( name );
 
             if (newForm != null)
             {
-                if (!newForm.IsDocumentHost)
+                // Assure only one instance.
+                if ( !(newForm is DocumentForm) )
                 {
                     // We only allow a single instance of this.
                     foreach (DockableForm f in dockedForms)
@@ -40,8 +44,11 @@ namespace Proteus.Editor.DockForms
                 // Ok we can allow it being hosted so add it.
                 dockedForms.Add( newForm );
                 newForm.Text = name;
-                newForm.FormClosed += new System.Windows.Forms.FormClosedEventHandler(newForm_FormClosed);
-                newForm.Show( dockPanel,newForm.DefaultDockState );
+
+                if (show)
+                {
+                    newForm.Show(dockPanel, newForm.DefaultDockState);
+                }
 
                 return newForm;
             }
@@ -49,32 +56,72 @@ namespace Proteus.Editor.DockForms
             return null;
         }
 
+        public void Register<FormType>(string name) where FormType : DockableForm,new()
+        {
+            formFactory.Register<FormType>( name );
+
+            DockableForm testForm = formFactory.Create(name);
+            if (testForm != null)
+            {
+                if ( testForm is DocumentForm )
+                    documentFormTypes.Add( name );
+
+                dockedForms.Remove( testForm );
+                testForm.Dispose();
+            }
+        }
+
+        public void Remove(DockableForm form)
+        {
+            dockedForms.Remove(form);
+        }
+
         public void Initialize(Dp.DockPanel _dockPanel)
         {
             dockPanel = _dockPanel;
 
-            // Register default types.
-            Factory.Register<DiagramForm>("Diagram View");
-            Factory.Register<ActorBrowserForm>("Actor Tree");
-            Factory.Register<LogForm>("Log");
-            Factory.Register<PropertyBrowserForm>("Actor Properties");
-            Factory.Register<WebBrowserForm>("Web browser");
+            // Register default windows.
+            this.Register<ActorBrowserForm>("Actor browser");
+            this.Register<ActorTypeBrowserForm>("Actor type browser");
+            this.Register<WebBrowserForm>("Web browser");
+            this.Register<LogForm>("Log");
+            this.Register<PropertyBrowserForm>("Property browser");
 
-            // Add default forms.
-            Add("Diagram View");
-            Add("Actor Tree");
-            Add("Log");
-            Add("Actor Properties");
+            // Create default windows.
+            Add("Actor browser");
+            Add("Actor type browser");
             Add("Web browser");
+            Add("Property browser");
+            Add("Log");
         }
 
-        private void newForm_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        private void CreateDocumentHosts(Framework.Parts.IActor actor)
         {
-            dockedForms.Remove( (DockableForm)sender );
+            foreach (string n in documentFormTypes )
+            {
+                DocumentForm newForm = (DocumentForm)Create( n,false );
+
+                if (newForm.IsCompatible(actor))
+                {
+                    newForm.Actor = actor;
+                    newForm.Show( dockPanel,newForm.DefaultDockState );
+                }
+                else
+                {
+                    dockedForms.Remove( newForm );
+                    newForm.Dispose();
+                }
+            }
+        }
+
+        private void Instance_DefaultAction(Proteus.Framework.Parts.IActor selectedActor)
+        {
+            CreateDocumentHosts( selectedActor );
         }
 
         public Manager()
         {
+            Manipulation.Manager.Instance.DefaultAction += new Proteus.Editor.Manipulation.Manager.ActionDelegate(Instance_DefaultAction);
         }
     }
 }

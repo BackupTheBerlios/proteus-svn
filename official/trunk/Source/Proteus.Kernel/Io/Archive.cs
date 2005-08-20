@@ -31,7 +31,7 @@ namespace Proteus.Kernel.Io
         public abstract string[]                    GetFiles( string searchDirectory );
         public abstract Stream                      Open( string fileName,bool write );
         public abstract bool                        Exists(string fileName);
-
+        public abstract bool                        CreateDirectory( string directory );
 
         public virtual bool Initialize(string initUrl, string mountUrl)
         {

@@ -8,17 +8,21 @@ using System.Windows.Forms;
 
 namespace Proteus.Editor.DockForms
 {
-    public partial class LogForm : DockableForm
+    public partial class TextEditorForm : DocumentForm
     {
         public override WeifenLuo.WinFormsUI.DockState DefaultDockState
         {
-            get { return WeifenLuo.WinFormsUI.DockState.DockBottomAutoHide; }
+            get { return WeifenLuo.WinFormsUI.DockState.Document; }
         }
 
-        public LogForm()
+        protected override void CreateDocument()
+        {
+            currentDocument = (Documents.Document)new Documents.TextDocument();
+        }
+
+        public TextEditorForm()
         {
             InitializeComponent();
-            controlSink1.CaptureLog = true;
         }
     }
 }

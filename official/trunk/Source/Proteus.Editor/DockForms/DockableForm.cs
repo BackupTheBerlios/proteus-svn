@@ -11,25 +11,22 @@ using Dp = WeifenLuo.WinFormsUI;
 namespace Proteus.Editor.DockForms
 {
     public partial class DockableForm : Dp.DockContent
-    {
+    {   
         public virtual Dp.DockState DefaultDockState
         {
             get { return Dp.DockState.DockLeft; }
         }
 
-        public virtual bool IsDocumentHost
+        private void DockableForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            get { return false; }
-        }
-
-        public virtual Framework.Parts.IActor Actor
-        {
-            set { }
+            Manager.Instance.Remove(this);
         }
 
         public DockableForm()
         {
             InitializeComponent();
-        }
+
+            this.FormClosing += new FormClosingEventHandler(DockableForm_FormClosing);
+        }  
     }
 }

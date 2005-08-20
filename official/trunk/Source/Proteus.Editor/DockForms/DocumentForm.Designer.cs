@@ -1,6 +1,6 @@
 namespace Proteus.Editor.DockForms
 {
-    partial class ActorTypeBrowserForm
+    partial class DocumentForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace Proteus.Editor.DockForms
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "ActorTypeBrowser";
+            this.Text = "DocumentForm";
         }
 
         #endregion

@@ -18,7 +18,7 @@ namespace Proteus.Host.Application
         public MainForm()
         {
             InitializeComponent();
-            controlSink1.Capture = true;
+            controlSink1.CaptureLog = true;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
