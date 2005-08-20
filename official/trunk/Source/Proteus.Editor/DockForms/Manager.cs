@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 
 using Dp = WeifenLuo.WinFormsUI;
@@ -8,14 +9,14 @@ namespace Proteus.Editor.DockForms
 {
     public sealed class Manager : Kernel.Pattern.Singleton<Manager>
     {
-        private Kernel.Pattern.TypeFactory<DockableForm> formFactory = 
+        private Kernel.Pattern.TypeFactory<DockableForm>        formFactory = 
             new Kernel.Pattern.TypeFactory<DockableForm> ();
 
-        private List<string>                             documentFormTypes = 
+        private List<string>                                    documentFormTypes = 
             new List<string>();
     
-        private Dp.DockPanel                             dockPanel   = null;
-        private List<DockableForm>                       dockedForms = 
+        private Dp.DockPanel                                    dockPanel   = null;
+        private List<DockableForm>                              dockedForms = 
             new List<DockableForm>();
 
         public void Add(string name)
@@ -86,6 +87,7 @@ namespace Proteus.Editor.DockForms
             this.Register<WebBrowserForm>("Web browser");
             this.Register<LogForm>("Log");
             this.Register<PropertyBrowserForm>("Property browser");
+            this.Register<TextEditorForm>("Text editor");
 
             // Create default windows.
             Add("Actor browser");
@@ -103,8 +105,35 @@ namespace Proteus.Editor.DockForms
 
                 if (newForm.IsCompatible(actor))
                 {
-                    newForm.Actor = actor;
-                    newForm.Show( dockPanel,newForm.DefaultDockState );
+                    bool alreadyExisting = false;
+
+                    // Search existing forms for this combination
+                    foreach( DockableForm f in dockedForms )
+                    {
+                        if ( f is DocumentForm )
+                        {
+                            DocumentForm docForm = f as DocumentForm;
+
+                            if ( object.ReferenceEquals(docForm.Actor,actor) )
+                            {
+                                alreadyExisting = true;
+
+                                // Push to front.
+                                docForm.Show();
+                            }
+                        }
+                    }
+                    
+                    if( !alreadyExisting )
+                    {
+                        newForm.Actor = actor;
+                        newForm.Show(dockPanel, newForm.DefaultDockState);
+                    }
+                    else
+                    {
+                        dockedForms.Remove( newForm );
+                        newForm.Dispose();                        
+                    }
                 }
                 else
                 {

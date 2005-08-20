@@ -23,6 +23,10 @@ namespace Proteus.Editor.DockForms
                     currentDocument.Actor = currentActor;
                 }
             }
+            get
+            {
+                return currentActor;
+            }
         }
 
         protected virtual void CreateDocument()
