@@ -31,7 +31,9 @@ namespace Proteus.Editor.DockForms
 
         protected virtual void CreateDocument()
         {
-            currentDocument = null;
+            // Create document.
+            if (currentDocument != null)
+                currentDocument.Host = this;
         }
 
         public virtual bool IsCompatible(Framework.Parts.IActor actor)
@@ -72,11 +74,6 @@ namespace Proteus.Editor.DockForms
             // Watch out for closing the form.
             this.FormClosing += new FormClosingEventHandler(DocumentForm_FormClosing);
             Manipulation.Manager.Instance.ActorRemoved += new Proteus.Editor.Manipulation.Manager.ActorDelegate(Instance_ActorRemoved);
-
-            // Create document.
-            CreateDocument();
-            if ( currentDocument != null )
-                currentDocument.Host = this;
         }     
     }
 }

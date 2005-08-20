@@ -18,11 +18,13 @@ namespace Proteus.Editor.DockForms
         protected override void CreateDocument()
         {
             currentDocument = (Documents.Document)new Documents.TextDocument( textEditorControl1 );
+            base.CreateDocument();
         }
 
         public TextEditorForm()
         {
             InitializeComponent();
+            CreateDocument();
         }
     }
 }
