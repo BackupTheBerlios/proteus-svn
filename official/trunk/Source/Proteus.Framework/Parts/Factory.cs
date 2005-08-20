@@ -14,6 +14,18 @@ namespace Proteus.Framework.Parts
             get { return typeFactory; }
         }
 
+        public string[] AllTypes
+        {
+            get
+            {
+                List<string> allTypeNames = new List<string>();
+                foreach( string i in typeFactory )
+                    allTypeNames.Add( i );
+
+                return allTypeNames.ToArray();
+            }
+        }
+
         public IActor Create(string name)
         {
             return typeFactory.Create(name);

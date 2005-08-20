@@ -72,7 +72,7 @@ namespace Proteus.Editor.Manipulation
             OnSelectionChanged();
         }
 
-        protected void OnSelectionChanged()
+        private void OnSelectionChanged()
         {
             if ( SelectionChanged != null )
                 SelectionChanged( singleSelection,multiSelection );

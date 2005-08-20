@@ -6,7 +6,7 @@ namespace Proteus.Framework.Parts
 {
     public interface IPart
     {
-        string Name             { get; }
+        string Name             { get; set; }
         string Description      { get; }
         string Documentation    { get; }
     }

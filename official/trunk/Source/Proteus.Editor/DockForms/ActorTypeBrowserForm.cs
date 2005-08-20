@@ -17,11 +17,15 @@ namespace Proteus.Editor.DockForms
 
         private void Build()
         {
+            string[] actorTypeNames = Framework.Parts.Factory.Instance.AllTypes;
+
+            // Foreach actor count its base types.
         }
 
         public ActorTypeBrowserForm()
         {
             InitializeComponent();
+            Build();
         }
     }
 }

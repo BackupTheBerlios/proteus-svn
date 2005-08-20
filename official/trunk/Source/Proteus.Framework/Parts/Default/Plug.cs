@@ -37,6 +37,7 @@ namespace Proteus.Framework.Parts.Default
         public virtual string Name
         {
             get { return name; }
+            set { }
         }
 
         public virtual string Description

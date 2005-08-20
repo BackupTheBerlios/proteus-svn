@@ -151,6 +151,9 @@
     <EmbeddedResource Include="DockForms\ActorBrowserForm.resx">
       <DependentUpon>ActorBrowserForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DockForms\ActorTypeBrowserForm.resx">
+      <DependentUpon>ActorTypeBrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DockForms\DiagramForm.resx">
       <DependentUpon>DiagramForm.cs</DependentUpon>
     </EmbeddedResource>

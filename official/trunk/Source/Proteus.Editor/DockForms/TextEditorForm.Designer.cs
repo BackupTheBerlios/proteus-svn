@@ -31,6 +31,7 @@ namespace Proteus.Editor.DockForms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextEditorForm));
             this.SuspendLayout();
 
+            this.textEditorControl1 = new ICSharpCode.TextEditor.TextEditorControl();
             this.textEditorControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textEditorControl1.Encoding = System.Text.Encoding.UTF8;
             this.textEditorControl1.Location = new System.Drawing.Point(0, 0);

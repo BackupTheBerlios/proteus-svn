@@ -85,6 +85,7 @@ namespace Proteus.Framework.Parts.Default
 
                 return propertyInfo.Name;
             }
+            set { }
         }
 
         public string Description
