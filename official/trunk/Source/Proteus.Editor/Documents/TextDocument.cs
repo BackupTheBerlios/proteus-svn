@@ -2,20 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using Ted = ICSharpCode.TextEditor.Document;
-
 namespace Proteus.Editor.Documents
 {
     public class TextDocument : Document
     {
         private string                                                      textContent     = string.Empty;
-        private Ted.IDocument                                               textDocument    = null;
         private Kernel.Resource.Handle<Kernel.Io.TextFile>                  textHandle      = 
             new Kernel.Resource.Handle<Kernel.Io.TextFile>();
-        private ICSharpCode.TextEditor.TextEditorControl                    textEditor      = null;
-
-        private static Ted.DocumentFactory  documentFactory = new Ted.DocumentFactory();
-       
+        private ICSharpCode.TextEditor.TextEditorControl                    textEditor      = null;       
 
         public override Proteus.Framework.Parts.IActor Actor
         {
@@ -29,18 +23,15 @@ namespace Proteus.Editor.Documents
                         Framework.Parts.Basic.ConfigFileActor configFile = (Framework.Parts.Basic.ConfigFileActor)value;
 
                         textHandle = new Kernel.Resource.Handle<Kernel.Io.TextFile>( configFile.Url );
-                        textDocument = documentFactory.CreateDocument();
-                        textDocument.TextContentChanged += new EventHandler(textDocument_TextContentChanged);
-                        textEditor.Document = textDocument;
 
                         // Now we can load it again.
                         if (textHandle.Resource != null)
                         {
-                            // Get it.
-                            textContent = textHandle.Resource.Content;
-
-                            // Insert the content.
-                            textDocument.TextContent = textContent;
+                            // Get it
+                            textEditor.Text = textHandle.Resource.Content;
+                            textEditor.Document.DocumentChanged += new ICSharpCode.TextEditor.Document.DocumentEventHandler(Document_DocumentChanged);                            
+                            textEditor.SetHighlighting("XML");
+                            this.documentHost.Text = textHandle.Url;
                         }
                         else
                         {
@@ -55,18 +46,20 @@ namespace Proteus.Editor.Documents
             }
         }
 
-        private void textDocument_TextContentChanged(object sender, EventArgs e)
+        private void Document_DocumentChanged(object sender, ICSharpCode.TextEditor.Document.DocumentEventArgs e)
         {
-            textContent = textDocument.TextContent;
             MakeDirty();
+            this.documentHost.Text = textHandle.Url + "*";
         }
         
         protected override bool Save(System.IO.Stream stream)
         {
             System.IO.StreamWriter writer = new System.IO.StreamWriter( stream );
-            writer.Write( textContent );
+            writer.Write( textEditor.Text );
             writer.Flush();
             writer.Close();
+
+            this.documentHost.Text = textHandle.Url;
 
             return true;
         }

@@ -12,7 +12,10 @@ namespace Proteus.Editor.Documents
         {
             foreach (Document d in openDocuments)
             {
-                d.Save();
+                if (d.IsDirty)
+                {
+                    d.Save();
+                }
             }
         }
 
