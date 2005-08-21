@@ -21,6 +21,9 @@ namespace Proteus.Editor.Forms
 
             // Initialize docking support.
             DockForms.Manager.Instance.Initialize( dockPanel1 );
+
+            // Initialize menu and tool support.
+            Manager.Instance.Initialize( this.toolStrip1,this.menuStrip1 );
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

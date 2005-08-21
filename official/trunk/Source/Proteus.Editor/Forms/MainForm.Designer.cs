@@ -41,7 +41,7 @@ namespace Proteus.Editor.Forms
             this.dockPanel1.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
             this.dockPanel1.Location = new System.Drawing.Point(0, 49);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.Size = new System.Drawing.Size(1016, 663);
+            this.dockPanel1.Size = new System.Drawing.Size(1016, 662);
             this.dockPanel1.TabIndex = 0;
             // 
             // menuStrip1
@@ -55,9 +55,9 @@ namespace Proteus.Editor.Forms
             // statusStrip1
             // 
             this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
-            this.statusStrip1.Location = new System.Drawing.Point(0, 712);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 711);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1016, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1016, 23);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 

@@ -57,7 +57,24 @@ namespace Proteus.Editor.DockForms
                 displayProperties[ p.Name ] = p.CurrentValue;
             }
 
-            propertyGrid1.SelectedObject = displayProperties;           
+            propertyGrid1.SelectedObject = displayProperties;
+            displayProperties.SetValue += new Proteus.Editor.Utility.PropertySpecEventHandler(displayProperties_SetValue);
+        }
+
+        private void displayProperties_SetValue(object sender, Proteus.Editor.Utility.PropertySpecEventArgs e)
+        {
+            // Find the corresponding property on the actor and transfer.
+            Framework.Parts.IProperty[] properties = currentActor.Properties;
+
+            foreach (Framework.Parts.IProperty p in properties)
+            {
+                if (p.Name == e.Property.Name)
+                {
+                    // Transfer value.
+                    p.CurrentValue = e.Value;
+                    break;
+                }
+            }
         }
 
         private void Instance_SelectionChanged(Proteus.Framework.Parts.IActor selectedActor, List<Proteus.Framework.Parts.IActor> selectedActors)

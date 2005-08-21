@@ -5,9 +5,14 @@ using System.Text;
 namespace Proteus.Kernel.Pattern
 {
     public class ConcreteFactory<IdType,ProductType> : AbstractFactory<IdType,ProductType> 
-    {   
+    {
+        internal interface IConcreteCreator
+        {
+            Type Type { get; }
+        }
+
         internal sealed class ConcreteCreator<ConcreteProductType> 
-            : IAbstractCreator where ConcreteProductType : ProductType,new()
+            : IAbstractCreator,IConcreteCreator where ConcreteProductType : ProductType,new()
         {            
             private Type createType = null;
 
@@ -39,6 +44,11 @@ namespace Proteus.Kernel.Pattern
 
         public Type GetType(IdType id)
         {
+            IConcreteCreator creator = this[id] as IConcreteCreator;
+            if (creator != null)
+            {
+                return creator.Type;
+            }
             return null;
         }
 
