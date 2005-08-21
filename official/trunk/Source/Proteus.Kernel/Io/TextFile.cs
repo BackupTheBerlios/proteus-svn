@@ -17,48 +17,68 @@ namespace Proteus.Kernel.Io
 
         public void Write(string url)
         {
-            if (textContent.Length > 0)
-            {
-                Stream writeStream = Io.Manager.Instance.Open(url, true);
-                Write( writeStream );
-            }
-        }
-
-        public void Write(Stream stream)
-        {
-            if (stream != null && textContent.Length > 0 )
-            {
-                StreamWriter streamWriter = new StreamWriter(stream);
-                streamWriter.Write( textContent);
-                streamWriter.Flush();
-                streamWriter.Close();
-            }
+            WriteFile( url,textContent);
         }
 
         public override int OnLoad(string url)
         {
-            Stream loadStream = Io.Manager.Instance.Open(url);
-            int size = 0;
-            if (loadStream != null)
-            {
-                size = (int)loadStream.Length;
-               
-                StreamReader streamReader = new StreamReader( loadStream );
-                textContent = streamReader.ReadToEnd();
-                streamReader.Close();
-            }
-            else
-            {
-                size = -1;
-            }
+            bool success = false;
+            textContent = ReadFile( url,ref success );
 
-            return size;
+            if ( success )
+                return textContent.Length * 2;
+            return -1;
         }
 
         public override int OnUnload()
         {
             textContent = string.Empty;
             return 0;
+        }
+
+        public static string ReadFile(string url)
+        {
+            bool success = false;
+            return ReadFile( url,ref success );
+        }
+
+        public static string ReadFile(string url,ref bool success )
+        {
+            Stream loadStream = Io.Manager.Instance.Open(url);
+            string text = string.Empty;
+
+            if (loadStream != null)
+            {
+                StreamReader streamReader = new StreamReader(loadStream);
+                text = streamReader.ReadToEnd();
+                streamReader.Close();
+                success = true;
+            }
+            else
+            {
+                success = false;
+            }
+
+            return text;
+        }
+
+        public static void WriteFile(string url, string text)
+        {
+            if (text.Length > 0)
+            {
+                Stream writeStream = Io.Manager.Instance.Open(url,true);
+
+                if (writeStream != null)
+                {
+                    StreamWriter writer = new StreamWriter( writeStream );
+                    writer.Write( text );
+                    writer.Close();
+                }
+            }
+        }
+
+        public TextFile()
+        {
         }
     }
 }

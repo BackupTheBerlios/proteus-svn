@@ -31,7 +31,7 @@ namespace Proteus.Kernel.Resource
                 foundEntry.OnLoad();
                 memoryUsage += foundEntry.Size;
 
-                return (ResourceType)foundEntry.Item;
+                return foundEntry.Item as ResourceType;
             }
             else
             {

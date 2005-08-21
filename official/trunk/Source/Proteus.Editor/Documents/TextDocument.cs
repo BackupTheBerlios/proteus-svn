@@ -6,9 +6,6 @@ namespace Proteus.Editor.Documents
 {
     public class TextDocument : Document
     {
-        private string                                                      textContent     = string.Empty;
-        private Kernel.Resource.Handle<Kernel.Io.TextFile>                  textHandle      = 
-            new Kernel.Resource.Handle<Kernel.Io.TextFile>();
         private ICSharpCode.TextEditor.TextEditorControl                    textEditor      = null;       
 
         public override Proteus.Framework.Parts.IActor Actor
@@ -22,25 +19,13 @@ namespace Proteus.Editor.Documents
                     {
                         Framework.Parts.Basic.ConfigFileActor configFile = (Framework.Parts.Basic.ConfigFileActor)value;
 
-                        textHandle = new Kernel.Resource.Handle<Kernel.Io.TextFile>( configFile.Url );
+                        textEditor.Text = Kernel.Io.TextFile.ReadFile( configFile.Url );
+                        documentUrl = configFile.Url;
 
-                        // Now we can load it again.
-                        if (textHandle.Resource != null)
-                        {
-                            // Get it
-                            textEditor.Text = textHandle.Resource.Content;
-                            textEditor.Document.DocumentChanged += new ICSharpCode.TextEditor.Document.DocumentEventHandler(Document_DocumentChanged);                            
-                            textEditor.SetHighlighting("XML");
-                            this.documentHost.Text = textHandle.Url;
-                        }
-                        else
-                        {
-                            // We have to create a new one.
-                            Kernel.Io.TextFile textWriter = new Kernel.Io.TextFile();
-                            textWriter.Content = "<Actor>\n</Actor>";
-                            textWriter.Write( textHandle.Url );
-                            this.Actor = value;
-                        }
+                        // Get it
+                        textEditor.Document.DocumentChanged += new ICSharpCode.TextEditor.Document.DocumentEventHandler(Document_DocumentChanged);                            
+                        textEditor.SetHighlighting("XML");
+                        this.documentHost.Text = documentUrl;
                     }
                 }
             }
@@ -49,7 +34,7 @@ namespace Proteus.Editor.Documents
         private void Document_DocumentChanged(object sender, ICSharpCode.TextEditor.Document.DocumentEventArgs e)
         {
             MakeDirty();
-            this.documentHost.Text = textHandle.Url + "*";
+            this.documentHost.Text = documentUrl + "*";
         }
         
         protected override bool Save(System.IO.Stream stream)
@@ -59,7 +44,7 @@ namespace Proteus.Editor.Documents
             writer.Flush();
             writer.Close();
 
-            this.documentHost.Text = textHandle.Url;
+            this.documentHost.Text = documentUrl;
 
             return true;
         }

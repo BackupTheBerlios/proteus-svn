@@ -142,6 +142,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utility\PropertyBag.cs" />
+    <Compile Include="Utility\Resource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Proteus.Framework\Proteus.Framework.csproj">

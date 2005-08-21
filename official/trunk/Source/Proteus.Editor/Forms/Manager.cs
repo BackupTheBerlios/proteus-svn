@@ -65,6 +65,11 @@ namespace Proteus.Editor.Forms
         public void AddToolItem(string name, System.Drawing.Image icon,string toolTip,EventHandler clickHandler )
         {
             ToolStripButton button = new ToolStripButton( name,icon,clickHandler );
+            button.ToolTipText = toolTip;
+            button.AutoToolTip = false;
+            if ( button.ToolTipText != string.Empty )
+                button.AutoToolTip = true;
+
             toolBar.Items.Add( button );
         }
 

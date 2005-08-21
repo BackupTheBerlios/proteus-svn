@@ -24,6 +24,14 @@ namespace Proteus.Editor.Forms
 
             // Initialize menu and tool support.
             Manager.Instance.Initialize( this.toolStrip1,this.menuStrip1 );
+        
+            // Now add default items to the system.
+            Manager.Instance.AddToolItem(string.Empty,Utility.Resource.GetIcon("Save.bmp"),"Saves the current document.",new EventHandler( this.Save_Click ) );
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            Documents.Manager.Instance.Save();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

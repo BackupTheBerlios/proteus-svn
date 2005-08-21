@@ -19,8 +19,7 @@ namespace Proteus.Editor.Documents
         {
             if (topDocument != null)
             {
-                if ( topDocument.IsDirty )
-                    topDocument.Save();
+                topDocument.Save();
             }
         }
 
@@ -28,10 +27,7 @@ namespace Proteus.Editor.Documents
         {
             foreach (Document d in openDocuments)
             {
-                if (d.IsDirty)
-                {
-                    d.Save();
-                }
+               d.Save(); 
             }
         }
 
