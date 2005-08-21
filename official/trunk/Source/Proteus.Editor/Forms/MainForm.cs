@@ -27,6 +27,7 @@ namespace Proteus.Editor.Forms
         
             // Now add default items to the system.
             Manager.Instance.AddToolItem(string.Empty,Utility.Resource.GetIcon("Save.bmp"),"Saves the current document.",new EventHandler( this.Save_Click ) );
+            Manager.Instance.AddMenuItem("File.Save",string.Empty,"Saves the current document.",new EventHandler(this.Save_Click) );
         }
 
         private void Save_Click(object sender, EventArgs e)
