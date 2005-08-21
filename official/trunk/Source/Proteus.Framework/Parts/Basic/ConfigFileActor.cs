@@ -7,9 +7,9 @@ using Proteus.Kernel.Configuration;
 
 namespace Proteus.Framework.Parts.Basic
 {
-    [Actor("ConfigFile")]
+    [Actor("ConfigFile","Group")]
     [Documentation("Configuration file","An automatic reference to a secondary configuration file.")]
-    public class ConfigFileActor : Default.CollectionActor
+    public class ConfigFileActor : GroupActor
     {
         protected       Handle<XmlDocument> configFile =
                   new   Handle<XmlDocument>();

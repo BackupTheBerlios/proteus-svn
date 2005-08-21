@@ -24,6 +24,34 @@ namespace Proteus.Framework.Parts
             }
         }
 
+        public static string GetBaseType(Type actorType)
+        {
+            ActorAttribute actorAttribute = Attribute.GetCustomAttribute(actorType, typeof(ActorAttribute), false) as ActorAttribute;
+            if (actorAttribute != null)
+            {
+                if ( actorAttribute.BaseName != string.Empty )
+                    return actorAttribute.BaseName;
+            }
+           
+            Type realBaseType = actorType.BaseType;
+            if (realBaseType != null)
+            {
+                if (realBaseType.GetInterface(typeof(IActor).FullName) != null)
+                {
+                    if (!realBaseType.IsAbstract)
+                    {
+                        return Utility.GetTypeName(realBaseType);
+                    }
+                }
+            }
+            return string.Empty;          
+        }
+
+        public static string GetBaseType(IActor actor)
+        {
+            return GetBaseType( actor.GetType() );
+        }
+
         public static string GetTypeName(IActor actor)
         {
             return GetTypeName(actor.GetType());

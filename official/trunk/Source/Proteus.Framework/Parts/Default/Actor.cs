@@ -42,15 +42,7 @@ namespace Proteus.Framework.Parts.Default
         {
             get
             {
-                Type realBaseType = this.GetType().BaseType;
-                if (realBaseType.GetInterface(typeof(IActor).FullName) != null)
-                {
-                    if (!realBaseType.IsAbstract)
-                    {
-                        return Utility.GetTypeName( realBaseType );
-                    }
-                }
-                return string.Empty;
+                return Utility.GetBaseType(this);
             }
         }
 

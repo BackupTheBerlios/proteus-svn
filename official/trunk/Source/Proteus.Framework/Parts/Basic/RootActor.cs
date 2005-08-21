@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Proteus.Framework.Parts.Basic
 {
+    [Actor("Root","ConfigFile")]
     public sealed class RootActor : ConfigFileActor
     {
         private         Hosting.Engine  engine      = null;
