@@ -20,6 +20,8 @@ namespace Proteus.Editor.DockForms
             string[] actorTypeNames = Framework.Parts.Factory.Instance.AllTypes;
 
             // Foreach actor count its base types.
+            foreach( string s in actorTypeNames )
+                treeView1.Nodes.Add( s );
         }
 
         public ActorTypeBrowserForm()
