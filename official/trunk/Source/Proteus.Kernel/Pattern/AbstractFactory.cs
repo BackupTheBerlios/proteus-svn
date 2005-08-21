@@ -26,8 +26,8 @@ namespace Proteus.Kernel.Pattern
         public event RegistrationDelegate Registered;
         public event RegistrationDelegate Unregistered;
         
-        private   SortedList<IdType, IAbstractCreator> factoryCreators =
-             new  SortedList<IdType, IAbstractCreator>();
+        protected    SortedList<IdType, IAbstractCreator> factoryCreators =
+                new  SortedList<IdType, IAbstractCreator>();
 
         public IAbstractCreator this[IdType id]
         {

@@ -10,6 +10,11 @@ namespace Proteus.Kernel.Pattern
             : IAbstractCreator where ConcreteProductType : ProductType,new()
         {            
             private Type createType = null;
+
+            public Type Type
+            {
+                get { return createType; }
+            }
             
             public object Create() 
             {
@@ -30,6 +35,11 @@ namespace Proteus.Kernel.Pattern
             {
                 createType = typeof(ConcreteProductType);
             }
+        }
+
+        public Type GetType(IdType id)
+        {
+            return null;
         }
 
         public void Register<ConcreteProductType>(IdType id) where ConcreteProductType : ProductType,new()
