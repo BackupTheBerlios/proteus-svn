@@ -37,7 +37,7 @@ namespace Proteus.Editor.Documents
                         {
                             // We have to create a new one.
                             Kernel.Io.TextFile textWriter = new Kernel.Io.TextFile();
-                            textWriter.Content = "<NewFile>";
+                            textWriter.Content = "<Actor>\n</Actor>";
                             textWriter.Write( textHandle.Url );
                             this.Actor = value;
                         }

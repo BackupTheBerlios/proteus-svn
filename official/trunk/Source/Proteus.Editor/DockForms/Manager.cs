@@ -19,6 +19,8 @@ namespace Proteus.Editor.DockForms
         private List<DockableForm>                              dockedForms = 
             new List<DockableForm>();
 
+        private DocumentForm                                    topDocumentForm = null;
+
         public void Add(string name)
         {
             DockableForm newForm = Create(name,true);
@@ -120,6 +122,8 @@ namespace Proteus.Editor.DockForms
 
                                 // Push to front.
                                 docForm.Show();
+                                topDocumentForm = docForm;
+                                Documents.Manager.Instance.TopDocument = docForm.CurrentDocument;
                             }
                         }
                     }
@@ -128,6 +132,8 @@ namespace Proteus.Editor.DockForms
                     {
                         newForm.Actor = actor;
                         newForm.Show(dockPanel, newForm.DefaultDockState);
+                        topDocumentForm = newForm;
+                        Documents.Manager.Instance.TopDocument = newForm.CurrentDocument;
                     }
                     else
                     {
