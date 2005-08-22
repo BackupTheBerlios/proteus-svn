@@ -132,6 +132,12 @@
     <Compile Include="Forms\PluginForm.Designer.cs">
       <DependentUpon>PluginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\QuitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QuitForm.Designer.cs">
+      <DependentUpon>QuitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Manipulation\Manager.cs" />
     <Compile Include="Manipulation\Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,6 +149,7 @@
     </Compile>
     <Compile Include="Utility\PropertyBag.cs" />
     <Compile Include="Utility\Resource.cs" />
+    <Compile Include="Workflow\Project.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Proteus.Framework\Proteus.Framework.csproj">
@@ -198,11 +205,11 @@
     <EmbeddedResource Include="Images\Icons\SaveAll.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\QuitForm.resx">
+      <DependentUpon>QuitForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Images\Icons\Run.bmp" />
     <EmbeddedResource Include="Images\Icons\Stop.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Workflow\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

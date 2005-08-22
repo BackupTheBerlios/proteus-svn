@@ -15,6 +15,20 @@ namespace Proteus.Editor.Documents
             get { return topDocument; }
         }
 
+        public bool IsDirty
+        {
+            get
+            {
+                foreach( Document d in openDocuments )
+                {
+                    if ( d.IsDirty )
+                        return true;
+                }
+
+                return false;
+            }
+        }
+
         public void Save()
         {
             if (topDocument != null)
