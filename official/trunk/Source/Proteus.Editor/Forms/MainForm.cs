@@ -29,6 +29,9 @@ namespace Proteus.Editor.Forms
             Manager.Instance.AddToolItem(string.Empty,Utility.Resource.GetIcon("Save.bmp"),"Saves the current document.",new EventHandler( this.Save_Click ) );
             Manager.Instance.AddMenuItem("File.Save",string.Empty,"Saves the current document.",new EventHandler(this.Save_Click) );
             Manager.Instance.AddMenuItem("File.Exit",string.Empty,"Exits the editor.",new EventHandler(this.Exit_Click) );
+        
+            // Add menu items for hidden windows.
+            DockForms.Manager.Instance.AddMenuItems();
         }
 
         private void Save_Click(object sender, EventArgs e)

@@ -26,6 +26,24 @@ namespace Proteus.Editor.DockForms
             DockableForm newForm = Create(name,true);
         }
 
+        public void AddMenuItems()
+        {
+            foreach (string s in formFactory)
+            {
+                if (documentFormTypes.IndexOf(s) == -1)
+                {
+                    // Add an entry
+                    Forms.Manager.Instance.AddMenuItem("Windows.Show." + s,string.Empty,"Shows the " + s + " window.",new EventHandler(this.Add_Click) );
+                }
+            }
+        }
+
+        private void Add_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.ToolStripMenuItem item = (System.Windows.Forms.ToolStripMenuItem)sender;
+            Add( item.Text );
+        }
+
         private DockableForm Create(string name,bool show )
         {
             // First try to create it.
