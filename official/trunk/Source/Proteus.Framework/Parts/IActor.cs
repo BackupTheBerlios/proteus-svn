@@ -20,9 +20,6 @@ namespace Proteus.Framework.Parts
         IProperty[]         Properties  { get; }
         Type[]              Interfaces  { get; }
 
-        IInputPlug[]        GetInputPlugs(IActor outputActor, IOutputPlug outputPlug);
-        IOutputPlug[]       GetOutputPlugs(IActor inputActor, IInputPlug inputPlug);
-
         bool                Update(double deltaTime);
         bool                Initialize(IEnvironment environment);
 

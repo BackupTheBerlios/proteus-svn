@@ -5,9 +5,10 @@ using System.Text;
 namespace Proteus.Framework.Parts
 {
     [AttributeUsage(AttributeTargets.Class | 
-                    AttributeTargets.Event | 
                     AttributeTargets.Method | 
-                    AttributeTargets.Property )]
+                    AttributeTargets.Property |
+                    AttributeTargets.Parameter |
+                    AttributeTargets.ReturnValue )]
     public sealed class DocumentationAttribute : System.Attribute
     {
         private string description      = string.Empty;

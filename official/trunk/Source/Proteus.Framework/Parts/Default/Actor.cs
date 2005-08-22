@@ -6,7 +6,6 @@ namespace Proteus.Framework.Parts.Default
 {
     public abstract class Actor : Kernel.Pattern.Disposable,IActor
     {
-        protected PlugCollection    actorPlugs          = null;
         protected string            actorName           = string.Empty;
         protected string            actorDescription    = string.Empty;
         protected string            actorDocumentation  = string.Empty;
@@ -59,16 +58,6 @@ namespace Proteus.Framework.Parts.Default
         public virtual Type[] Interfaces
         {
             get { return this.GetType().GetInterfaces(); }
-        }
-
-        public virtual IInputPlug[] GetInputPlugs(IActor outputActor, IOutputPlug outputPlug)
-        {
-            return actorPlugs.GetInputPlugs(outputActor, outputPlug);
-        }
-
-        public virtual IOutputPlug[] GetOutputPlugs(IActor inputActor, IInputPlug inputPlug)
-        {
-            return actorPlugs.GetOutputPlugs(inputActor, inputPlug);
         }
 
         public virtual bool Update(double deltaTime)
@@ -190,8 +179,6 @@ namespace Proteus.Framework.Parts.Default
 
         protected Actor()
         {
-            actorPlugs = new PlugCollection(this);
-
             DocumentationAttribute documentation
                 = Attribute.GetCustomAttribute(this.GetType(), typeof(DocumentationAttribute)) as DocumentationAttribute;
 

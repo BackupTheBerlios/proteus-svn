@@ -68,7 +68,7 @@ namespace Proteus.Framework.Parts.Basic
             // Write out file.
             if (this.collectionEnvironment.Count == 1)
             {
-                IActor fileActor = this.collectionEnvironment.Actors[0];
+                IActor fileActor = this.collectionEnvironment[0];
 
                 // Create new file with it.
                 Chunk actorChunk = Utility.WriteActor(fileActor);

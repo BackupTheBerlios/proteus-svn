@@ -4,15 +4,14 @@ using System.Text;
 
 namespace Proteus.Framework.Parts.Default
 {
-    public sealed class Environment : IEnvironment
+    public class Environment : IEnvironment
     {
         private SortedList<string, IActor>  actors      = new SortedList<string, IActor>();
-        private List<IConnection>           connections = new List<IConnection>();
         private IActor                      owner       = null;
 
         #region IEnvironment Members
 
-        public IActor this[string name]
+        public virtual IActor this[string name]
         {
             get
             {
@@ -24,55 +23,38 @@ namespace Proteus.Framework.Parts.Default
             }
         }
 
-        public IActor Owner
+        public virtual IActor this[int index]
+        {
+            get
+            {
+                if ( index >= 0 && index < actors.Count )
+                    return actors.Values[index];
+                return null;
+            }
+        }
+
+        public virtual int Count
+        {
+            get { return actors.Count; }
+        }
+
+        public virtual IActor Owner
         {
             get { return owner; }
         }
 
-        public IActor[] Actors
-        {
-            get 
-            {
-                IActor[] tempArray = new IActor[actors.Count];
-                actors.Values.CopyTo(tempArray, 0);
-                return tempArray;
-            }
-        }
-
-        public IConnection[] Connections
-        {
-            get
-            {
-                return connections.ToArray();
-            }
-        }
-
-        #region IEnumerable<IActor> Members
-
-        public IEnumerator<IActor> GetEnumerator()
+        public virtual IEnumerator<IActor> GetEnumerator()
         {
             foreach (IActor a in actors.Values )
                 yield return a;
         }
 
-        #endregion
-
-        #region IEnumerable Members
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        public virtual bool IsCompatible(IActor actor)
         {
-            foreach (IActor a in actors.Values )
-                yield return a;
+            return true;
         }
-
-        #endregion
-
-        public bool Contains(string actorName)
-        {
-            return actors.ContainsKey(actorName);
-        }
-
-        public bool Add(IActor actor)
+      
+        public virtual bool Add(IActor actor)
         {
             if (!actors.ContainsKey(actor.Name))
             {
@@ -82,66 +64,23 @@ namespace Proteus.Framework.Parts.Default
             return false;
         }
 
-        public bool Add(IConnection connection)
-        {
-            Remove(connection);
-            connections.Add(connection);
-            return true;
-        }
-
-        public void Remove(IActor actor)
+        public virtual bool Remove(IActor actor)
         {
             if (actors.ContainsKey(actor.Name))
             {
                 actors.Remove(actor.Name);
+                return true;
             }
+
+            return false;
         }
 
-        public void Remove(IConnection connection)
+        public virtual void Clear()
         {
-            connections.Remove(connection);
+            actors.Clear();
         }
 
         #endregion
-
-        #region ICollection<IActor> Members
-
-        public void Clear()
-        {
-            foreach (IActor a in actors.Values )
-            {
-                a.Dispose();
-            }
-            foreach (IConnection c in connections)
-            {
-                c.Dispose();
-            }
-
-            actors.Clear();
-            connections.Clear();
-        }
-
-        public bool Contains(IActor item)
-        {
-            return actors.ContainsKey(item.Name);
-        }
-
-        public void CopyTo(IActor[] array, int arrayIndex)
-        {
-            actors.Values.CopyTo(array, arrayIndex);
-        }
-
-        public int Count
-        {
-            get { return actors.Count; }
-        }
-
-        public bool IsReadOnly
-        {
-            get { return actors.Values.IsReadOnly; }
-        }
-
-        #endregion    
 
         public Environment(IActor _owner)
         {
