@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\RegexLengthComparer.cs" />
     <Compile Include="Collections\StringLengthComparer.cs" />
     <Compile Include="Configuration\Chunk.cs" />
     <Compile Include="Configuration\CommandLine.cs" />

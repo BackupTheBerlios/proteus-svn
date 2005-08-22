@@ -19,10 +19,11 @@ namespace Proteus.Framework.Parts
 
         IProperty[]         Properties  { get; }
 
+        object              SendMessage( string name,IActor sender,params object[] parameters );
+
         bool                Update(double deltaTime);
         bool                Initialize(IEnvironment environment);
 
-        object              QueryInterface(Type interfaceType);
-        InterfaceType       QueryInterface<InterfaceType>();
+        InterfaceType       QueryInterface<InterfaceType>() where InterfaceType : class;
     }
 }

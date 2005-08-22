@@ -52,6 +52,9 @@
     <Compile Include="Parts\DocumentationAttribute.cs" />
     <Compile Include="Parts\Default\Environment.cs" />
     <Compile Include="Parts\Default\Property.cs" />
+    <Compile Include="Parts\MessageHandlerAttribute.cs" />
+    <Compile Include="Parts\MessageRouter.cs" />
+    <Compile Include="Parts\MessageTable.cs" />
     <Compile Include="Parts\PropertyAttribute.cs" />
     <Compile Include="Parts\Factory.cs" />
     <Compile Include="Parts\IActor.cs" />

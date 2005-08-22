@@ -9,6 +9,7 @@ namespace Proteus.Framework.Parts.Default
         protected string            actorName           = string.Empty;
         protected bool              actorActive         = true;
         protected IEnvironment      actorEnvironment    = null;
+        protected MessageTable      actorMessageTable   = new MessageTable();
 
         private static Kernel.Diagnostics.Log<Actor> log =
             new Kernel.Diagnostics.Log<Actor>();
@@ -89,19 +90,14 @@ namespace Proteus.Framework.Parts.Default
             return false;
         }
 
-        public virtual object QueryInterface(Type interfaceType)
+        public virtual object SendMessage(string name,IActor sender, params object[] parameters)
         {
-            if (this.GetType().GetInterface(interfaceType.FullName) != null)
-            {
-                return this;
-            }
-
-            return null;
+            actorMessageTable.SendMessage(this,name,sender,parameters );
         }
 
-        public virtual InterfaceType QueryInterface<InterfaceType>()
+        public virtual InterfaceType QueryInterface<InterfaceType>() where InterfaceType : class
         {
-            return (InterfaceType)QueryInterface(typeof(InterfaceType));
+            return this as InterfaceType;
         }
 
         #endregion
@@ -178,6 +174,6 @@ namespace Proteus.Framework.Parts.Default
 
         protected Actor()
         {
-        }     
+        }  
     }
 }
