@@ -39,6 +39,7 @@ namespace Proteus.Editor.Forms
             if (foundItem == null)
             {
                 foundItem = new ToolStripMenuItem( name );
+                foundItem.Name = name;
                 items.Add( foundItem );
             }
 
