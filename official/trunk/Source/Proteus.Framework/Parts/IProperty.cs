@@ -14,7 +14,6 @@ namespace Proteus.Framework.Parts
         
         bool    IsConfigureable         { get; }
         bool    IsState                 { get; }
-        bool    IsPlug                  { get; }
         
         object  CurrentValue            { get; set; }
         object  DefaultValue            { get; }

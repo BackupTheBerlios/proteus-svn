@@ -44,11 +44,6 @@ namespace Proteus.Framework.Parts.Default
             get { return propertyAttribute.IsState; }
         }
 
-        public bool IsPlug
-        {
-            get { return propertyAttribute.IsPlug; }
-        }
-
         public object CurrentValue
         {
             get

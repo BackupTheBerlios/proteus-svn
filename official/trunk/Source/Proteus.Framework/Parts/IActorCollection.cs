@@ -7,7 +7,7 @@ namespace Proteus.Framework.Parts
     public interface IActorCollection 
     {
         IActor              this[string name]   { get; }
-        IActor              this[int index]        { get; }
+        IActor              this[int index]     { get; }
         
         int                 Count               { get; }
         

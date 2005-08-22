@@ -12,7 +12,6 @@ namespace Proteus.Framework.Parts
         private string      name            = string.Empty;
         private bool        isState         = false;
         private bool        isConfigureable = true;
-        private bool        isPlug          = false;
         private object      defaultValue    = null;
 
         public Type EditorType
@@ -40,11 +39,6 @@ namespace Proteus.Framework.Parts
             get { return isConfigureable; }
         }
 
-        public bool IsPlug
-        {
-            get { return isPlug; }
-        }
-
         public object DefaultValue
         {
             get { return defaultValue; }
@@ -59,14 +53,9 @@ namespace Proteus.Framework.Parts
             isState = _isState;
         }
 
-        public PropertyAttribute(bool _isState, bool _isPlug)
-            : this( _isState )
-        {
-            isPlug = _isPlug;
-        }
 
-        public PropertyAttribute(bool _isState, bool _isPlug, bool _isConfigureable)
-            : this( _isState,_isPlug )
+        public PropertyAttribute(bool _isState, bool _isConfigureable)
+            : this( _isState )
         {
             isConfigureable = _isConfigureable;
         }
