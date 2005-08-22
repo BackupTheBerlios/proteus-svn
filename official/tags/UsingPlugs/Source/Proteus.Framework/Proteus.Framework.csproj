@@ -1,0 +1,99 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50215</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{83FBEDC8-EBC1-42DE-9376-ED0D088EEC99}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Proteus.Framework</RootNamespace>
+    <AssemblyName>Proteus.Framework</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Proteus.Framework.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Bin\Proteus.Framework\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunFxCop>false</RunFxCop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Bin\Proteus.Framework\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\Broker.cs" />
+    <Compile Include="Hosting\Engine.cs" />
+    <Compile Include="Hosting\ITask.cs" />
+    <Compile Include="Hosting\Input.cs" />
+    <Compile Include="Hosting\Tasks\ActorTask.cs" />
+    <Compile Include="Hosting\Tasks\EventTask.cs" />
+    <Compile Include="Parts\Basic\ConfigFileActor.cs" />
+    <Compile Include="Parts\Basic\GroupActor.cs" />
+    <Compile Include="Parts\Basic\RootActor.cs" />
+    <Compile Include="Parts\Default\Actor.cs" />
+    <Compile Include="Parts\ActorAttribute.cs" />
+    <Compile Include="Parts\Default\CollectionActor.cs" />
+    <Compile Include="Parts\Default\Connection.cs" />
+    <Compile Include="Parts\DocumentationAttribute.cs" />
+    <Compile Include="Parts\Default\Environment.cs" />
+    <Compile Include="Parts\Default\EventMethodConnection.cs" />
+    <Compile Include="Parts\Default\EventPlug.cs" />
+    <Compile Include="Parts\Default\InputPlug.cs" />
+    <Compile Include="Parts\Default\InterfacePlug.cs" />
+    <Compile Include="Parts\Default\MethodPlug.cs" />
+    <Compile Include="Parts\Default\OutputPlug.cs" />
+    <Compile Include="Parts\Default\Plug.cs" />
+    <Compile Include="Parts\PlugAttribute.cs" />
+    <Compile Include="Parts\Default\Property.cs" />
+    <Compile Include="Parts\PropertyAttribute.cs" />
+    <Compile Include="Parts\Default\PropertyCollection.cs" />
+    <Compile Include="Parts\Default\PropertyInterfaceConnection.cs" />
+    <Compile Include="Parts\Default\PropertyPlug.cs" />
+    <Compile Include="Parts\Factory.cs" />
+    <Compile Include="Parts\IActor.cs" />
+    <Compile Include="Parts\IActorCollection.cs" />
+    <Compile Include="Parts\IConnection.cs" />
+    <Compile Include="Parts\IEnvironment.cs" />
+    <Compile Include="Parts\IInputPlug.cs" />
+    <Compile Include="Parts\IOutputPlug.cs" />
+    <Compile Include="Parts\IPart.cs" />
+    <Compile Include="Parts\IPlug.cs" />
+    <Compile Include="Parts\IProperty.cs" />
+    <Compile Include="Parts\Default\PlugCollection.cs" />
+    <Compile Include="Parts\Utility.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="State\IState.cs" />
+    <Compile Include="State\Manager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Proteus.Kernel\Proteus.Kernel.csproj">
+      <Project>{D04C709A-DE0D-49BE-A463-7F78CE4E5971}</Project>
+      <Name>Proteus.Kernel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documentation\Proteus.Framework.xml" />
+    <None Include="Proteus.Framework.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

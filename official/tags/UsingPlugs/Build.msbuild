@@ -1,0 +1,31 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="BuildAll">
+	
+	<PropertyGroup>
+		<ReleaseDirectory>d:/ProteusRelease</ReleaseDirectory>
+	</PropertyGroup>
+	
+	<Target Name="Clean">
+		  <RemoveDir
+		  Directories="$(ReleaseDirectory)" />
+	</Target>
+
+	<Target Name="BuildEngine" DependsOnTargets="Clean">
+		<MSBuild
+		    Projects="Build/BuildEngine.msbuild"
+		    Targets="BuildAll"
+		    Properties="ReleaseDirectory=$(ReleaseDirectory)">
+		</MSBuild>
+	</Target>
+
+	<Target Name="BuildTutorials" DependsOnTargets="BuildEngine">
+		<MSBuild
+		    Projects="Build/BuildTutorials.msbuild"
+		    Targets="BuildAll"
+		    Properties="ReleaseDirectory=$(ReleaseDirectory)">
+		</MSBuild>
+	</Target>
+	
+	<Target Name="BuildAll" DependsOnTargets="BuildTutorials">
+	</Target>
+
+</Project>

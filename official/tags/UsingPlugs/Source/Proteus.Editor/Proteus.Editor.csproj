@@ -1,0 +1,219 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50215</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D7A9D349-8EDF-41B2-944D-33E5724180CA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Proteus.Editor</RootNamespace>
+    <AssemblyName>Proteus.Editor</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Proteus.Editor.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Bin\Proteus.Editor\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Bin\Proteus.Editor\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.TextEditor, Version=1.1.0.1964, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Libraries\TextEditor\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="NetronGraphLib, Version=2.2.2055.24966, Culture=neutral, PublicKeyToken=a55bbad7898c6f34, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Libraries\Netron\NetronGraphLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=0.99.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dependencies\Libraries\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\FileBrowserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FileBrowserControl.Designer.cs">
+      <DependentUpon>FileBrowserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\ActorBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\ActorBrowserForm.Designer.cs">
+      <DependentUpon>ActorBrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\ActorTypeBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\ActorTypeBrowserForm.Designer.cs">
+      <DependentUpon>ActorTypeBrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\DiagramForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\DiagramForm.Designer.cs">
+      <DependentUpon>DiagramForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\DockableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\DockableForm.Designer.cs">
+      <DependentUpon>DockableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\DocumentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\DocumentForm.Designer.cs">
+      <DependentUpon>DocumentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\LogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\LogForm.Designer.cs">
+      <DependentUpon>LogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\Manager.cs" />
+    <Compile Include="DockForms\PropertyBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\PropertyBrowserForm.Designer.cs">
+      <DependentUpon>PropertyBrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\ScenePreviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\ScenePreviewForm.Designer.cs">
+      <DependentUpon>ScenePreviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\TextEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\TextEditorForm.Designer.cs">
+      <DependentUpon>TextEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DockForms\WebBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\WebBrowserForm.Designer.cs">
+      <DependentUpon>WebBrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Documents\Document.cs" />
+    <Compile Include="Documents\Manager.cs" />
+    <Compile Include="Documents\TextDocument.cs" />
+    <Compile Include="Forms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Manager.cs" />
+    <Compile Include="Forms\PluginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PluginForm.Designer.cs">
+      <DependentUpon>PluginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QuitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QuitForm.Designer.cs">
+      <DependentUpon>QuitForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Manipulation\Manager.cs" />
+    <Compile Include="Manipulation\Parser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\PropertyBag.cs" />
+    <Compile Include="Utility\Resource.cs" />
+    <Compile Include="Workflow\Project.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Proteus.Framework\Proteus.Framework.csproj">
+      <Project>{83FBEDC8-EBC1-42DE-9376-ED0D088EEC99}</Project>
+      <Name>Proteus.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Proteus.Graphics\Proteus.Graphics.csproj">
+      <Project>{58961AE0-EB88-4538-AF42-C616A2588CCA}</Project>
+      <Name>Proteus.Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Proteus.Kernel\Proteus.Kernel.csproj">
+      <Project>{D04C709A-DE0D-49BE-A463-7F78CE4E5971}</Project>
+      <Name>Proteus.Kernel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Proteus.Editor.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\FileBrowserControl.resx">
+      <DependentUpon>FileBrowserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockForms\ActorBrowserForm.resx">
+      <DependentUpon>ActorBrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockForms\ActorTypeBrowserForm.resx">
+      <DependentUpon>ActorTypeBrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockForms\DiagramForm.resx">
+      <DependentUpon>DiagramForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockForms\LogForm.resx">
+      <DependentUpon>LogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockForms\PropertyBrowserForm.resx">
+      <DependentUpon>PropertyBrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockForms\TextEditorForm.resx">
+      <DependentUpon>TextEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockForms\WebBrowserForm.resx">
+      <DependentUpon>WebBrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Icons\Save.bmp" />
+    <EmbeddedResource Include="Images\Icons\SaveAll.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\QuitForm.resx">
+      <DependentUpon>QuitForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\Icons\Run.bmp" />
+    <EmbeddedResource Include="Images\Icons\Stop.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

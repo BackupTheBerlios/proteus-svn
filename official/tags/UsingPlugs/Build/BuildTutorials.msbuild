@@ -1,0 +1,36 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="BuildAll">
+	
+	<PropertyGroup>
+		<ReleaseDirectory></ReleaseDirectory>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<ProteusBinaries Include="$(ReleaseDirectory)/Bin/Debug/*.dll"/>
+		<ProteusBinaries Include="$(ReleaseDirectory)/Bin/Debug/*.exe"/>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<Tutorial01Files Include="../Samples/Tutorial01/*.actor"/>
+		<Tutorial01Files Include="../Samples/Tutorial01/*.registry"/>
+		<Tutorial01Files Include="../Samples/Tutorial01/*.bat"/>
+	</ItemGroup>
+	
+	<Target Name="BuildTutorial01">
+		 <MakeDir Directories="$(ReleaseDirectory)\Tutorials\Tutorial01"/>
+		 <Copy
+		   SourceFiles="@(ProteusBinaries)"
+		   DestinationFolder="$(ReleaseDirectory)\Tutorials\Tutorial01"
+		 />
+		 <Copy
+		   SourceFiles="@(Tutorial01Files)"
+		   DestinationFolder="$(ReleaseDirectory)\Tutorials\Tutorial01"
+		 /> 
+	</Target>
+
+	<Target Name="BuildTutorials" DependsOnTargets="BuildTutorial01">
+	</Target>
+			
+	<Target Name="BuildAll" DependsOnTargets="BuildTutorials">
+	</Target>
+
+</Project>

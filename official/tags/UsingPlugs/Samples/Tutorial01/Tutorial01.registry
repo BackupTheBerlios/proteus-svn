@@ -1,0 +1,16 @@
+<Registry>
+	<Framework>
+		<Value Name="RootFile">Tutorial01.actor</Value>
+		<Plugins>
+			<Plugin>
+				<Value Name="Url">Proteus.Graphics.dll</Value>
+			</Plugin>
+		</Plugins>
+	</Framework>
+	<Graphics>
+		<Value Name="Adapter">0</Value>
+		<Value Name="DeviceType">Hardware</Value>
+		<Value Name="Windowed">True</Value>
+		<Value Name="Multisample">0</Value>
+	</Graphics>
+</Registry>
