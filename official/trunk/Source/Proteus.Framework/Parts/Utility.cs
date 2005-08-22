@@ -10,6 +10,38 @@ namespace Proteus.Framework.Parts
     {
         private static Kernel.Diagnostics.Log<Utility> log =
             new Kernel.Diagnostics.Log<Utility>();
+
+        public static string GetDocumentation(Type actorType)
+        {
+            DocumentationAttribute documentation
+                   = Attribute.GetCustomAttribute(actorType, typeof(DocumentationAttribute)) as DocumentationAttribute;
+
+            if (documentation != null)
+                return documentation.Documentation;
+
+            return string.Empty;
+        }
+
+        public static string GetDocumentation(IActor actor)
+        {
+            return GetDocumentation( actor.GetType() );
+        }
+
+        public static string GetDescription(Type actorType)
+        {
+            DocumentationAttribute documentation
+               = Attribute.GetCustomAttribute(actorType, typeof(DocumentationAttribute)) as DocumentationAttribute;
+
+            if (documentation != null)
+                return documentation.Description;
+
+            return string.Empty;
+        }
+
+        public static string GetDescription(IActor actor)
+        {
+            return GetDescription( actor.GetType() );
+        }
         
         public static string GetTypeName(Type actorType)
         {
@@ -127,6 +159,10 @@ namespace Proteus.Framework.Parts
             }
 
             return actorChunk;
+        }
+
+        private Utility()
+        {
         }
     }
 }

@@ -7,8 +7,6 @@ namespace Proteus.Framework.Parts.Default
     public abstract class Actor : Kernel.Pattern.Disposable,IActor
     {
         protected string            actorName           = string.Empty;
-        protected string            actorDescription    = string.Empty;
-        protected string            actorDocumentation  = string.Empty;
         protected bool              actorActive         = true;
         protected IEnvironment      actorEnvironment    = null;
 
@@ -53,11 +51,6 @@ namespace Proteus.Framework.Parts.Default
         public virtual IProperty[] Properties
         {
             get { return Default.Property.Enumerate(this); }
-        }
-
-        public virtual Type[] Interfaces
-        {
-            get { return this.GetType().GetInterfaces(); }
         }
 
         public virtual bool Update(double deltaTime)
@@ -155,12 +148,18 @@ namespace Proteus.Framework.Parts.Default
 
         public virtual string Description
         {
-            get { return actorDescription; }
+            get 
+            {
+                return Utility.GetDescription(this);
+            }
         }
 
         public virtual string Documentation
         {
-            get { return actorDocumentation; }
+            get
+            {
+               return Utility.GetDocumentation(this);
+            }
         }
 
         #endregion
@@ -179,14 +178,6 @@ namespace Proteus.Framework.Parts.Default
 
         protected Actor()
         {
-            DocumentationAttribute documentation
-                = Attribute.GetCustomAttribute(this.GetType(), typeof(DocumentationAttribute)) as DocumentationAttribute;
-
-            if (documentation != null)
-            {
-                actorDescription = documentation.Description;
-                actorDocumentation = documentation.Documentation;
-            }
         }     
     }
 }

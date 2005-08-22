@@ -18,7 +18,6 @@ namespace Proteus.Framework.Parts
         IEnvironment        Environment { get; }
 
         IProperty[]         Properties  { get; }
-        Type[]              Interfaces  { get; }
 
         bool                Update(double deltaTime);
         bool                Initialize(IEnvironment environment);

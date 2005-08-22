@@ -111,6 +111,7 @@ namespace Proteus.Framework.Parts.Default
         protected override void ReleaseManaged()
         {
             this.Clear();
+            base.ReleaseManaged();
         }
 
         public CollectionActor()
