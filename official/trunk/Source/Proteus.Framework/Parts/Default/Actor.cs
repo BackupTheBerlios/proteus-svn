@@ -92,7 +92,7 @@ namespace Proteus.Framework.Parts.Default
 
         public virtual object SendMessage(string name,IActor sender, params object[] parameters)
         {
-            actorMessageTable.SendMessage(this,name,sender,parameters );
+            return actorMessageTable.SendMessage(this,name,sender,parameters );
         }
 
         public virtual InterfaceType QueryInterface<InterfaceType>() where InterfaceType : class

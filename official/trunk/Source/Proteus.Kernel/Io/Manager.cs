@@ -6,11 +6,31 @@ namespace Proteus.Kernel.Io
 {
     public sealed class Manager : Pattern.Singleton<Manager>
     {
+        internal class MountPoint : IComparable<MountPoint>
+        {
+            public string   url     = string.Empty;
+            public Archive  archive = null;
+
+            #region IComparable<MountPoint> Members
+
+            public int CompareTo(MountPoint other)
+            {
+                return url.Length.CompareTo( other.url.Length );
+            }
+
+            #endregion
+
+            public MountPoint(string _url, Archive _archive)
+            {
+                url = _url;
+                archive = _archive;
+            }
+        }
+        
         private Pattern.TypeFactory<Archive> archiveFactory =
             new Pattern.TypeFactory<Archive>();
 
-        private SortedList<string, Archive> mountPoints =
-            new SortedList<string, Archive>( new Collections.StringLengthComparer(false));
+        private List<MountPoint> mountPoints = new List<MountPoint>();
 
         private static Diagnostics.Log<Manager> log = new Diagnostics.Log<Manager>();
 
@@ -24,8 +44,8 @@ namespace Proteus.Kernel.Io
 
         public IEnumerator<string> GetEnumerator()
         {
-            foreach (string s in mountPoints.Keys)
-                yield return s;
+            foreach (MountPoint m in mountPoints)
+                yield return m.url;
         }
 
         public string[] GetDirectories(string url)
@@ -154,7 +174,9 @@ namespace Proteus.Kernel.Io
                     {
                         newArchive.FileChanged += new Archive.FileChangedDelegate(newArchive_FileChanged);
                         newArchive.FileRemoved += new Archive.FileChangedDelegate(newArchive_FileRemoved);
-                        mountPoints.Add(mountPoint, newArchive);
+                        
+                        mountPoints.Add(new MountPoint(mountPoint, newArchive) );
+                        mountPoints.Sort();
 
                         log.Debug("Mounting was successful.");
                         return true;
@@ -167,33 +189,44 @@ namespace Proteus.Kernel.Io
 
         public void Unmount(string mountPoint)
         {
-            if (mountPoints.ContainsKey(mountPoint))
+            MountPoint toRemove = null;
+
+            foreach (MountPoint p in mountPoints)
             {
-                Archive mountedArchive = mountPoints[mountPoint];
+                if (p.url == mountPoint)
+                {
+                    toRemove = p;
+                    break;
+                }
+            }
+
+            if ( toRemove != null )
+            {     
+                Archive mountedArchive = toRemove.archive;
 
                 mountedArchive.FileChanged -= new Archive.FileChangedDelegate(newArchive_FileChanged);
                 mountedArchive.FileRemoved -= new Archive.FileChangedDelegate(newArchive_FileRemoved);
                 
-                mountPoints.Remove(mountPoint);
+                mountPoints.Remove(toRemove);
                 mountedArchive.Dispose();           
             }
         }
 
         private Archive FindArchive(string url, ref string relativeUrl)
         {
-            foreach (string m in mountPoints.Keys)
+            foreach (MountPoint m in mountPoints)
             {
-                if (url.StartsWith(m) || m == string.Empty )
+                if (url.StartsWith(m.url) || m.url == string.Empty )
                 {
-                    if (m != string.Empty)
+                    if (m.url != string.Empty)
                     {
-                        relativeUrl = url.Replace(m, "");
+                        relativeUrl = url.Replace(m.url, "");
                     }
                     else
                     {
                         relativeUrl = url;
                     }
-                    return mountPoints[m];
+                    return m.archive;
                 }
             }
 

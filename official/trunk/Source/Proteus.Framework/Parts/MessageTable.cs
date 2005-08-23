@@ -48,7 +48,7 @@ namespace Proteus.Framework.Parts
             if (!isInitialized)
             {
                 // First get all public methods.
-                MethodInfo allMethods = actor.GetType().GetMethods( BindingFlags.Public | BindingFlags.NonPublic );
+                MethodInfo[] allMethods = actor.GetType().GetMethods( BindingFlags.Public | BindingFlags.NonPublic );
 
                 foreach (MethodInfo m in allMethods)
                 {
