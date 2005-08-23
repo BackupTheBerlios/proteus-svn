@@ -6,10 +6,11 @@ namespace Proteus.Framework.Parts.Default
 {
     public abstract class Actor : Kernel.Pattern.Disposable,IActor
     {
-        protected string            actorName           = string.Empty;
-        protected bool              actorActive         = true;
-        protected IEnvironment      actorEnvironment    = null;
-        protected MessageTable      actorMessageTable   = new MessageTable();
+        protected string            actorName               = string.Empty;
+        protected bool              actorActive             = true;
+        protected IEnvironment      actorEnvironment        = null;
+        protected MessageTable      actorMessageTable       = new MessageTable();
+        protected MessageDebugger   actorMessageDebugger    = null;
 
         private static Kernel.Diagnostics.Log<Actor> log =
             new Kernel.Diagnostics.Log<Actor>();
@@ -92,7 +93,14 @@ namespace Proteus.Framework.Parts.Default
 
         public virtual object SendMessage(string name,IActor sender, params object[] parameters)
         {
-            return actorMessageTable.SendMessage(this,name,sender,parameters );
+            if (actorMessageDebugger.Active)
+            {
+                return actorMessageDebugger.InterceptMessage( this,name,sender,parameters );
+            }
+            else
+            {
+                return actorMessageTable.SendMessage(name, sender, parameters);
+            }
         }
 
         public virtual InterfaceType QueryInterface<InterfaceType>() where InterfaceType : class
@@ -172,8 +180,19 @@ namespace Proteus.Framework.Parts.Default
         {
         }
 
+        protected void InitializeDebugServices()
+        {
+            actorMessageDebugger = new MessageDebugger( new MessageDebugger.DebugMessageDelegate(actorMessageTable.SendMessage) );
+        }
+
+        public override string ToString()
+        {
+            return this.TypeName + ":" + this.Name;
+        }
+
         protected Actor()
         {
+            InitializeDebugServices();
         }  
     }
 }

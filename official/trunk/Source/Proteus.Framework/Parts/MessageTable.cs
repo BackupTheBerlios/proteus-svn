@@ -8,6 +8,7 @@ namespace Proteus.Framework.Parts
     public sealed class MessageTable
     {
         private bool                            isInitialized   = false;
+        private IActor                          target          = null;
         private SortedList<string,MethodInfo>   methods         = new
                 SortedList<string,MethodInfo>();
 
@@ -21,8 +22,7 @@ namespace Proteus.Framework.Parts
             return messageNames;
         }
 
-        public object SendMessage(  IActor target, 
-                                    string name,
+        public object SendMessage(  string name,
                                     IActor sender, 
                                     object[] parameters)
         {
@@ -47,6 +47,8 @@ namespace Proteus.Framework.Parts
         {
             if (!isInitialized)
             {
+                target = actor;
+
                 // First get all public methods.
                 MethodInfo[] allMethods = actor.GetType().GetMethods( BindingFlags.Public | BindingFlags.NonPublic );
 

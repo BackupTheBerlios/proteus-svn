@@ -52,6 +52,7 @@
     <Compile Include="Parts\DocumentationAttribute.cs" />
     <Compile Include="Parts\Default\Environment.cs" />
     <Compile Include="Parts\Default\Property.cs" />
+    <Compile Include="Parts\MessageDebugger.cs" />
     <Compile Include="Parts\MessageHandlerAttribute.cs" />
     <Compile Include="Parts\MessageRouter.cs" />
     <Compile Include="Parts\MessageTable.cs" />
