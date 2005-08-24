@@ -7,79 +7,98 @@ namespace Proteus.Framework.Parts
 {
     public sealed class MessageTable
     {
-        private bool                            isInitialized   = false;
-        private IActor                          target          = null;
-        private SortedList<string,MethodInfo>   methods         = new
+        private SortedList<string,MethodInfo>           methods         = new
                 SortedList<string,MethodInfo>();
 
-        public string[] GetHandledMessages(IActor actor)
+        private SortedList<string,MessagePrototype>     prototypes  = new
+                SortedList<string,MessagePrototype>();
+
+        private MessagePrototype[]                      returnArray = null;
+        private MessageDebugger.DebugMessageDelegate    realCall    = null;
+
+
+        public MessagePrototype this[string name]
         {
-            Initialize( actor );
-            
-            string[] messageNames = new string[ methods.Count ];
-            methods.Keys.CopyTo( messageNames,0 );
-            
-            return messageNames;
+            get { return prototypes[name]; }
         }
 
-        public object SendMessage(  string name,
+        public MessagePrototype[] Prototypes
+        {
+            get { return returnArray; }
+        }
+
+        public object SendMessage(  IActor target,
+                                    string name,
                                     IActor sender, 
                                     object[] parameters)
         {
-            Initialize( target );
+            if (MessageRegistry.Debugger.Active)
+            {
+                return MessageRegistry.Debugger.InterceptMessage(realCall,target,name,sender,parameters );
+            }
+            else
+            {
+                return CallMethod( target,name,sender,parameters );
+            }
+        }
 
+        private object CallMethod(IActor target, string name, IActor sender, object[] parameters)
+        {
             MethodInfo targetMethod = methods[name];
             if (targetMethod != null)
             {
-                object[] callParameters = new object[parameters.Length +1];
+                object[] callParameters = new object[parameters.Length + 1];
                 callParameters[0] = sender;
                 for (int i = 1; i < callParameters.Length; i++)
                 {
-                    callParameters[i] = parameters[i -1];
+                    callParameters[i] = parameters[i - 1];
                 }
 
-                return targetMethod.Invoke( target,callParameters );
+                return targetMethod.Invoke(target, callParameters);
             }
             return null;
         }
 
         private void Initialize(IActor actor)
         {
-            if (!isInitialized)
+            // First get all public methods.
+            MethodInfo[] allMethods = actor.GetType().GetMethods( BindingFlags.Public | BindingFlags.NonPublic );
+
+            foreach (MethodInfo m in allMethods)
             {
-                target = actor;
+                // Check if its a method handler.
+                MessageHandlerAttribute messageAttribute = Attribute.GetCustomAttribute( m,typeof(MessageHandlerAttribute)) as MessageHandlerAttribute;
 
-                // First get all public methods.
-                MethodInfo[] allMethods = actor.GetType().GetMethods( BindingFlags.Public | BindingFlags.NonPublic );
-
-                foreach (MethodInfo m in allMethods)
+                if (messageAttribute != null)
                 {
-                    // Check if its a method handler.
-                    MessageHandlerAttribute messageAttribute = Attribute.GetCustomAttribute( m,typeof(MessageHandlerAttribute)) as MessageHandlerAttribute;
+                    string messageName = messageAttribute.Name;
 
-                    if (messageAttribute != null)
+                    if (messageName == string.Empty)
                     {
-                        string messageName = messageAttribute.Name;
+                        messageName = m.Name; 
+                    }
 
-                        if (messageName == string.Empty)
-                        {
-                            messageName = m.Name; 
-                        }
-
-                        // Store it.
-                        if (!methods.ContainsKey(messageName))
-                        {
-                            methods.Add( messageName,m );
-                        }
+                    // Store it.
+                    if (!methods.ContainsKey(messageName))
+                    {
+                        MessagePrototype newPrototype = MessagePrototype.Create( messageName,m );
+                        
+                        methods.Add( messageName,m );
+                        prototypes.Add( messageName,newPrototype );
                     }
                 }
-                
-                isInitialized = true;
-            }
+            }  
+        
+            returnArray = new MessagePrototype[ prototypes.Count ];
+            prototypes.Values.CopyTo( returnArray,0 );
+
+            // Handle the dispatch
+            realCall = new MessageDebugger.DebugMessageDelegate( this.CallMethod );
         }
 
-        public MessageTable()
+        public MessageTable( IActor actor )
         {
+            Initialize( actor );
         }
     }
 }

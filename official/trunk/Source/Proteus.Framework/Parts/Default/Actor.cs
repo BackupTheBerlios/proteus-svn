@@ -9,8 +9,7 @@ namespace Proteus.Framework.Parts.Default
         protected string            actorName               = string.Empty;
         protected bool              actorActive             = true;
         protected IEnvironment      actorEnvironment        = null;
-        protected MessageTable      actorMessageTable       = new MessageTable();
-        protected MessageDebugger   actorMessageDebugger    = null;
+        protected MessageTable      actorMessageTable       = null;
 
         private static Kernel.Diagnostics.Log<Actor> log =
             new Kernel.Diagnostics.Log<Actor>();
@@ -55,6 +54,11 @@ namespace Proteus.Framework.Parts.Default
             get { return Default.Property.Enumerate(this); }
         }
 
+        public virtual MessagePrototype[] Messages
+        {
+            get { return actorMessageTable.Prototypes; }
+        }
+
         public virtual bool Update(double deltaTime)
         {
             if (actorActive)
@@ -93,14 +97,7 @@ namespace Proteus.Framework.Parts.Default
 
         public virtual object SendMessage(string name,IActor sender, params object[] parameters)
         {
-            if (actorMessageDebugger.Active)
-            {
-                return actorMessageDebugger.InterceptMessage( this,name,sender,parameters );
-            }
-            else
-            {
-                return actorMessageTable.SendMessage(name, sender, parameters);
-            }
+            return actorMessageTable.SendMessage(this,name, sender, parameters);
         }
 
         public virtual InterfaceType QueryInterface<InterfaceType>() where InterfaceType : class
@@ -180,11 +177,6 @@ namespace Proteus.Framework.Parts.Default
         {
         }
 
-        protected void InitializeDebugServices()
-        {
-            actorMessageDebugger = new MessageDebugger( new MessageDebugger.DebugMessageDelegate(actorMessageTable.SendMessage) );
-        }
-
         public override string ToString()
         {
             return this.TypeName + ":" + this.Name;
@@ -192,7 +184,7 @@ namespace Proteus.Framework.Parts.Default
 
         protected Actor()
         {
-            InitializeDebugServices();
+            actorMessageTable = MessageRegistry.Initialize(this);
         }  
     }
 }

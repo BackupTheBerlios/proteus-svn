@@ -6,9 +6,8 @@ namespace Proteus.Framework.Parts
 {
     public sealed class MessageDebugger
     {
-        public delegate object DebugMessageDelegate( string name,IActor sender,params object[] parameters );
+        public delegate object DebugMessageDelegate( IActor target,string name,IActor sender,params object[] parameters );
 
-        private DebugMessageDelegate                            targetSite = null;
         private bool                                            debuggerActive = false;
         private static bool                                     debuggerDefault = true;
      
@@ -26,12 +25,7 @@ namespace Proteus.Framework.Parts
             get { return debuggerActive; }
         }
 
-        public object InterceptMessage(string name, IActor sender, params object[] parameters)
-        {
-            return this.InterceptMessage( null,name,sender,parameters );
-        }
-
-        public object InterceptMessage(IActor targetActor,string name, IActor sender, params object[] parameters)
+        public object InterceptMessage(DebugMessageDelegate targetSite,IActor targetActor,string name, IActor sender, params object[] parameters)
         {
             OnEnterMessage( targetActor,name,sender,parameters );
 
@@ -39,7 +33,7 @@ namespace Proteus.Framework.Parts
 
             if (targetSite != null)
             {
-                result = targetSite(name, sender, parameters);
+                result = targetSite(targetActor,name, sender, parameters);
             }
             else
             {
@@ -88,11 +82,6 @@ namespace Proteus.Framework.Parts
         public MessageDebugger()
         {
             debuggerActive = debuggerDefault;
-        }
-
-        public MessageDebugger(DebugMessageDelegate target) : this()
-        {
-            targetSite = target;
         }
 
         static MessageDebugger()

@@ -19,6 +19,8 @@ namespace Proteus.Framework.Parts
 
         IProperty[]         Properties  { get; }
 
+        MessagePrototype[]  Messages    { get; }
+
         object              SendMessage( string name,IActor sender,params object[] parameters );
 
         bool                Update(double deltaTime);
