@@ -96,9 +96,15 @@ namespace Proteus.Editor.DockForms
             }
         }
 
+        protected override object OnDragRequest(int x, int y, MouseButtons buttons)
+        {
+            return "Hello";
+        }
+
         public ActorTypeBrowserForm()
         {
             InitializeComponent();
+            ActivateDrag();
             Build();
         }
     }

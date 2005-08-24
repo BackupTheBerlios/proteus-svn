@@ -108,6 +108,7 @@ namespace Proteus.Editor.DockForms
             this.Register<LogForm>("Log");
             this.Register<PropertyBrowserForm>("Property browser");
             this.Register<TextEditorForm>("Text editor");
+            this.Register<MessageBrowserForm>("Message browser");
 
             // Create default windows.
             Add("Actor browser");
@@ -115,6 +116,7 @@ namespace Proteus.Editor.DockForms
             Add("Web browser");
             Add("Property browser");
             Add("Log");
+            Add("Message browser");
         }
 
         private void CreateDocumentHosts(Framework.Parts.IActor actor)

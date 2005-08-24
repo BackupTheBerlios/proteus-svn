@@ -92,6 +92,12 @@
       <DependentUpon>LogForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DockForms\Manager.cs" />
+    <Compile Include="DockForms\MessageBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockForms\MessageBrowserForm.Designer.cs">
+      <DependentUpon>MessageBrowserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DockForms\PropertyBrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +211,9 @@
     <EmbeddedResource Include="Images\Icons\SaveAll.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DockForms\MessageBrowserForm.resx">
+      <DependentUpon>MessageBrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\QuitForm.resx">
       <DependentUpon>QuitForm.cs</DependentUpon>
     </EmbeddedResource>

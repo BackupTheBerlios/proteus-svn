@@ -12,6 +12,12 @@ namespace Proteus.Editor.DockForms
 {
     public partial class DockableForm : Dp.DockContent
     {   
+        protected Type              dockTargetType      = null;
+        protected DragDropEffects   dockTargetEffect    = DragDropEffects.Copy;
+        protected object            dockLastDragged     = null;
+        protected bool              dockIsSource        = false;
+
+
         public virtual Dp.DockState DefaultDockState
         {
             get { return Dp.DockState.DockLeft; }
@@ -22,7 +28,110 @@ namespace Proteus.Editor.DockForms
             Manager.Instance.Remove(this);
         }
 
-        public DockableForm()
+        protected virtual void OnDropReceived(object data, int x, int y, int keystate)
+        {
+        }
+
+        protected virtual object OnDragRequest(int x, int y, MouseButtons buttons)
+        {
+            return null;
+        }
+
+        protected virtual void OnDragComplete(object dataObject)
+        {
+            
+        }
+
+        protected void ActivateDrag()
+        {
+            ActivateDragDrop( true,null,DragDropEffects.None );
+        }
+
+        protected void ActivateDrop(Type targetType, DragDropEffects effect)
+        {
+            ActivateDragDrop(false,targetType,effect);
+        }
+
+        protected void ActivateDragDrop(bool isSource, Type targetType,DragDropEffects effect )
+        {
+            if (targetType != null)
+            {
+                dockTargetType      = targetType;
+                dockTargetEffect    = effect;
+                this.AllowDrop      = true;
+            }
+
+            if (isSource)
+            {
+                dockIsSource = true;
+            }
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            if (dockIsSource)
+            {
+                object dataObject = OnDragRequest(e.X, e.Y, e.Button);
+
+                if (dataObject != null)
+                {
+                    dockLastDragged = dataObject;
+                    this.DoDragDrop(dataObject, DragDropEffects.All);
+                }
+            }
+
+            base.OnMouseDown(e);
+        }
+
+        protected override void OnQueryContinueDrag(QueryContinueDragEventArgs qcdevent)
+        {
+            if (dockIsSource)
+            {
+                if (qcdevent.Action == DragAction.Drop && dockLastDragged != null)
+                {
+                    OnDragComplete(dockLastDragged);
+                    dockLastDragged = null;
+                }
+            }
+
+            base.OnQueryContinueDrag(qcdevent);
+        }
+
+        protected override void OnDragEnter(DragEventArgs drgevent)
+        {
+            if (this.AllowDrop && dockTargetType != null )
+            {
+                if (drgevent.Data.GetDataPresent(dockTargetType))
+                {
+                    // We got correct data.
+                    drgevent.Effect = dockTargetEffect;
+                }
+                else
+                {
+                    drgevent.Effect = DragDropEffects.None;
+                }
+            }
+
+            base.OnDragEnter( drgevent );
+        }
+
+        protected override void OnDragDrop(DragEventArgs drgevent)
+        {
+            if (this.AllowDrop && dockTargetType != null)
+            {
+                if (drgevent.Data.GetDataPresent(dockTargetType))
+                {
+                    object dataObject = drgevent.Data.GetData(dockTargetType);
+
+                    // Call method
+                    OnDropReceived(dataObject, drgevent.X, drgevent.Y, drgevent.KeyState);
+                }
+            }
+
+            base.OnDragDrop( drgevent );
+        }
+
+        protected DockableForm()
         {
             InitializeComponent();
 
