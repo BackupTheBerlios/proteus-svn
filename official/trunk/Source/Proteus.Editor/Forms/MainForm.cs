@@ -27,6 +27,9 @@ namespace Proteus.Editor.Forms
         
             // Now add default items to the system.
             Manager.Instance.AddToolItem(string.Empty,Utility.Resource.GetIcon("Save.bmp"),"Saves the current document.",new EventHandler( this.Save_Click ) );
+            Manager.Instance.AddToolItem(string.Empty,Utility.Resource.GetIcon("SaveAll.bmp"),"Saves all unsaved documents.",new EventHandler( this.SaveAll_Click ) );
+            
+            // Menu items.
             Manager.Instance.AddMenuItem("File.Save",string.Empty,"Saves the current document.",new EventHandler(this.Save_Click) );
             Manager.Instance.AddMenuItem("File.Exit",string.Empty,"Exits the editor.",new EventHandler(this.Exit_Click) );
         
@@ -37,6 +40,11 @@ namespace Proteus.Editor.Forms
         private void Save_Click(object sender, EventArgs e)
         {
             Documents.Manager.Instance.Save();
+        }
+
+        private void SaveAll_Click(object sender, EventArgs e)
+        {
+            Documents.Manager.Instance.SaveAll();
         }
 
         private void Exit_Click(object sender, EventArgs e)

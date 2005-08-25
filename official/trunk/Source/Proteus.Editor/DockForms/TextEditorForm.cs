@@ -21,18 +21,10 @@ namespace Proteus.Editor.DockForms
             base.CreateDocument();
         }
 
-        protected override void OnDropReceived(object data, int x, int y, int keystate)
-        {
-            string actorName = (string)data;
-            textEditorControl1.Text += "<Actor> <Value Name=\"Type\">" +actorName;
-        }
-
         public TextEditorForm()
         {
             InitializeComponent();
             CreateDocument();
-            ActivateDrop( typeof(string),DragDropEffects.Copy );
-            textEditorControl1.AllowDrop = false;
         }
     }
 }

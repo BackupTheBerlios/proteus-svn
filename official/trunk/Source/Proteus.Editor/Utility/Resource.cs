@@ -40,7 +40,7 @@ namespace Proteus.Editor.Utility
         static Resource()
         {
             imageList = new System.Windows.Forms.ImageList();
-            imageList.ImageSize = new Size( 16,15 );
+            imageList.ImageSize = new Size( 16,16 );
             imageList.TransparentColor = Color.FromArgb(255,255,0,255 );
         }
     }

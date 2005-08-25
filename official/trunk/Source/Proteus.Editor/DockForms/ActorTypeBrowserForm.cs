@@ -100,7 +100,13 @@ namespace Proteus.Editor.DockForms
         {
             if (treeView1.SelectedNode != null)
             {
-                return treeView1.SelectedNode.ToString();
+                StringBuilder builder = new StringBuilder();
+                builder.AppendLine  ("<Actor>");
+                builder.AppendFormat("    <Value Name=\"Type\">{0}</Value>\n",treeView1.SelectedNode.Text);
+                builder.AppendFormat("    <Value Name=\"Name\">{0}</Value>\n",treeView1.SelectedNode.Text + "01" );
+                builder.AppendLine  ("</Actor>");
+
+                return builder.ToString();
             }
             return null;
         }
