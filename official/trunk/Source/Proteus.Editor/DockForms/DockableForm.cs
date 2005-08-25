@@ -68,7 +68,7 @@ namespace Proteus.Editor.DockForms
         protected override void OnControlAdded(ControlEventArgs e)
         {
             // Add event handlers.
-            e.Control.MouseDown += new MouseEventHandler(Control_MouseDown);
+            //e.Control.MouseDown += new MouseEventHandler(Control_MouseDown);
             e.Control.QueryContinueDrag += new QueryContinueDragEventHandler(Control_QueryContinueDrag);
             e.Control.DragEnter += new DragEventHandler(Control_DragEnter);
             e.Control.DragDrop += new DragEventHandler(Control_DragDrop);

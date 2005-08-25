@@ -36,6 +36,7 @@ namespace Proteus.Editor.DockForms
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
+            this.treeView1.ShowNodeToolTips = true;
             this.treeView1.Size = new System.Drawing.Size(292, 266);
             this.treeView1.TabIndex = 0;
             // 

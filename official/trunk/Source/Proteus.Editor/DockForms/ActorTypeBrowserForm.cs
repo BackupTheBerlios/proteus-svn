@@ -79,9 +79,18 @@ namespace Proteus.Editor.DockForms
 
             foreach (string s in typeNames)
             {
+                IActor topActor = Factory.Instance.Create(s);
+                
+                string description = topActor.Description;
+                string documentation = topActor.Documentation;
+                
+                topActor.Dispose();
+
                 if (baseCount == 0)
                 {
                     TreeNode subNode = node.Nodes.Add(s);
+                    subNode.ToolTipText = description;
+
                     BuildStep( subNode,1 );
                 }
                 else
@@ -90,6 +99,8 @@ namespace Proteus.Editor.DockForms
                     if (GetBaseName(s) == node.Text)
                     {
                         TreeNode subNode = node.Nodes.Add(s);
+                        subNode.ToolTipText = description;
+                        
                         BuildStep(subNode,baseCount + 1);
                     }
                 }

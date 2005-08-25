@@ -33,6 +33,11 @@ namespace Proteus.Framework.Hosting
             get { return input; }     
         }
 
+        public Kernel.Extension.PluginLoader PluginLoader
+        {
+            get { return loader; }
+        }
+
         public void Run()
         {             
             timer = new Stopwatch();
