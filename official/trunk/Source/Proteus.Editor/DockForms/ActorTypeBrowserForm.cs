@@ -98,7 +98,11 @@ namespace Proteus.Editor.DockForms
 
         protected override object OnDragRequest(int x, int y, MouseButtons buttons)
         {
-            return "Hello";
+            if (treeView1.SelectedNode != null)
+            {
+                return treeView1.SelectedNode.ToString();
+            }
+            return null;
         }
 
         public ActorTypeBrowserForm()

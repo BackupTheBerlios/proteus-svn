@@ -17,7 +17,6 @@ namespace Proteus.Editor.DockForms
         protected object            dockLastDragged     = null;
         protected bool              dockIsSource        = false;
 
-
         public virtual Dp.DockState DefaultDockState
         {
             get { return Dp.DockState.DockLeft; }
@@ -38,8 +37,7 @@ namespace Proteus.Editor.DockForms
         }
 
         protected virtual void OnDragComplete(object dataObject)
-        {
-            
+        {           
         }
 
         protected void ActivateDrag()
@@ -65,6 +63,35 @@ namespace Proteus.Editor.DockForms
             {
                 dockIsSource = true;
             }
+        }
+
+        protected override void OnControlAdded(ControlEventArgs e)
+        {
+            // Add event handlers.
+            e.Control.MouseDown += new MouseEventHandler(Control_MouseDown);
+            e.Control.QueryContinueDrag += new QueryContinueDragEventHandler(Control_QueryContinueDrag);
+            e.Control.DragEnter += new DragEventHandler(Control_DragEnter);
+            e.Control.DragDrop += new DragEventHandler(Control_DragDrop);
+        }
+
+        private void Control_DragDrop(object sender, DragEventArgs e)
+        {
+            this.OnDragDrop( e );
+        }
+
+        private void Control_DragEnter(object sender, DragEventArgs e)
+        {
+            this.OnDragEnter( e );
+        }
+
+        private void Control_QueryContinueDrag(object sender, QueryContinueDragEventArgs e)
+        {
+            this.OnQueryContinueDrag( e );
+        }
+
+        private void Control_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.OnMouseDown(e);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)

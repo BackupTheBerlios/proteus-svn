@@ -8,9 +8,17 @@ namespace Proteus.Editor.Utility
 {
     public sealed class Resource
     {
+        private static System.Windows.Forms.ImageList imageList = null;
+
         public static Image GetIcon(string name)
         {
-            return GetImage( "Proteus.Editor.Images.Icons." + name );
+            Image newImage = GetImage( "Proteus.Editor.Images.Icons." + name );
+            if (newImage != null)
+            {
+                imageList.Images.Add( newImage );
+                return imageList.Images[ imageList.Images.Count - 1 ];
+            }
+            return null;
         }
 
         public static Image GetImage(string name)
@@ -19,7 +27,7 @@ namespace Proteus.Editor.Utility
             if (stream != null)
             {
                 Image newImage = Image.FromStream(stream);
-                stream.Close();
+                //stream.Close();
                 return newImage;
             }
             return null;
@@ -27,6 +35,13 @@ namespace Proteus.Editor.Utility
 
         private Resource()
         {
+        }
+
+        static Resource()
+        {
+            imageList = new System.Windows.Forms.ImageList();
+            imageList.ImageSize = new Size( 16,15 );
+            imageList.TransparentColor = Color.FromArgb(255,255,0,255 );
         }
     }
 }
