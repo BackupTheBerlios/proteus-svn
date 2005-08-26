@@ -111,13 +111,19 @@ namespace Proteus.Editor.DockForms
         {
             if (treeView1.SelectedNode != null)
             {
-                StringBuilder builder = new StringBuilder();
-                builder.AppendLine  ("<Actor>");
-                builder.AppendFormat("    <Value Name=\"Type\">{0}</Value>\n",treeView1.SelectedNode.Text);
-                builder.AppendFormat("    <Value Name=\"Name\">{0}</Value>\n",treeView1.SelectedNode.Text + "01" );
-                builder.AppendLine  ("</Actor>");
+                // Create an actor.
+                IActor newActor = Framework.Parts.Factory.Instance.Create( treeView1.SelectedNode.Text );
 
-                return builder.ToString();
+                if (newActor != null)
+                {
+                    newActor.Name = "Unknown" + newActor.TypeName; 
+                    Kernel.Configuration.Chunk actorChunk = Framework.Parts.Utility.WriteActor(newActor);
+                    string content = Kernel.Configuration.XmlDocument.GetChunkXml(actorChunk);
+
+                    newActor.Dispose();
+
+                    return content;
+                }
             }
             return null;
         }

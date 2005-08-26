@@ -50,7 +50,7 @@ namespace Proteus.Editor.DockForms
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(268, 20);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "http://developer.berlios.de/projects/proteus";
+            this.textBox1.Text = "http://www.proteus.at";
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // WebBrowserForm

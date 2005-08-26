@@ -27,7 +27,7 @@ namespace Proteus.Kernel.Configuration
             }
         }
 
-        private void WriteStep(Xml.XmlTextWriter writer, Chunk chunk)
+        private static void WriteStep(Xml.XmlTextWriter writer, Chunk chunk)
         {
             // First write out the chunk itself.
             writer.WriteStartElement(chunk.Name);
@@ -50,7 +50,22 @@ namespace Proteus.Kernel.Configuration
             writer.WriteEndElement();
         }
 
-        private string GetElementText(Xml.XmlElement element)
+        public static string GetChunkXml(Chunk chunk)
+        {
+            System.IO.StringWriter stringWriter = new
+                System.IO.StringWriter();
+            Xml.XmlTextWriter writer = new Xml.XmlTextWriter( stringWriter );
+            writer.Formatting = Xml.Formatting.Indented;
+
+            WriteStep( writer,chunk );
+        
+            string content = stringWriter.ToString();
+
+            writer.Close();
+            return content;
+        }
+
+        private static string GetElementText(Xml.XmlElement element)
         {
             foreach (Xml.XmlNode n in element.ChildNodes)
             {
@@ -64,7 +79,7 @@ namespace Proteus.Kernel.Configuration
             return string.Empty;
         }
 
-        private Chunk ReadStep(Xml.XmlElement element)
+        private static Chunk ReadStep(Xml.XmlElement element)
         {
             Chunk newChunk = new Chunk(element.Name);
 
@@ -79,7 +94,7 @@ namespace Proteus.Kernel.Configuration
                         if (subElement.HasAttribute("Name"))
                         {
                             string valueName = subElement.GetAttribute("Name");
-                            newChunk.Values[valueName] = this.GetElementText(subElement);
+                            newChunk.Values[valueName] = GetElementText(subElement);
                         }
                     }
                 }

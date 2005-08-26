@@ -94,6 +94,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shading\Parameter.cs" />
     <Compile Include="Shading\ParameterCollection.cs" />
+    <Compile Include="Vdb\Database.cs" />
+    <Compile Include="Vdb\IIndex.cs" />
+    <Compile Include="Vdb\IIndexCollection.cs" />
+    <Compile Include="Vdb\INode.cs" />
+    <Compile Include="Vdb\Manager.cs" />
     <Compile Include="Vdb\Query.cs" />
   </ItemGroup>
   <ItemGroup>

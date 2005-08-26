@@ -38,7 +38,7 @@ namespace Proteus.Graphics.Hal
 
         public override bool SetAsTarget(int channel, int surface)
         {
-            if (channel != 0)
+            if (channel == 0)
             {
                 textureManager.Device.D3dDevice.DepthStencilSurface = d3dDepthBuffer;
             }

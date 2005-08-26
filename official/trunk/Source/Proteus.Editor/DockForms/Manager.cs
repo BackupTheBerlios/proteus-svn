@@ -176,7 +176,7 @@ namespace Proteus.Editor.DockForms
 
         public Manager()
         {
-            Manipulation.Manager.Instance.DefaultAction += new Proteus.Editor.Manipulation.Manager.ActionDelegate(Instance_DefaultAction);
+            Manipulation.Manager.Instance.DefaultAction += new Proteus.Editor.Manipulation.Manager.ActorDelegate(Instance_DefaultAction);
         }
     }
 }

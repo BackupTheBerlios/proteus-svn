@@ -9,13 +9,13 @@ namespace Proteus.Editor.Manipulation
     public sealed class Manager : Kernel.Pattern.Singleton<Manager>
     {
         public delegate void    SelectionDelegate( IActor selectedActor,List<IActor> selectedActors );
-        public delegate void    ActionDelegate( IActor selectedActor );
         public delegate void    ActorDelegate( IActor actor );
 
         public event            ActorDelegate       ActorAdded;
         public event            ActorDelegate       ActorRemoved;
         public event            SelectionDelegate   SelectionChanged;
-        public event            ActionDelegate      DefaultAction;
+        public event            ActorDelegate       DefaultAction;
+        public event            ActorDelegate       ActorModified;
 
         private IActor          singleSelection = null;
         private List<IActor>    multiSelection  = new List<IActor>();
@@ -52,6 +52,12 @@ namespace Proteus.Editor.Manipulation
         {
             if ( ActorRemoved != null )
                 ActorRemoved(actor);
+        }
+
+        public void AfterActorModified(IActor actor)
+        {
+            if ( ActorModified != null )
+                ActorModified(actor);
         }
 
         public void ClearSelection()

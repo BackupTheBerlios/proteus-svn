@@ -72,6 +72,16 @@ namespace Proteus.Editor.DockForms
                 {
                     // Transfer value.
                     p.CurrentValue = e.Value;
+
+                    // Walk up the stack.
+                    Framework.Parts.Basic.ConfigFileActor configActor = Utility.Actor.FindConfigFile(currentActor);
+                    if (configActor != null)
+                    {
+                        configActor.WriteFile();
+                        configActor.ReadFile();
+                        Manipulation.Manager.Instance.AfterActorModified( configActor );
+                    }
+
                     break;
                 }
             }

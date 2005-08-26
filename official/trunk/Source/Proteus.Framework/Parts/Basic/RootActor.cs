@@ -15,9 +15,9 @@ namespace Proteus.Framework.Parts.Basic
             get { return instance; }
         }
 
-        public void ForceLoad()
+        public void ForceRead()
         {
-            base.LoadFile();
+            base.ReadFile();
         }
 
         public RootActor(Hosting.Engine _engine)

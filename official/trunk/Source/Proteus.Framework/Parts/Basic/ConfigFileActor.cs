@@ -27,10 +27,10 @@ namespace Proteus.Framework.Parts.Basic
 
         private void configFile_ResourceChanged(Handle<XmlDocument> handle)
         {
-            this.LoadFile();
+            this.ReadFile();
         }
 
-        protected void LoadFile()
+        public void ReadFile()
         {
             this.Clear();
 
@@ -56,7 +56,7 @@ namespace Proteus.Framework.Parts.Basic
             Configuration.Broker.ReadConfiguration(this, chunk);
           
             // Now we have the url loaded, read the file.
-            LoadFile();
+            ReadFile();
 
             return true;
         }
@@ -65,6 +65,11 @@ namespace Proteus.Framework.Parts.Basic
         {
             Configuration.Broker.WriteConfiguration(this, chunk);
             
+            return WriteFile();
+        }
+
+        public bool WriteFile()
+        {
             // Write out file.
             if (this.collectionEnvironment.Count == 1)
             {
