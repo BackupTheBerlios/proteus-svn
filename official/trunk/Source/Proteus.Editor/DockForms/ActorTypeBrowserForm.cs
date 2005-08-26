@@ -107,17 +107,29 @@ namespace Proteus.Editor.DockForms
             }
         }
 
-        protected override object OnDragRequest(int x, int y, MouseButtons buttons)
+        protected override object OnDragRequest(MouseButtons buttons,object item)
         {
-            if (treeView1.SelectedNode != null)
+            if (item != null)
             {
+                TreeNode dragNode = (TreeNode)item;
+                
                 // Create an actor.
-                IActor newActor = Framework.Parts.Factory.Instance.Create( treeView1.SelectedNode.Text );
+                IActor newActor = Framework.Parts.Factory.Instance.Create( dragNode.Text );
 
                 if (newActor != null)
                 {
-                    newActor.Name = "Unknown" + newActor.TypeName; 
                     Kernel.Configuration.Chunk actorChunk = Framework.Parts.Utility.WriteActor(newActor);
+                    actorChunk.Values["Name"] = "Unknown" + newActor.TypeName; 
+
+                    string[] allKeys = new string[ actorChunk.Values.Count ];
+                    actorChunk.Values.Keys.CopyTo( allKeys,0 );
+
+                    foreach (string k in allKeys)
+                    {
+                        if ( actorChunk.Values[k] == string.Empty )
+                            actorChunk.Values[k] = "SetThis";
+                    }
+
                     string content = Kernel.Configuration.XmlDocument.GetChunkXml(actorChunk);
 
                     newActor.Dispose();

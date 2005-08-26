@@ -84,7 +84,7 @@ namespace Proteus.Framework.Parts.Basic
                 return true;
             }
 
-            return false;
+            return true;
         }
 
         public ConfigFileActor()

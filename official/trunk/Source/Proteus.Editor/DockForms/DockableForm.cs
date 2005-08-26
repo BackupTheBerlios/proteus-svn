@@ -36,6 +36,11 @@ namespace Proteus.Editor.DockForms
             return null;
         }
 
+        protected virtual object OnDragRequest(MouseButtons buttons, object item)
+        {
+            return null;
+        }
+
         protected virtual void OnDragComplete(object dataObject)
         {           
         }
@@ -68,10 +73,24 @@ namespace Proteus.Editor.DockForms
         protected override void OnControlAdded(ControlEventArgs e)
         {
             // Add event handlers.
-            e.Control.MouseDown += new MouseEventHandler(Control_MouseDown);
+            if (!(e.Control is TreeView))
+            {
+                e.Control.MouseDown += new MouseEventHandler(Control_MouseDown);
+            }
+            else
+            {
+                TreeView tree = (TreeView)e.Control;
+                tree.ItemDrag += new ItemDragEventHandler(tree_ItemDrag);
+            }
+
             e.Control.QueryContinueDrag += new QueryContinueDragEventHandler(Control_QueryContinueDrag);
             e.Control.DragEnter += new DragEventHandler(Control_DragEnter);
             e.Control.DragDrop += new DragEventHandler(Control_DragDrop);
+        }
+
+        private void tree_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            this.OnItemDrag( e );
         }
 
         private void Control_DragDrop(object sender, DragEventArgs e)
@@ -92,6 +111,20 @@ namespace Proteus.Editor.DockForms
         private void Control_MouseDown(object sender, MouseEventArgs e)
         {
             this.OnMouseDown(e);
+        }
+
+        protected virtual void OnItemDrag(ItemDragEventArgs e)
+        {
+            if (dockIsSource)
+            {
+                object dataObject = OnDragRequest(e.Button,e.Item);
+
+                if (dataObject != null)
+                {
+                    dockLastDragged = dataObject;
+                    this.DoDragDrop(dataObject, DragDropEffects.All);
+                }
+            }
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
